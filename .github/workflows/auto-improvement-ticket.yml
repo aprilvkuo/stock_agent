@@ -73,8 +73,8 @@ jobs:
             issueBody += '|------|------|\n';
             issueBody += '| 工单 ID | `' + issueId + '` |\n';
             issueBody += '| 优先级 | ' + priority + ' |\n';
-            issueBody += '| 乙方 | @' + providerGithub + ' |\n';
-            issueBody += '| 甲方 | @' + consumerGithub + ' |\n';
+            issueBody += '| 负责方 | @' + providerGithub + ' |\n';
+            issueBody += '| 提出方 | @' + consumerGithub + ' |\n';
             issueBody += '| 服务类型 | `' + service_type + '` |\n';
             issueBody += '| 评分 | ' + score + '/5.0 |\n';
             issueBody += '| 创建时间 | ' + now.toISOString().split('T')[0] + ' |\n';
