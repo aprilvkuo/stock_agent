@@ -1,7 +1,6 @@
 name: 🎫 自动改进工单创建
 
 on:
-  # 手动触发（用于测试）
   workflow_dispatch:
     inputs:
       provider:
@@ -43,27 +42,24 @@ jobs:
             const score = parseInt('${{ github.event.inputs.score }}');
             const feedback = '${{ github.event.inputs.feedback }}';
             
-            // 确定优先级
             let priority, priorityLabel;
             if (score <= 1) {
               priority = 'CRITICAL';
-              priorityLabel = '🚨 critical';
+              priorityLabel = 'critical';
             } else if (score <= 2) {
               priority = 'HIGH';
-              priorityLabel = '🔴 high-priority';
+              priorityLabel = 'high-priority';
             } else if (score <= 3) {
               priority = 'MEDIUM';
-              priorityLabel = '🟠 medium-priority';
+              priorityLabel = 'medium-priority';
             } else {
               priority = 'LOW';
-              priorityLabel = '🟡 low-priority';
+              priorityLabel = 'low-priority';
             }
             
-            // 生成工单 ID
             const now = new Date();
-            const issueId = `IMPROVE-${now.toISOString().replace(/[-:T.]/g, '').slice(0, 14)}`;
+            const issueId = 'IMPROVE-' + now.toISOString().replace(/[-:T.]/g, '').slice(0, 14);
             
-            // Agent GitHub 映射
             const AGENT_GITHUB = {
               'fundamental': 'fundamental-agent',
               'technical': 'technical-agent',
@@ -78,65 +74,45 @@ jobs:
             const providerGithub = AGENT_GITHUB[provider] || provider;
             const consumerGithub = AGENT_GITHUB[consumer] || consumer;
             
-            // 生成 Issue 内容
-            const issueBody = `# 🎫 改进工单：${issueId}
-
-**优先级**: ${priority}  
-**乙方**: @${providerGithub}  
-**甲方**: @${consumerGithub}  
-**服务类型**: \`${service_type}\`  
-**创建时间**: ${now.toISOString()}  
-**触发方式**: GitHub Actions 自动化
-
----
-
-## ⭐ 总体评分
-
-**得分**: ${score}/5.0 ${'⭐'.repeat(score)}${'☆'.repeat(5-score)}
-
-## 📝 问题描述
-
-${feedback}
-
-## 💡 改进建议
-
-- [ ] 分析具体问题原因
-- [ ] 制定改进计划
-- [ ] 实施改进
-- [ ] 验证改进效果
-
----
-
-## 📋 处理流程
-
-1. **接收任务** - @${providerGithub} 确认接收
-2. **创建 Branch** - \`fix/${issueId.toLowerCase()}\`
-3. **解决问题** - 实施改进
-4. **创建 PR** - 关联此 Issue (\`Closes #{{issue_number}}\`)
-5. **Code Review** - 等待审核
-6. **Merge** - 合并后自动关闭
-
----
-
-**标签**: \`improvement-ticket\` \`agent-feedback\` \`automated\`
-
-> 💡 提示：完成改进后，请在 PR 描述中使用 \`Closes #\` 关联此 Issue
-`;
+            const issueBody = '# 🎫 改进工单：' + issueId + '\n\n' +
+              '**优先级**: ' + priority + '  \n' +
+              '**乙方**: @' + providerGithub + '  \n' +
+              '**甲方**: @' + consumerGithub + '  \n' +
+              '**服务类型**: `' + service_type + '`  \n' +
+              '**创建时间**: ' + now.toISOString() + '  \n' +
+              '**触发方式**: GitHub Actions 自动化\n\n' +
+              '---\n\n' +
+              '## ⭐ 总体评分\n\n' +
+              '**得分**: ' + score + '/5.0\n\n' +
+              '## 📝 问题描述\n\n' +
+              feedback + '\n\n' +
+              '## 💡 改进建议\n\n' +
+              '- [ ] 分析具体问题原因\n' +
+              '- [ ] 制定改进计划\n' +
+              '- [ ] 实施改进\n' +
+              '- [ ] 验证改进效果\n\n' +
+              '---\n\n' +
+              '## 📋 处理流程\n\n' +
+              '1. **接收任务** - @' + providerGithub + ' 确认接收\n' +
+              '2. **创建 Branch** - `fix/' + issueId.toLowerCase() + '`\n' +
+              '3. **解决问题** - 实施改进\n' +
+              '4. **创建 PR** - 关联此 Issue\n' +
+              '5. **Code Review** - 等待审核\n' +
+              '6. **Merge** - 合并后自动关闭\n\n' +
+              '---\n\n' +
+              '**标签**: `improvement-ticket` `agent-feedback` `automated`';
             
-            // 确定 Label
-            const labels = ['improvement-ticket', 'automated'];
-            if (priorityLabel) labels.push(priorityLabel);
+            const labels = ['improvement-ticket', 'automated', priorityLabel];
             
-            // 创建 Issue
             const issue = await github.rest.issues.create({
               owner: context.repo.owner,
               repo: context.repo.repo,
-              title: `[${priority}] ${providerGithub} 需要改进：${service_type}`,
+              title: '[' + priority + '] ' + providerGithub + ' 需要改进：' + service_type,
               body: issueBody,
               labels: labels
             });
             
-            console.log(`✅ Issue 创建成功：#${issue.data.number}`);
-            console.log(`   标题：${issue.data.title}`);
-            console.log(`   创建者：${issue.data.user.login}`);
-            console.log(`   链接：${issue.data.html_url}`);
+            console.log('✅ Issue 创建成功：#' + issue.data.number);
+            console.log('   标题：' + issue.data.title);
+            console.log('   创建者：' + issue.data.user.login);
+            console.log('   链接：' + issue.data.html_url);
