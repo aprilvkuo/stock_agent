@@ -1,0 +1,71 @@
+{
+  "agent_id": "programmer",
+  "agent_name": "程序员 Agent",
+  "agent_emoji": "💻",
+  "status": "active",
+  "status_text": "🔴 工作中",
+  "todo_count": 7,
+  "doing_count": 0,
+  "done_count": 0,
+  "todo_list": [
+    {
+      "id": "issue-29",
+      "task": "[WEB-MIGRATED] [IMPROVEMENT-TICKET] 当前工作区代码结构不够规范，需要明确草稿区和正式区的分离。shared/stock-system 和 memory/st",
+      "priority": "high",
+      "status": "pending",
+      "url": "https://github.com/aprilvkuo/stock_agent/issues/29",
+      "created_at": "2026-03-09T14:14:44+00:00"
+    },
+    {
+      "id": "issue-28",
+      "task": "[WEB-MIGRATED] [IMPROVEMENT-TICKET] 当前工作区代码结构不够规范，需要明确草稿区和正式区的分离。shared/stock-system 和 memory/st",
+      "priority": "high",
+      "status": "pending",
+      "url": "https://github.com/aprilvkuo/stock_agent/issues/28",
+      "created_at": "2026-03-09T14:14:38+00:00"
+    },
+    {
+      "id": "issue-27",
+      "task": "[WEB-MIGRATED] [IMPROVEMENT-TICKET] 当前工作区代码结构不够规范，需要明确草稿区和正式区的分离。shared/stock-system 和 memory/st",
+      "priority": "high",
+      "status": "pending",
+      "url": "https://github.com/aprilvkuo/stock_agent/issues/27",
+      "created_at": "2026-03-09T14:14:32+00:00"
+    },
+    {
+      "id": "issue-26",
+      "task": "[WEB-MIGRATED] [IMPROVEMENT-TICKET] 当前工作区代码结构不够规范，需要明确草稿区和正式区的分离",
+      "priority": "high",
+      "status": "pending",
+      "url": "https://github.com/aprilvkuo/stock_agent/issues/26",
+      "created_at": "2026-03-09T14:14:26+00:00"
+    },
+    {
+      "id": "issue-24",
+      "task": "[WEB-MIGRATED] [TASK] 添加死信队列",
+      "priority": "medium",
+      "status": "pending",
+      "url": "https://github.com/aprilvkuo/stock_agent/issues/24",
+      "created_at": "2026-03-09T14:14:14+00:00"
+    },
+    {
+      "id": "issue-18",
+      "task": "[WEB-MIGRATED] [TASK] 添加死信队列",
+      "priority": "medium",
+      "status": "pending",
+      "url": "https://github.com/aprilvkuo/stock_agent/issues/18",
+      "created_at": "2026-03-09T14:06:58+00:00"
+    },
+    {
+      "id": "issue-15",
+      "task": "[MIGRATED] [程序员 Agent] 修复 Bug",
+      "priority": "medium",
+      "status": "pending",
+      "url": "https://github.com/aprilvkuo/stock_agent/issues/15",
+      "created_at": "2026-03-09T14:03:56+00:00"
+    }
+  ],
+  "doing_list": [],
+  "last_sync": "2026-03-09T22:25:50.923211",
+  "github_label": "programmer-agent"
+}

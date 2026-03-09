@@ -1,8 +1,8 @@
 # 🤝 贡献指南 (Contributing Guide)
 
-**版本**: v1.1  
+**版本**: v1.2  
 **实施日期**: 2026-03-09  
-**最后更新**: 2026-03-09 (v1.1 添加目录规范)  
+**最后更新**: 2026-03-09 (v1.2 添加项目归属人)  
 **适用范围**: 股票多 Agent 系统团队
 
 ---
@@ -72,6 +72,32 @@ workspace/
 | 实现报告 | `docs/guides/` | `GITHUB_IMPLEMENTATION_REPORT.md` |
 | 安全文档 | `docs/guides/` | `GITHUB_TOKEN_SECURITY.md` |
 | 股票系统文档 | `memory/stock-system/` 或 `docs/stock-system/` | `OPTIMIZATION_REPORT.md` |
+
+---
+
+## 👥 项目归属人
+
+每个项目都有明确的归属人 (Owner)，负责该项目的维护和优化。
+
+**查看完整归属人清单**: [PROJECT_OWNERS.md](./PROJECT_OWNERS.md)
+
+### 核心归属
+
+| 项目 | 归属人 |
+|------|--------|
+| 股票多 Agent 系统 (核心) | 用户本人 |
+| Web 网站项目 (`dev/`) | 程序员 Agent |
+| Git 项目管理 (`scripts/` + `.github/`) | 协调 Agent |
+| 文档系统 (`docs/`) | 协调 Agent |
+| 技能系统 (`skills/`) | 程序员 Agent |
+| 各 Agent 模块 | 对应 Agent |
+
+### 协作原则
+
+1. **归属人负责** - 每个项目由归属人主导开发和优化
+2. **跨项目协作** - 通过 GitHub Issue 协调
+3. **重大改动审批** - 核心系统改动需用户本人审批
+4. **自主维护** - 各 Agent 自主维护自己负责的模块
 
 ---
 

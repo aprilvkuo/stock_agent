@@ -1,0 +1,14 @@
+{
+  "agent_id": "data-fetcher",
+  "agent_name": "数据获取 Agent",
+  "agent_emoji": "📡",
+  "status": "idle",
+  "status_text": "🟢 空闲",
+  "todo_count": 0,
+  "doing_count": 0,
+  "done_count": 0,
+  "todo_list": [],
+  "doing_list": [],
+  "last_sync": "2026-03-09T22:25:52.421474",
+  "github_label": "data-fetcher-agent"
+}

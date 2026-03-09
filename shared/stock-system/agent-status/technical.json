@@ -1,0 +1,23 @@
+{
+  "agent_id": "technical",
+  "agent_name": "技术面 Agent",
+  "agent_emoji": "📈",
+  "status": "busy",
+  "status_text": "🟡 忙碌中",
+  "todo_count": 1,
+  "doing_count": 0,
+  "done_count": 0,
+  "todo_list": [
+    {
+      "id": "issue-14",
+      "task": "[MIGRATED] [技术面 Agent] 分析 00700 腾讯控股 K 线",
+      "priority": "medium",
+      "status": "pending",
+      "url": "https://github.com/aprilvkuo/stock_agent/issues/14",
+      "created_at": "2026-03-09T14:03:50+00:00"
+    }
+  ],
+  "doing_list": [],
+  "last_sync": "2026-03-09T22:25:39.840067",
+  "github_label": "technical-agent"
+}

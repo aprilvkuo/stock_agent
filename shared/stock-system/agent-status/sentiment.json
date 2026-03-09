@@ -1,0 +1,23 @@
+{
+  "agent_id": "sentiment",
+  "agent_name": "情绪 Agent",
+  "agent_emoji": "😊",
+  "status": "busy",
+  "status_text": "🟡 忙碌中",
+  "todo_count": 1,
+  "doing_count": 0,
+  "done_count": 0,
+  "todo_list": [
+    {
+      "id": "issue-17",
+      "task": "[MIGRATED] [情绪 Agent] 监控市场舆情",
+      "priority": "medium",
+      "status": "pending",
+      "url": "https://github.com/aprilvkuo/stock_agent/issues/17",
+      "created_at": "2026-03-09T14:04:09+00:00"
+    }
+  ],
+  "doing_list": [],
+  "last_sync": "2026-03-09T22:25:41.413382",
+  "github_label": "sentiment-agent"
+}
