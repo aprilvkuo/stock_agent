@@ -1,0 +1,17 @@
+{
+  "title": "[MIGRATED] [程序员 Agent] 修复 Bug",
+  "body": "## 📋 任务描述\n\n修复 Bug\n\n---\n\n## 🤖 负责方\n\n@programmer-agent\n\n---\n\n## 📊 任务信息\n\n- **优先级**: 🟡 P2 - 普通\n- **来源 Agent**: 程序员 Agent\n- **创建时间**: 2026-03-08T16:16:59.123901\n- **来源文件**: `程序员_Agent.json`\n\n---\n\n## 📝 备注\n\n无\n\n---\n\n## ✅ 完成标准\n\n- [ ] 任务已完成\n- [ ] 已创建相关 PR（如适用）\n- [ ] 已通过测试/验证\n- [ ] 已在 Issue 中更新状态\n\n---\n\n*此 Issue 由自动化迁移工具创建*\n*迁移日期：2026-03-09 21:53*\n*从本地 agent-todos 系统迁移*\n",
+  "labels": [
+    "migrated",
+    "auto-generated",
+    "improvement-ticket",
+    "programmer-agent"
+  ],
+  "assignee": "programmer-agent",
+  "priority": "medium",
+  "source": {
+    "file": "程序员_Agent.json",
+    "agent": "程序员 Agent",
+    "migrated_at": "2026-03-09T21:53:25.146845"
+  }
+}

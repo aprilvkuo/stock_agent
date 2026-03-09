@@ -1,0 +1,43 @@
+name: 每日 Issue 检查
+
+on:
+  schedule:
+    - cron: '0 1 * * *'  # 每天 09:00 (UTC+8)
+  workflow_dispatch:  # 允许手动触发
+
+jobs:
+  check-issues:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: 设置 Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      
+      - name: 安装依赖
+        run: |
+          pip install PyGithub python-dotenv
+      
+      - name: 检查逾期任务
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPO: ${{ github.repository }}
+        run: |
+          python scripts/check_overdue_issues.py
+      
+      - name: 生成日报
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPO: ${{ github.repository }}
+        run: |
+          python scripts/daily_issue_report.py
+      
+      - name: 发送通知
+        if: always()
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          python scripts/send_daily_summary.py
