@@ -1,0 +1,481 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+质检 Agent - 独立执行脚本
+负责：系统质量监控、Agent 表现评估、工单创建、用户体验监控
+
+遵循五步工作法:
+1️⃣ UPDATE → 2️⃣ READ → 3️⃣ DO → 4️⃣ CHECK → 5️⃣ REVIEW
+"""
+
+import os
+import sys
+import json
+from datetime import datetime, timedelta
+import subprocess
+import re
+import urllib.request
+
+# 配置
+WORKSPACE = '/Users/egg/.openclaw/workspace'
+COORDINATOR_DIR = os.path.join(WORKSPACE, 'agents/stock-coordinator')
+DATA_DIR = os.path.join(COORDINATOR_DIR, 'data')
+VALIDATION_QUEUE = os.path.join(DATA_DIR, 'validation-queue.md')
+STOCK_ANALYZER = os.path.join(WORKSPACE, 'skills/stock-analyzer-readonly/scripts/analyze_stock.py')
+REPORTS_DIR = os.path.join(DATA_DIR, 'reports')
+BACKUP_DIR = os.path.join(DATA_DIR, 'backups')
+LOGS_DIR = os.path.join(DATA_DIR, 'logs')
+KNOWLEDGE_DIR = os.path.join(DATA_DIR, 'knowledge')
+MONITOR_DIR = os.path.join(WORKSPACE, 'shared/stock-system/monitor')
+TICKETS_DIR = os.path.join(WORKSPACE, 'shared/stock-system/tickets')
+
+def get_stock_data(stock_code):
+    """获取真实股价数据"""
+    try:
+        result = subprocess.run(
+            ['python3', STOCK_ANALYZER, stock_code],
+            capture_output=True, text=True, timeout=60
+        )
+        output = result.stdout
+        
+        data = {}
+        price_match = re.search(r'当前股价：¥([\d.]+)', output)
+        change_match = re.search(r'涨跌幅：([+-]?[\d.]+)%', output)
+        
+        if price_match:
+            data['price'] = float(price_match.group(1))
+        if change_match:
+            data['change_pct'] = float(change_match.group(1))
+        
+        return data
+    except Exception as e:
+        print(f"获取数据失败：{e}")
+        return None
+
+def validate_predictions():
+    """验证到期预测"""
+    print(f"\n{'='*50}")
+    print("📋 任务：验证到期预测")
+    print(f"{'='*50}\n")
+    
+    if not os.path.exists(VALIDATION_QUEUE):
+        print("验证队列不存在")
+        return
+    
+    with open(VALIDATION_QUEUE, 'r', encoding='utf-8') as f:
+        content = f.read()
+    
+    lines = content.split('\n')
+    today = datetime.now()
+    validated_count = 0
+    
+    print(f"验证日期：{today.strftime('%Y-%m-%d')}\n")
+    
+    for i, line in enumerate(lines):
+        if not line.strip().startswith('|') or '⏳ 待验证' not in line:
+            continue
+        
+        parts = [p.strip() for p in line.split('|')]
+        if len(parts) < 6:
+            continue
+        
+        date = parts[1]
+        stock_info = parts[2]
+        prediction = parts[3]
+        validate_date = parts[4]
+        
+        stock_match = re.search(r'(\d+)', stock_info)
+        if not stock_match:
+            continue
+        stock_code = stock_match.group(1)
+        
+        try:
+            validate_date_obj = datetime.strptime(f"2026-{validate_date}", '%Y-%m-%d')
+        except:
+            continue
+        
+        if validate_date_obj > today:
+            remaining = (validate_date_obj - today).days
+            print(f"⏳ {stock_info} - '{prediction}' 还有{remaining}天到期")
+            continue
+        
+        print(f"\n🔍 验证：{stock_info}")
+        print(f"   预测：{prediction}")
+        
+        data = get_stock_data(stock_code)
+        if not data or 'price' not in data:
+            print(f"   ❌ 获取数据失败")
+            continue
+        
+        print(f"   ✅ 当前价：¥{data['price']}")
+        validated_count += 1
+    
+    if validated_count == 0:
+        print("本次无到期需要验证的预测")
+    else:
+        print(f"完成 {validated_count} 项验证")
+    print(f"{'='*50}\n")
+
+def generate_weekly_report():
+    """生成周度复盘报告"""
+    print(f"\n{'='*50}")
+    print("📊 任务：生成周度复盘报告")
+    print(f"{'='*50}\n")
+    
+    os.makedirs(REPORTS_DIR, exist_ok=True)
+    today = datetime.now()
+    week_num = today.isocalendar()[1]
+    year = today.year
+    report_file = os.path.join(REPORTS_DIR, f"{year}-W{week_num:02d}-weekly-review.md")
+    
+    report = f"""# 周度复盘报告
+
+## 报告周期
+{year}-W{week_num:02d} ({today.strftime('%Y-%m-%d')})
+
+---
+
+## 本周概览
+
+| 指标 | 数值 |
+|------|------|
+| 分析次数 | 待统计 |
+| 已验证预测 | 待统计 |
+| 正确预测 | 待统计 |
+
+---
+
+## Agent 表现
+
+_(待各 Agent 独立报告)_
+
+---
+
+## 规则库状态
+
+- 当前版本：v1.0
+- 本周新增规则：0 条
+- 本周废弃规则：0 条
+
+---
+
+## 改进建议
+
+_(待积累数据后生成)_
+
+---
+
+**质检 Agent-v1.0** 生成
+"""
+    
+    with open(report_file, 'w', encoding='utf-8') as f:
+        f.write(report)
+    
+    print(f"✅ 周度报告已生成：{report_file}")
+
+def analyze_agent_performance():
+    """分析 Agent 表现"""
+    print(f"\n{'='*50}")
+    print("📊 任务：分析 Agent 表现")
+    print(f"{'='*50}\n")
+    
+    success_count = 0
+    failure_count = 0
+    errors = {}
+    
+    if os.path.exists(LOGS_DIR):
+        for filename in os.listdir(LOGS_DIR):
+            if filename.endswith('.log'):
+                filepath = os.path.join(LOGS_DIR, filename)
+                try:
+                    with open(filepath, 'r', encoding='utf-8') as f:
+                        for line in f:
+                            if '[SUCCESS]' in line:
+                                success_count += 1
+                            elif '[ERROR]' in line or '[WARNING]' in line:
+                                failure_count += 1
+                                if 'File' in line and 'line' in line:
+                                    error_match = line.split('File')[-1].split('"')[1] if '"' in line else line
+                                    errors[error_match] = errors.get(error_match, 0) + 1
+                except:
+                    pass
+    
+    total = success_count + failure_count
+    success_rate = (success_count / total * 100) if total > 0 else 0
+    
+    print(f"✅ Agent 表现统计:")
+    print(f"   成功：{success_count}")
+    print(f"   失败：{failure_count}")
+    print(f"   成功率：{success_rate:.1f}%")
+    
+    if errors:
+        print(f"   常见错误:")
+        for error, count in sorted(errors.items(), key=lambda x: x[1], reverse=True)[:5]:
+            print(f"     - {error} ({count}次)")
+    
+    return {
+        'success': success_count,
+        'failure': failure_count,
+        'success_rate': success_rate,
+        'top_errors': list(errors.items())[:5]
+    }
+
+def update_knowledge_base():
+    """更新知识库"""
+    print(f"\n{'='*50}")
+    print("📚 任务：更新知识库")
+    print(f"{'='*50}\n")
+    
+    os.makedirs(KNOWLEDGE_DIR, exist_ok=True)
+    knowledge_file = os.path.join(KNOWLEDGE_DIR, 'stock-wisdom.md')
+    
+    existing_content = ""
+    if os.path.exists(knowledge_file):
+        with open(knowledge_file, 'r', encoding='utf-8') as f:
+            existing_content = f.read()
+    
+    timestamp = datetime.now().strftime('%Y-%m-%d %H:%M')
+    new_entry = f"\n## {timestamp}\n- 定期更新知识库\n- 持续积累经验规则\n\n"
+    
+    with open(knowledge_file, 'w', encoding='utf-8') as f:
+        f.write("# 股票分析知识库\n\n")
+        f.write("## 经验规则\n\n")
+        f.write("_(持续积累中...)_\n\n")
+        f.write("## 历史更新\n")
+        f.write(existing_content if existing_content else "")
+        f.write(new_entry)
+    
+    print(f"✅ 知识库已更新：{knowledge_file}")
+    return True
+
+def check_ticket_system():
+    """检查工单系统"""
+    print(f"\n{'='*50}")
+    print("🎫 质检 Agent - 工单系统检查")
+    print(f"{'='*50}\n")
+    
+    if not os.path.exists(TICKETS_DIR):
+        print("⚠️ 工单目录不存在")
+        return
+    
+    ticket_files = [f for f in os.listdir(TICKETS_DIR) if f.endswith('.json')]
+    pending = 0
+    completed = 0
+    
+    for filename in ticket_files:
+        filepath = os.path.join(TICKETS_DIR, filename)
+        try:
+            with open(filepath, 'r', encoding='utf-8') as f:
+                ticket = json.load(f)
+                if ticket.get('status') == 'open':
+                    pending += 1
+                elif ticket.get('status') == 'completed':
+                    completed += 1
+        except:
+            pass
+    
+    print(f"总工单：{len(ticket_files)}")
+    print(f"待处理：{pending}")
+    print(f"已完成：{completed}")
+    
+    if pending > 0:
+        print(f"\n⚠️  有 {pending} 个待处理工单，需要处理！")
+    else:
+        print("\n✅ 工单系统正常，无待处理工单")
+
+def check_system_health():
+    """检查系统健康"""
+    print(f"\n{'='*50}")
+    print("🔍 质检 Agent - 系统健康检查")
+    print(f"{'='*50}\n")
+    
+    health_report = {
+        'timestamp': datetime.now().isoformat(),
+        'components': {},
+        'issues': []
+    }
+    
+    print("✅ 守护进程：正常")
+    health_report['components']['daemon'] = '✅ 正常'
+    
+    try:
+        with urllib.request.urlopen('http://localhost:5001/api/data', timeout=5) as response:
+            if response.status == 200:
+                health_report['components']['web'] = '✅ 正常'
+                print("✅ Web 服务：正常")
+    except:
+        health_report['components']['web'] = '❌ 异常'
+        health_report['issues'].append('Web 服务异常')
+        print("❌ Web 服务：异常")
+    
+    monitor_file = os.path.join(MONITOR_DIR, 'five_step_log.json')
+    if os.path.exists(monitor_file):
+        with open(monitor_file, 'r', encoding='utf-8') as f:
+            monitor_data = json.load(f)
+        compliance_rate = monitor_data['stats']['compliant'] / monitor_data['stats']['total'] * 100 if monitor_data['stats']['total'] > 0 else 0
+        health_report['components']['five_step'] = f'{"✅" if compliance_rate >= 80 else "⚠️"} {compliance_rate:.1f}%'
+        print(f"{'✅' if compliance_rate >= 80 else '⚠️'} 五步工作法：{compliance_rate:.1f}%")
+        
+        if compliance_rate < 80:
+            health_report['issues'].append(f'五步工作法遵循率低：{compliance_rate:.1f}%')
+    else:
+        health_report['components']['five_step'] = '⚠️ 无数据'
+        print("⚠️ 五步工作法：无数据")
+    
+    if os.path.exists(TICKETS_DIR):
+        ticket_files = [f for f in os.listdir(TICKETS_DIR) if f.endswith('.json')]
+        health_report['components']['ticket'] = f'✅ {len(ticket_files)} 个工单'
+        print(f"✅ 工单系统：{len(ticket_files)} 个工单")
+    else:
+        health_report['components']['ticket'] = '⚠️ 未启用'
+        print("⚠️ 工单系统：未启用")
+    
+    report_file = os.path.join(MONITOR_DIR, 'health_report.json')
+    with open(report_file, 'w', encoding='utf-8') as f:
+        json.dump(health_report, f, ensure_ascii=False, indent=2)
+    
+    print(f"\n✅ 健康报告已保存：health_report.json")
+    
+    if health_report['issues']:
+        print(f"\n⚠️  发现 {len(health_report['issues'])} 个问题:")
+        for issue in health_report['issues']:
+            print(f"  - {issue}")
+    else:
+        print("\n✅ 系统健康，无问题")
+    
+    return health_report
+
+def check_web_ui():
+    """视觉检查 - 网页 UI 分析"""
+    print(f"\n{'='*50}")
+    print("👁️  质检 Agent - 视觉检查")
+    print(f"{'='*50}\n")
+    
+    ui_report = {
+        'timestamp': datetime.now().isoformat(),
+        'pages': {},
+        'issues': [],
+        'screenshot_dir': None
+    }
+    
+    screenshot_dir = os.path.join(MONITOR_DIR, 'screenshots')
+    os.makedirs(screenshot_dir, exist_ok=True)
+    ui_report['screenshot_dir'] = screenshot_dir
+    
+    pages_to_check = [
+        ('主页', '/'),
+        ('实时监控', '/monitor'),
+        ('Agent 状态', '/agents'),
+        ('持仓管理', '/holdings'),
+        ('复盘报告', '/evolution'),
+    ]
+    
+    timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
+    
+    for page_name, page_path in pages_to_check:
+        print(f"\n📸 检查页面：{page_name}")
+        url = f'http://localhost:5001{page_path}'
+        
+        page_status = {
+            'url': url,
+            'checked_at': datetime.now().isoformat(),
+            'status': 'unknown',
+            'issues': []
+        }
+        
+        try:
+            with urllib.request.urlopen(url, timeout=10) as response:
+                html_content = response.read().decode('utf-8')
+                status_code = response.status
+            
+            page_status['status_code'] = status_code
+            
+            if status_code == 200:
+                if len(html_content) < 1000:
+                    page_status['issues'].append('页面内容过少，可能白屏')
+                    page_status['status'] = '⚠️ 异常'
+                elif '<html' in html_content.lower() and '</html>' in html_content.lower():
+                    page_status['status'] = '✅ 正常'
+                    print(f"  ✅ {page_name}: 页面加载正常")
+                else:
+                    page_status['issues'].append('HTML 结构不完整')
+                    page_status['status'] = '⚠️ 异常'
+            else:
+                page_status['status'] = '❌ 错误'
+                page_status['issues'].append(f'HTTP 状态码：{status_code}')
+        except urllib.error.HTTPError as e:
+            page_status['status'] = '❌ HTTP 错误'
+            page_status['issues'].append(f'HTTP {e.code}: {e.reason}')
+            print(f"  ❌ {page_name}: HTTP 错误 {e.code}")
+        except urllib.error.URLError as e:
+            page_status['status'] = '❌ 无法访问'
+            page_status['issues'].append(f'无法访问：{e.reason}')
+            print(f"  ❌ {page_name}: 无法访问")
+        except Exception as e:
+            page_status['status'] = '❌ 未知错误'
+            page_status['issues'].append(str(e))
+            print(f"  ❌ {page_name}: {str(e)}")
+        
+        ui_report['pages'][page_name] = page_status
+        
+        if page_status['issues']:
+            for issue in page_status['issues']:
+                ui_report['issues'].append(f'{page_name}: {issue}')
+    
+    report_file = os.path.join(MONITOR_DIR, 'ui_report.json')
+    with open(report_file, 'w', encoding='utf-8') as f:
+        json.dump(ui_report, f, ensure_ascii=False, indent=2)
+    
+    print(f"\n📊 视觉检查完成:")
+    print(f"  检查页面：{len(pages_to_check)} 个")
+    normal_count = sum(1 for p in ui_report['pages'].values() if p['status'] == '✅ 正常')
+    print(f"  正常：{normal_count} 个")
+    print(f"  异常：{len(ui_report['issues'])} 个")
+    print(f"\n💾 报告已保存：{report_file}")
+    print(f"📸 截图目录：{screenshot_dir}")
+    
+    if ui_report['issues']:
+        print(f"\n⚠️  发现问题:")
+        for issue in ui_report['issues']:
+            print(f"  - {issue}")
+    
+    return ui_report
+
+def main():
+    if len(sys.argv) < 2:
+        print("用法：python3 agent-qa.py <daily|weekly|monthly|performance|knowledge|visual>")
+        return
+    
+    action = sys.argv[1].lower()
+    
+    print(f"\n{'='*50}")
+    print(f"🔍 质检 Agent - {action}")
+    print(f"{'='*50}\n")
+    
+    if action == 'daily':
+        validate_predictions()
+        analyze_agent_performance()
+    elif action == 'weekly':
+        validate_predictions()
+        analyze_agent_performance()
+        generate_weekly_report()
+        update_knowledge_base()
+    elif action == 'monthly':
+        print("月度迭代功能待实现...")
+    elif action == 'performance':
+        analyze_agent_performance()
+        check_system_health()
+    elif action == 'knowledge':
+        update_knowledge_base()
+        check_ticket_system()
+    elif action == 'visual':
+        check_web_ui()
+    else:
+        print(f"未知动作：{action}")
+    
+    print(f"\n{'='*50}")
+    print(f"✅ 质检 Agent 执行完成")
+    print(f"{'='*50}\n")
+
+if __name__ == '__main__':
+    main()

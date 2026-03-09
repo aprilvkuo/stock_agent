@@ -1,0 +1,24 @@
+{
+  "rewards": [
+    {
+      "id": "R001",
+      "date": "2026-03-08",
+      "agent": "程序员 Agent",
+      "achievement": "UI 显示问题修复",
+      "reward": "表扬",
+      "score_change": 0,
+      "status": "completed"
+    }
+  ],
+  "punishments": [],
+  "agent_scores": {
+    "fundamental": {"name": "基本面 Agent", "score": 100, "trend": "stable"},
+    "technical": {"name": "技术面 Agent", "score": 100, "trend": "stable"},
+    "sentiment": {"name": "情绪 Agent", "score": 100, "trend": "stable"},
+    "coordinator": {"name": "主 Agent", "score": 100, "trend": "stable"},
+    "qa": {"name": "质检 Agent", "score": 100, "trend": "stable"},
+    "programmer": {"name": "程序员 Agent", "score": 100, "trend": "stable"}
+  },
+  "honor_roll": [],
+  "last_update": "2026-03-08T20:38:00"
+}

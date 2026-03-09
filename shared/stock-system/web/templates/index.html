@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📊 股票多 Agent 系统监控</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            background: linear-gradient(135deg, #0F0F1A 0%, #1A1A2E 50%, #16213E 100%);
+            min-height: 100vh;
+            color: white;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+        .card {
+            background: rgba(26, 26, 46, 0.8);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 16px;
+        }
+        .stat-card {
+            transition: all 0.3s;
+        }
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+        }
+        .status-dot {
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.7; transform: scale(1.1); }
+        }
+        .ranking-item {
+            transition: all 0.3s;
+        }
+        .ranking-item:hover {
+            background: rgba(255,255,255,0.05);
+        }
+        .progress-bar {
+            transition: width 1s ease-in-out;
+        }
+    </style>
+</head>
+<body class="p-4 md:p-8">
+    <div class="max-w-7xl mx-auto">
+        <!-- 标题栏 -->
+        <div class="text-center mb-8">
+            <h1 class="text-4xl md:text-5xl font-bold mb-2 bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
+                📊 股票多 Agent 系统监控
+            </h1>
+            <p class="text-gray-400 text-lg">专业级实时监控面板</p>
+            <div class="mt-4 flex items-center justify-center gap-4 flex-wrap">
+                <span class="text-sm text-gray-500">
+                    🕐 最后更新：<span id="last-update" class="text-blue-400 font-mono">--</span>
+                </span>
+                <span class="inline-flex items-center text-sm text-green-400">
+                    <span class="status-dot w-2 h-2 bg-green-400 rounded-full mr-2"></span>
+                    实时刷新 (5 秒)
+                </span>
+                <a href="/v2-reports" class="text-sm text-green-400 hover:text-green-300 font-semibold">
+                    📈 v2.0 分析报告
+                </a>
+                <a href="/agent-transparency" class="text-sm text-purple-400 hover:text-purple-300">
+                    🔍 透明度页面 →
+                </a>
+            </div>
+        </div>
+
+        <!-- 系统健康度 -->
+        <div class="card p-6 mb-8">
+            <div class="flex items-center justify-between mb-4">
+                <h2 class="text-2xl font-bold flex items-center">
+                    <span class="mr-2">💚</span> 系统健康度
+                </h2>
+                <span id="health-score" class="text-4xl font-bold text-green-400">--</span>
+            </div>
+            <div class="w-full bg-gray-700 rounded-full h-4 overflow-hidden">
+                <div id="health-bar" class="progress-bar bg-gradient-to-r from-green-500 to-emerald-400 h-4 rounded-full" style="width: 0%"></div>
+            </div>
+            <div class="grid grid-cols-3 gap-4 mt-4">
+                <div class="text-center">
+                    <div id="critical-issues" class="text-2xl font-bold text-red-400">-</div>
+                    <div class="text-sm text-gray-400">严重问题</div>
+                </div>
+                <div class="text-center">
+                    <div id="warnings" class="text-2xl font-bold text-yellow-400">-</div>
+                    <div class="text-sm text-gray-400">警告</div>
+                </div>
+                <div class="text-center">
+                    <div id="error-rate" class="text-2xl font-bold text-blue-400">-</div>
+                    <div class="text-sm text-gray-400">错误率</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 关键指标 -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+            <div class="card stat-card p-6 text-center">
+                <div class="text-4xl mb-2">🚀</div>
+                <div id="total-executions" class="text-3xl font-bold text-blue-400">-</div>
+                <div class="text-sm text-gray-400 mt-1">今日总执行</div>
+            </div>
+            <div class="card stat-card p-6 text-center">
+                <div class="text-4xl mb-2">🟢</div>
+                <div id="active-agents" class="text-3xl font-bold text-green-400">-</div>
+                <div class="text-sm text-gray-400 mt-1">活跃 Agent</div>
+            </div>
+            <div class="card stat-card p-6 text-center">
+                <div class="text-4xl mb-2">📋</div>
+                <div id="pending-requests" class="text-3xl font-bold text-yellow-400">-</div>
+                <div class="text-sm text-gray-400 mt-1">待处理请求</div>
+            </div>
+            <div class="card stat-card p-6 text-center">
+                <div class="text-4xl mb-2">✅</div>
+                <div id="success-count" class="text-3xl font-bold text-green-400">-</div>
+                <div class="text-sm text-gray-400 mt-1">成功次数</div>
+            </div>
+        </div>
+
+        <!-- 工作量排行榜 -->
+        <div class="card p-6 mb-8">
+            <h2 class="text-2xl font-bold mb-4 flex items-center">
+                <span class="mr-2">🏆</span> Agent 工作量排行榜
+            </h2>
+            <div id="ranking-list" class="space-y-3">
+                <div class="text-center text-gray-500 py-8">加载中...</div>
+            </div>
+        </div>
+
+        <!-- Agent 状态网格 -->
+        <h2 class="text-2xl font-bold mb-4 flex items-center">
+            <span class="mr-2">🤖</span> Agent 实时状态
+        </h2>
+        <div id="agent-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
+            <div class="text-center text-gray-500 py-8">加载中...</div>
+        </div>
+
+        <!-- 实时日志 -->
+        <div class="card p-6 mb-8">
+            <h2 class="text-2xl font-bold mb-4 flex items-center">
+                <span class="mr-2">📜</span> 实时日志
+            </h2>
+            <div id="live-logs" class="bg-black/60 rounded-lg p-4 h-64 overflow-y-auto font-mono text-sm">
+                <div class="text-gray-500">日志加载中...</div>
+            </div>
+        </div>
+
+        <!-- 奖惩公示 -->
+        <div class="card p-6 mb-8">
+            <h2 class="text-2xl font-bold mb-4 flex items-center">
+                <span class="mr-2">🏆</span> 奖惩公示
+            </h2>
+            
+            <!-- Agent 得分 -->
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 mb-6">
+                <div id="agent-scores" class="contents">加载中...</div>
+            </div>
+            
+            <!-- 奖惩记录 -->
+            <div class="grid md:grid-cols-2 gap-4">
+                <div>
+                    <h3 class="font-bold mb-3 text-green-400">🎖️ 奖励记录</h3>
+                    <div id="rewards-list" class="space-y-2">
+                        <div class="text-gray-500 text-sm">暂无奖励记录</div>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="font-bold mb-3 text-red-400">⚠️ 惩罚记录</h3>
+                    <div id="punishments-list" class="space-y-2">
+                        <div class="text-gray-500 text-sm">暂无惩罚记录</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 格式化数字
+        function formatNumber(num) {
+            return num >= 1000 ? (num/1000).toFixed(1) + 'k' : num.toString();
+        }
+
+        // 更新系统健康度
+        function updateHealth(health, errors) {
+            document.getElementById('health-score').textContent = health.health_score + '/100';
+            document.getElementById('health-bar').style.width = health.health_score + '%';
+            document.getElementById('critical-issues').textContent = health.critical_issues || 0;
+            document.getElementById('warnings').textContent = health.warnings || 0;
+            document.getElementById('error-rate').textContent = (errors.rate || 0) + '%';
+        }
+
+        // 更新关键指标
+        function updateMetrics(ranking, errors, pending) {
+            const total = ranking.reduce((sum, a) => sum + a.tasks, 0);
+            const active = ranking.filter(a => a.status === 'active').length;
+            
+            document.getElementById('total-executions').textContent = formatNumber(total);
+            document.getElementById('active-agents').textContent = active;
+            document.getElementById('pending-requests').textContent = pending;
+            document.getElementById('success-count').textContent = formatNumber(errors.success || 0);
+        }
+
+        // 更新排行榜
+        function updateRanking(ranking) {
+            const container = document.getElementById('ranking-list');
+            container.innerHTML = ranking.map(agent => `
+                <div class="ranking-item flex items-center justify-between p-4 rounded-lg" 
+                     style="background: linear-gradient(90deg, ${agent.color}20 0%, transparent 100%); border-left: 4px solid ${agent.color}">
+                    <div class="flex items-center gap-4">
+                        <div class="text-2xl font-bold w-12 text-center">${agent.medal}</div>
+                        <div class="text-3xl">${agent.emoji}</div>
+                        <div>
+                            <div class="font-bold text-lg">${agent.name}</div>
+                            <div class="text-sm text-gray-400">
+                                ${agent.status_emoji} ${agent.status_text}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-right">
+                        <div class="text-3xl font-bold" style="color: ${agent.color}">${formatNumber(agent.tasks)}</div>
+                        <div class="text-sm text-gray-400">次执行</div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // 更新 Agent 网格
+        function updateAgentGrid(stats) {
+            const container = document.getElementById('agent-grid');
+            container.innerHTML = Object.values(stats).map(agent => `
+                <div class="card p-6 stat-card">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="flex items-center gap-3">
+                            <span class="text-4xl">${agent.emoji}</span>
+                            <div>
+                                <h3 class="font-bold text-lg">${agent.name}</h3>
+                                <div class="flex items-center gap-2 mt-1">
+                                    <span class="status-dot w-3 h-3 rounded-full" 
+                                          style="background: ${agent.status === 'active' ? '#10B981' : agent.status === 'idle' ? '#F59E0B' : '#EF4444'}"></span>
+                                    <span class="text-sm text-gray-400">${agent.status_text}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="text-right">
+                            <div class="text-2xl font-bold" style="color: ${agent.color}">${formatNumber(agent.tasks)}</div>
+                            <div class="text-xs text-gray-500">今日执行</div>
+                        </div>
+                    </div>
+                    
+                    <div class="space-y-2 text-sm">
+                        <div class="flex justify-between">
+                            <span class="text-gray-400">最后运行:</span>
+                            <span class="text-gray-300 font-mono">${agent.last_run || '从未'}</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-400">状态:</span>
+                            <span class="${agent.status === 'active' ? 'text-green-400' : agent.status === 'idle' ? 'text-yellow-400' : 'text-red-400'}">
+                                ${agent.status}
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // 更新日志
+        function updateLogs(logs) {
+            const container = document.getElementById('live-logs');
+            container.innerHTML = logs.map(log => {
+                let color = 'text-gray-300';
+                if (log.includes('ERROR')) color = 'text-red-400';
+                else if (log.includes('SUCCESS')) color = 'text-green-400';
+                else if (log.includes('WARNING')) color = 'text-yellow-400';
+                else if (log.includes('INFO')) color = 'text-blue-300';
+                
+                return `<div class="${color}">${log}</div>`;
+            }).join('');
+            container.scrollTop = container.scrollHeight;
+        }
+
+        // 加载数据
+        async function loadData() {
+            try {
+                const response = await fetch('/api/data');
+                const data = await response.json();
+                
+                updateHealth(data.health, data.errors);
+                updateMetrics(data.ranking, data.errors, data.pending_requests);
+                updateRanking(data.ranking);
+                updateAgentGrid(data.agents);
+                
+                document.getElementById('last-update').textContent = data.last_update;
+            } catch (error) {
+                console.error('加载失败:', error);
+            }
+        }
+
+        // 加载日志
+        async function loadLogs() {
+            try {
+                const response = await fetch('/api/logs?limit=50');
+                const logs = await response.json();
+                updateLogs(logs);
+            } catch (error) {
+                console.error('日志加载失败:', error);
+            }
+        }
+
+        // 加载奖惩记录
+        async function loadRewards() {
+            try {
+                const response = await fetch('/api/rewards');
+                const data = await response.json();
+                updateAgentScores(data.agent_scores);
+                updateRewardsList(data.rewards);
+                updatePunishmentsList(data.punishments);
+            } catch (error) {
+                console.error('奖惩记录加载失败:', error);
+            }
+        }
+
+        // 更新 Agent 得分
+        function updateAgentScores(scores) {
+            const container = document.getElementById('agent-scores');
+            container.innerHTML = Object.values(scores).map(agent => `
+                <div class="card p-4 text-center stat-card">
+                    <div class="text-2xl mb-2">${agent.name.split(' ')[0]}</div>
+                    <div class="text-3xl font-bold ${agent.score >= 100 ? 'text-green-400' : agent.score >= 80 ? 'text-yellow-400' : 'text-red-400'}">${agent.score}</div>
+                    <div class="text-xs text-gray-400 mt-1">分</div>
+                    <div class="text-xs ${agent.trend === 'up' ? 'text-green-400' : agent.trend === 'down' ? 'text-red-400' : 'text-gray-500'}">
+                        ${agent.trend === 'up' ? '↑' : agent.trend === 'down' ? '↓' : '→'}
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // 更新奖励列表
+        function updateRewardsList(rewards) {
+            const container = document.getElementById('rewards-list');
+            if (!rewards || rewards.length === 0) {
+                container.innerHTML = '<div class="text-gray-500 text-sm">暂无奖励记录</div>';
+                return;
+            }
+            container.innerHTML = rewards.map(r => `
+                <div class="bg-green-900/20 border border-green-800 rounded-lg p-3">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <div class="font-bold text-green-400">🎖️ ${r.agent}</div>
+                            <div class="text-sm text-gray-300">${r.achievement}</div>
+                        </div>
+                        <div class="text-right">
+                            <div class="text-xs text-gray-400">${r.date}</div>
+                            <div class="text-sm text-green-400">${r.reward}</div>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // 更新惩罚列表
+        function updatePunishmentsList(punishments) {
+            const container = document.getElementById('punishments-list');
+            if (!punishments || punishments.length === 0) {
+                container.innerHTML = '<div class="text-gray-500 text-sm">暂无惩罚记录</div>';
+                return;
+            }
+            container.innerHTML = punishments.map(p => `
+                <div class="bg-red-900/20 border border-red-800 rounded-lg p-3">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <div class="font-bold text-red-400">⚠️ ${p.agent}</div>
+                            <div class="text-sm text-gray-300">${p.reason}</div>
+                        </div>
+                        <div class="text-right">
+                            <div class="text-xs text-gray-400">${p.date}</div>
+                            <div class="text-sm text-red-400">${p.punishment}</div>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // 初始加载
+        loadData();
+        loadLogs();
+        loadRewards();
+
+        // 定时刷新
+        setInterval(loadData, 5000);     // 5 秒刷新数据
+        setInterval(loadLogs, 3000);     // 3 秒刷新日志
+        setInterval(loadRewards, 10000); // 10 秒刷新奖惩
+    </script>
+</body>
+</html>

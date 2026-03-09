@@ -1,0 +1,731 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+股票多 Agent 系统实时监控网站
+"""
+
+import os
+import re
+import json
+from datetime import datetime, timedelta
+from flask import Flask, render_template, jsonify, request
+
+app = Flask(__name__)
+
+# 数据目录
+DATA_DIR = '/Users/egg/.openclaw/workspace/agents/stock-coordinator/data'
+LOGS_DIR = os.path.join(DATA_DIR, 'logs')
+REQUESTS_DIR = os.path.join(DATA_DIR, 'queue/requests')
+RESULTS_DIR = os.path.join(DATA_DIR, 'queue/results')
+
+def parse_markdown_file(filepath):
+    """解析 Markdown 文件内容"""
+    if not os.path.exists(filepath):
+        return None
+    
+    with open(filepath, 'r', encoding='utf-8') as f:
+        return f.read()
+
+def parse_request_file(filepath):
+    """解析请求文件"""
+    content = parse_markdown_file(filepath)
+    if not content:
+        return None
+    
+    data = {}
+    
+    # 提取股票代码
+    stock_match = re.search(r'股票代码：(\d+)', content)
+    if stock_match:
+        data['code'] = stock_match.group(1)
+    
+    # 提取股票名称
+    name_match = re.search(r'股票名称：(.+)', content)
+    if name_match:
+        data['name'] = name_match.group(1).strip()
+    
+    # 提取请求时间
+    time_match = re.search(r'请求时间：(.+)', content)
+    if time_match:
+        data['request_time'] = time_match.group(1).strip()
+    
+    # 提取状态
+    status_match = re.search(r'汇总：✅ 已完成 - (.+)', content)
+    if status_match:
+        data['status'] = status_match.group(1).strip()
+    else:
+        status_match = re.search(r'汇总：(.+)', content)
+        if status_match:
+            data['status'] = status_match.group(1).strip()
+    
+    return data
+
+def parse_result_file(filepath):
+    """解析结果文件"""
+    content = parse_markdown_file(filepath)
+    if not content:
+        return None
+    
+    data = {}
+    
+    # 提取评级
+    rating_match = re.search(r'\| 评级 \| (.+?) \|', content)
+    if rating_match:
+        data['rating'] = rating_match.group(1).strip()
+    
+    # 提取置信度
+    confidence_match = re.search(r'\| 置信度 \| (\d+)%', content)
+    if confidence_match:
+        data['confidence'] = int(confidence_match.group(1))
+    
+    # 提取建议
+    suggestion_match = re.search(r'\| 建议 \| (.+)', content)
+    if suggestion_match:
+        data['suggestion'] = suggestion_match.group(1).strip()
+    
+    # 判断类型
+    if 'fundamental' in filepath.lower() or '基本面' in content:
+        data['type'] = 'fundamental'
+    elif 'technical' in filepath.lower() or '技术面' in content:
+        data['type'] = 'technical'
+    elif 'sentiment' in filepath.lower() or '情绪' in content:
+        data['type'] = 'sentiment'
+    else:
+        data['type'] = 'unknown'
+    
+    return data
+
+def parse_validation_queue():
+    """解析验证队列"""
+    filepath = os.path.join(DATA_DIR, 'validation-queue.md')
+    content = parse_markdown_file(filepath)
+    if not content:
+        return {'pending': [], 'correct': 0, 'wrong': 0}
+    
+    items = []
+    correct = content.count('✅ 正确')
+    wrong = content.count('❌ 错误')
+    
+    # 提取待验证项
+    for line in content.split('\n'):
+        if '⏳ 待验证' in line:
+            parts = [p.strip() for p in line.split('|')]
+            if len(parts) >= 5:
+                items.append({
+                    'stock': parts[2],
+                    'prediction': parts[3],
+                    'date': parts[4].strip(),
+                    'status': 'pending'
+                })
+    
+    # 提取已验证项
+    for line in content.split('\n'):
+        if '✅ 正确' in line or '❌ 错误' in line:
+            parts = [p.strip() for p in line.split('|')]
+            if len(parts) >= 5:
+                status = 'correct' if '✅ 正确' in line else 'wrong'
+                items.append({
+                    'stock': parts[2],
+                    'prediction': parts[3],
+                    'date': parts[4].strip(),
+                    'verified_date': parts[5].strip() if len(parts) > 5 else '',
+                    'status': status
+                })
+    
+    return {
+        'items': items,
+        'pending': len([i for i in items if i['status'] == 'pending']),
+        'correct': correct,
+        'wrong': wrong
+    }
+
+def check_recent_activity(agent_name_pattern, hours=24):
+    """检查最近 Agent 活动 - 优化版：只统计今日完成的唯一股票数"""
+    now = datetime.now()
+    today_start = now.replace(hour=0, minute=0, second=0, microsecond=0)
+    last_run = None
+    unique_stocks = set()  # 使用集合去重 (按股票代码)
+    
+    # 1. 检查守护进程日志 (只读今日日志)
+    today_log = os.path.join(LOGS_DIR, f'daemon-{today_start.strftime("%Y-%m-%d")}.log')
+    if os.path.exists(today_log):
+        try:
+            with open(today_log, 'r', encoding='utf-8') as f:
+                lines = f.readlines()
+                for line in lines:
+                    # 只统计成功的 Agent 完成记录
+                    if 'SUCCESS' in line and 'Agent 完成' in line:
+                        if re.search(agent_name_pattern, line) or re.search(agent_name_pattern.replace('Agent', ''), line):
+                            # 提取股票代码
+                            stock_match = re.search(r'(\d{6})', line)
+                            if stock_match:
+                                unique_stocks.add(stock_match.group(1))
+                            
+                            # 提取时间戳
+                            time_match = re.search(r'\[(\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2})\]', line)
+                            if time_match:
+                                try:
+                                    timestamp = datetime.strptime(time_match.group(1), '%Y-%m-%d %H:%M:%S')
+                                    if last_run is None or timestamp > last_run:
+                                        last_run = timestamp
+                                except Exception:
+                                    pass
+        except Exception:
+            pass
+    
+    # 2. 检查结果文件 (只统计今日修改的)
+    if os.path.exists(RESULTS_DIR):
+        for filename in os.listdir(RESULTS_DIR):
+            if filename.endswith('.md'):
+                filepath = os.path.join(RESULTS_DIR, filename)
+                try:
+                    mtime = datetime.fromtimestamp(os.path.getmtime(filepath))
+                    if mtime >= today_start:  # 今日修改的文件
+                        with open(filepath, 'r', encoding='utf-8') as f:
+                            content = f.read()
+                            if re.search(agent_name_pattern, content) or re.search(agent_name_pattern.replace('Agent', ''), content):
+                                # 提取股票代码
+                                code_match = re.search(r'代码：(\d{6})', content)
+                                if code_match:
+                                    unique_stocks.add(code_match.group(1))
+                                
+                                if last_run is None or mtime > last_run:
+                                    last_run = mtime
+                except Exception:
+                    pass
+    
+    return {
+        'active': last_run is not None and (now - last_run) < timedelta(minutes=10),
+        'last_run': last_run.strftime('%Y-%m-%d %H:%M:%S') if last_run else None,
+        'count': len(unique_stocks)  # 返回唯一股票数
+    }
+    
+def get_agent_status():
+    """获取 Agent 实时状态"""
+    agents_config = {
+        'fundamental': {
+            'name': '基本面 Agent',
+            'pattern': r'基本面 Agent|fundamental'
+        },
+        'technical': {
+            'name': '技术面 Agent',
+            'pattern': r'技术面 Agent|technical'
+        },
+        'sentiment': {
+            'name': '情绪 Agent',
+            'pattern': r'情绪 Agent|sentiment'
+        },
+        'coordinator': {
+            'name': '主 Agent',
+            'pattern': r'主 Agent|Coordinator|coordinator'
+        },
+        'qa': {
+            'name': '质检 Agent',
+            'pattern': r'质检 Agent|qa|quality'
+        },
+        'programmer': {
+            'name': '程序员 Agent',
+            'pattern': r'程序员 Agent|programmer'
+        }
+    }
+    
+    result = {}
+    now = datetime.now()
+    
+    for agent_id, config in agents_config.items():
+        activity = check_recent_activity(config['pattern'])
+        
+        # 判断状态
+        if activity['active']:
+            status = 'active'
+            emoji = '🟢'
+            status_text = '运行中'
+        elif activity['last_run']:
+            # 检查最后运行时间
+            try:
+                last_run = datetime.strptime(activity['last_run'], '%Y-%m-%d %H:%M:%S')
+                hours_ago = (now - last_run).total_seconds() / 3600
+                
+                if hours_ago < 1:
+                    status = 'idle'
+                    emoji = '🟡'
+                    status_text = '空闲'
+                elif hours_ago < 24:
+                    status = 'idle'
+                    emoji = '🟡'
+                    status_text = f'{int(hours_ago)}小时前'
+                else:
+                    status = 'offline'
+                    emoji = '🔴'
+                    status_text = f'{int(hours_ago/24)}天前'
+            except Exception:
+                status = 'unknown'
+                emoji = '⚪'
+                status_text = '未知'
+        else:
+            status = 'offline'
+            emoji = '🔴'
+            status_text = '未活动'
+        
+        result[agent_id] = {
+            'name': config['name'],
+            'status': status,
+            'emoji': emoji,
+            'text': status_text,
+            'last_run': activity['last_run'],
+            'tasks': activity['count']
+        }
+    
+    return result
+
+def get_system_data():
+    """获取系统数据"""
+    # 获取所有请求
+    requests = {}
+    if os.path.exists(REQUESTS_DIR):
+        for f in os.listdir(REQUESTS_DIR):
+            if f.endswith('.md'):
+                req_id = f.replace('.md', '')
+                req_data = parse_request_file(os.path.join(REQUESTS_DIR, f))
+                if req_data:
+                    requests[req_id] = req_data
+                    requests[req_id]['id'] = req_id
+                    requests[req_id]['agents'] = {}
+    
+    # 获取所有结果并关联到请求
+    if os.path.exists(RESULTS_DIR):
+        for f in os.listdir(RESULTS_DIR):
+            if f.endswith('.md'):
+                result_data = parse_result_file(os.path.join(RESULTS_DIR, f))
+                if result_data:
+                    # 从文件名提取请求 ID
+                    match = re.search(r'result_(.+?)_(fundamental|technical|sentiment)', f)
+                    if match:
+                        req_id = match.group(1)
+                        agent_type = match.group(2)
+                        if req_id in requests:
+                            requests[req_id]['agents'][agent_type] = result_data
+    
+    # 转换为列表并排序
+    analysis_list = sorted(
+        [r for r in requests.values() if r.get('code')],
+        key=lambda x: x.get('request_time', ''),
+        reverse=True
+    )
+    
+    # 获取验证队列
+    validation = parse_validation_queue()
+    
+    # 获取 Agent 状态
+    agent_status = get_agent_status()
+    
+    return {
+        'analysis': analysis_list,
+        'validation': validation,
+        'agents': agent_status,
+        'last_update': datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+    }
+
+@app.route('/')
+def index():
+    """首页"""
+    return render_template('index.html')
+
+@app.route('/api/data')
+def api_data():
+    """API - 获取系统数据"""
+    return jsonify(get_system_data())
+
+@app.route('/api/analysis')
+def api_analysis():
+    """API - 获取分析历史"""
+    data = get_system_data()
+    return jsonify(data['analysis'])
+
+@app.route('/api/validation')
+def api_validation():
+    """API - 获取验证队列"""
+    data = get_system_data()
+    return jsonify(data['validation'])
+
+@app.route('/agents')
+def agents_page():
+    """Agent 监控页面"""
+    return render_template('agents.html')
+
+@app.route('/monitor')
+def monitor_page():
+    """系统实时监控页面"""
+    return render_template('monitor.html')
+
+@app.route('/agents-capability')
+def agents_capability_page():
+    """Agent 能力说明页面"""
+    return render_template('agents-capability.html')
+
+@app.route('/api/report/<stock_code>')
+def api_report(stock_code):
+    """API - 获取股票详细分析报告"""
+    reports = {'fundamental': None, 'technical': None, 'sentiment': None}
+    report_contents = {}
+    stock_info = None
+    
+    # 1. 查找请求文件获取股票信息
+    if os.path.exists(REQUESTS_DIR):
+        for f in os.listdir(REQUESTS_DIR):
+            if f.endswith('.md'):
+                req_data = parse_request_file(os.path.join(REQUESTS_DIR, f))
+                if req_data and req_data.get('code') == stock_code:
+                    stock_info = {
+                        'code': stock_code,
+                        'name': req_data.get('name', 'N/A'),
+                        'request_time': req_data.get('request_time', 'N/A'),
+                        'status': req_data.get('status', 'N/A')
+                    }
+                    break
+    
+    # 2. 通过内容查找该股票的结果文件
+    if os.path.exists(RESULTS_DIR):
+        for f in os.listdir(RESULTS_DIR):
+            if f.endswith('.md'):
+                filepath = os.path.join(RESULTS_DIR, f)
+                try:
+                    with open(filepath, 'r', encoding='utf-8') as file:
+                        content = file.read()
+                        # 检查是否包含该股票代码
+                        if f'代码：{stock_code}' in content or f'code": "{stock_code}"' in content:
+                            result_data = parse_result_file(filepath)
+                            
+                            # 判断类型
+                            if 'fundamental' in f.lower() or '基本面' in content:
+                                reports['fundamental'] = result_data
+                                report_contents['fundamental'] = content
+                            elif 'technical' in f.lower() or '技术面' in content:
+                                reports['technical'] = result_data
+                                report_contents['technical'] = content
+                            elif 'sentiment' in f.lower() or '情绪' in content:
+                                reports['sentiment'] = result_data
+                                report_contents['sentiment'] = content
+                except Exception:
+                    pass
+    
+    return jsonify({
+        'stock': stock_info,
+        'reports': reports,
+        'contents': report_contents
+    })
+
+@app.route('/report/<stock_code>')
+def report_page(stock_code):
+    """详细报告页面"""
+    return render_template('report.html', stock_code=stock_code)
+
+@app.route('/api/evolution')
+def api_evolution():
+    """API - 获取进化报告列表"""
+    evolution_reports = []
+    
+    # 扫描进化报告目录
+    if os.path.exists(DATA_DIR):
+        for filename in sorted(os.listdir(DATA_DIR), reverse=True):
+            if filename.startswith('evolution-') and filename.endswith('.md'):
+                filepath = os.path.join(DATA_DIR, filename)
+                try:
+                    with open(filepath, 'r', encoding='utf-8') as f:
+                        content = f.read()
+                        
+                        # 提取基本信息
+                        time_match = re.search(r'## 更新时间\s+(.+)', content)
+                        exec_time = time_match.group(1).strip() if time_match else filename
+                        
+                        # 提取统计数据
+                        total_match = re.search(r'总报告数：(\d+)', content)
+                        success_match = re.search(r'成功：(\d+)', content)
+                        rate_match = re.search(r'成功率：([\d.]+)%', content)
+                        
+                        evolution_reports.append({
+                            'filename': filename,
+                            'time': exec_time,
+                            'total_reports': int(total_match.group(1)) if total_match else 0,
+                            'success_count': int(success_match.group(1)) if success_match else 0,
+                            'success_rate': float(rate_match.group(1)) if rate_match else 0,
+                            'preview': content[:500] + '...' if len(content) > 500 else content
+                        })
+                except Exception as e:
+                    print(f"读取进化报告失败：{e}")
+    
+    return jsonify({
+        'reports': evolution_reports,
+        'count': len(evolution_reports)
+    })
+
+@app.route('/evolution')
+def evolution_page():
+    """进化报告页面"""
+    return render_template('evolution.html')
+
+@app.route('/api/evolution/<filename>')
+def api_evolution_detail(filename):
+    """API - 获取进化报告详情"""
+    filepath = os.path.join(DATA_DIR, filename)
+    
+    if not os.path.exists(filepath):
+        return jsonify({'error': '报告不存在'}), 404
+    
+    try:
+        with open(filepath, 'r', encoding='utf-8') as f:
+            content = f.read()
+        
+        return jsonify({
+            'filename': filename,
+            'content': content,
+            'html': content  # 前端会用 marked.js 渲染
+        })
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+# ============ 持仓管理模块 ============
+
+from holdings_manager import HoldingsManager, validate_stock_code, parse_stock_code_format
+
+# ============ Agent TODO 模块 ============
+
+import sys
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), '../scripts'))
+from agent_todo import get_all_todos, get_latest_meeting
+
+holdings_manager = HoldingsManager()
+
+@app.route('/holdings')
+def holdings_page():
+    """持仓管理页面"""
+    return render_template('holdings.html')
+
+@app.route('/api/holdings', methods=['GET'])
+def api_get_holdings():
+    """API - 获取持仓列表"""
+    status = request.args.get('status', 'active')
+    holdings = holdings_manager.get_holdings(status)
+    summary = holdings_manager.get_summary()
+    
+    return jsonify({
+        'holdings': holdings,
+        'summary': summary,
+    })
+
+@app.route('/api/holdings', methods=['POST'])
+def api_add_holding():
+    """API - 添加持仓"""
+    data = request.json
+    
+    # 验证必填字段
+    required = ['stock_code', 'stock_name', 'shares', 'cost_price']
+    for field in required:
+        if field not in data:
+            return jsonify({'success': False, 'error': f'缺少必填字段：{field}'}), 400
+    
+    # 自动判断市场类型（如果未提供）
+    market_type = data.get('market_type')
+    if not market_type:
+        market_type = parse_stock_code_format(data['stock_code'])
+        if not market_type:
+            market_type = 'A'  # 默认 A 股
+    
+    # 验证股票代码格式
+    if not validate_stock_code(data['stock_code'], market_type):
+        return jsonify({
+            'success': False, 
+            'error': f'股票代码格式不正确（{get_market_name(market_type)}应为{get_stock_code_format(market_type)}）'
+        }), 400
+    
+    try:
+        holding = holdings_manager.add_holding(
+            stock_code=data['stock_code'],
+            stock_name=data['stock_name'],
+            shares=float(data['shares']),
+            cost_price=float(data['cost_price']),
+            market_type=market_type,
+            notes=data.get('notes', '')
+        )
+        
+        return jsonify({'success': True, 'holding': holding})
+    except Exception as e:
+        return jsonify({'success': False, 'error': str(e)}), 500
+
+@app.route('/api/holdings/<holding_id>', methods=['GET'])
+def api_get_holding(holding_id):
+    """API - 获取单个持仓"""
+    holding = holdings_manager.get_holding_by_id(holding_id)
+    
+    if not holding:
+        return jsonify({'error': '持仓不存在'}), 404
+    
+    return jsonify(holding)
+
+@app.route('/api/holdings/<holding_id>', methods=['PUT'])
+def api_update_holding(holding_id):
+    """API - 更新持仓"""
+    data = request.json
+    
+    # 允许更新的字段
+    allowed_fields = ['stock_name', 'shares', 'cost_price', 'notes', 'status']
+    updates = {k: v for k, v in data.items() if k in allowed_fields}
+    
+    if not updates:
+        return jsonify({'success': False, 'error': '没有可更新的字段'}), 400
+    
+    holding = holdings_manager.update_holding(holding_id, **updates)
+    
+    if not holding:
+        return jsonify({'success': False, 'error': '持仓不存在'}), 404
+    
+    return jsonify({'success': True, 'holding': holding})
+
+@app.route('/api/holdings/<holding_id>', methods=['DELETE'])
+def api_delete_holding(holding_id):
+    """API - 删除持仓"""
+    success = holdings_manager.delete_holding(holding_id)
+    
+    if not success:
+        return jsonify({'success': False, 'error': '持仓不存在'}), 404
+    
+    return jsonify({'success': True})
+
+@app.route('/api/holdings/upload', methods=['POST'])
+def api_upload_image():
+    """API - 上传图片识别持仓（OCR 预留）"""
+    if 'file' not in request.files:
+        return jsonify({'success': False, 'error': '未找到文件'}), 400
+    
+    file = request.files['file']
+    
+    # TODO: 集成 OCR 服务
+    # 当前返回示例
+    return jsonify({
+        'success': True,
+        'message': 'OCR 功能开发中，当前仅支持手动输入',
+        'data': {
+            'stock_code': '待识别',
+            'stock_name': '待识别',
+            'shares': 0,
+            'cost_price': 0,
+        }
+    })
+
+def get_market_name(market_type):
+    """获取市场名称"""
+    names = {'A': 'A 股', 'HK': '港股', 'US': '美股'}
+    return names.get(market_type, market_type)
+
+def get_stock_code_format(market_type):
+    """获取股票代码格式说明"""
+    formats = {
+        'A': '6 位数字（如 600519）',
+        'HK': '5 位数字（如 00700）',
+        'US': '1-5 位字母（如 AAPL）'
+    }
+    return formats.get(market_type, '')
+
+
+# ============ 原有模块 ============
+
+@app.route('/api/logs')
+def api_logs():
+    """API - 获取活动日志"""
+    logs = []
+    
+    if not os.path.exists(LOGS_DIR):
+        return jsonify(logs)
+    
+    agent_patterns = {
+        '基本面 Agent': {'emoji': '📊', 'color': 'text-blue-400'},
+        '技术面 Agent': {'emoji': '📈', 'color': 'text-purple-400'},
+        '情绪 Agent': {'emoji': '😊', 'color': 'text-pink-400'},
+        '主 Agent': {'emoji': '🎯', 'color': 'text-green-400'},
+        '复盘 Agent': {'emoji': '📝', 'color': 'text-orange-400'}
+    }
+    
+    # 扫描最近的日志文件
+    now = datetime.now()
+    log_files = sorted(
+        [f for f in os.listdir(LOGS_DIR) if f.endswith('.md')],
+        reverse=True
+    )[:10]  # 只读取最近 10 个文件
+    
+    for filename in log_files:
+        filepath = os.path.join(LOGS_DIR, filename)
+        try:
+            with open(filepath, 'r', encoding='utf-8') as f:
+                content = f.read()
+                
+                # 提取时间戳
+                time_match = re.search(r'(\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2})', content)
+                if time_match:
+                    timestamp = time_match.group(1)
+                    
+                    # 识别 Agent
+                    for agent_name, info in agent_patterns.items():
+                        if agent_name in content:
+                            # 提取关键信息
+                            stock_match = re.search(r'股票代码：(\d+)', content)
+                            name_match = re.search(r'股票名称：(.+)', content)
+                            
+                            stock_code = stock_match.group(1) if stock_match else ''
+                            stock_name = name_match.group(1).strip() if name_match else ''
+                            
+                            # 判断任务类型
+                            if '分析结果' in content or '评级' in content:
+                                message = f'完成分析：{stock_code} {stock_name}'
+                            elif '验证' in content:
+                                message = f'执行验证：{stock_code} {stock_name}'
+                            else:
+                                message = f'处理任务：{stock_code} {stock_name}'
+                            
+                            logs.append({
+                                'time': timestamp,
+                                'agent': agent_name,
+                                'emoji': info['emoji'],
+                                'color': info['color'],
+                                'message': message
+                            })
+                            break
+        except Exception:
+            pass
+    
+    # 按时间排序，最新的在前
+    logs.sort(key=lambda x: x['time'], reverse=True)
+    
+    return jsonify(logs[:20])  # 返回最近 20 条
+
+@app.route('/api/agent-todos')
+def api_agent_todos():
+    """API - 获取所有 Agent TODO list"""
+    try:
+        todos = get_all_todos()
+        return jsonify(todos)
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+@app.route('/api/latest-meeting')
+def api_latest_meeting():
+    """API - 获取最新会议纪要"""
+    try:
+        meeting = get_latest_meeting()
+        return jsonify(meeting)
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+@app.route('/agent-meetings')
+def agent_meetings_page():
+    """Agent 例会页面"""
+    return render_template('agent-meetings.html')
+
+if __name__ == '__main__':
+    print("🚀 股票监控系统启动中...")
+    print("📊 访问地址：")
+    print("   本地访问：http://localhost:5001")
+    print("   局域网访问：http://0.0.0.0:5001")
+    print("   本机 IP：http://<你的 IP 地址>:5001")
+    print("📁 数据目录：" + DATA_DIR)
+    print("🔒 绑定地址：0.0.0.0 (所有网络接口)")
+    app.run(host='0.0.0.0', port=5001, debug=True)

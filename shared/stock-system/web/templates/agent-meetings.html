@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📋 Agent 例会纪要</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            background: linear-gradient(135deg, #1A1A2E 0%, #16213E 100%);
+            min-height: 100vh;
+            color: white;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        }
+        .card {
+            background: rgba(22, 33, 62, 0.9);
+            border: 1px solid rgba(15, 52, 96, 0.5);
+            border-radius: 12px;
+        }
+        .agent-card {
+            transition: all 0.3s;
+        }
+        .agent-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+    </style>
+</head>
+<body class="p-6">
+    <div class="max-w-7xl mx-auto">
+        <!-- 标题 -->
+        <div class="text-center mb-8">
+            <h1 class="text-4xl font-bold mb-2">📋 Agent 例会纪要</h1>
+            <p class="text-gray-400">每小时自动召开，实时同步进度</p>
+            <div class="mt-4 flex items-center justify-center gap-4">
+                <span class="text-sm text-gray-500">最后更新：<span id="last-update">--</span></span>
+                <span class="inline-flex items-center text-sm text-green-400">
+                    <span class="w-2 h-2 bg-green-400 rounded-full mr-2 animate-pulse"></span>
+                    实时刷新
+                </span>
+            </div>
+        </div>
+
+        <!-- 会议概览 -->
+        <div class="card p-6 mb-8">
+            <h2 class="text-2xl font-bold mb-4 flex items-center">
+                <span class="mr-2">🎯</span> 最新会议
+            </h2>
+            <div id="meeting-summary" class="grid grid-cols-3 gap-4 mb-6">
+                <div class="text-center p-4 bg-blue-900/30 rounded-lg">
+                    <div class="text-3xl font-bold text-blue-400" id="attendees-count">-</div>
+                    <div class="text-sm text-gray-400 mt-1">参会 Agent</div>
+                </div>
+                <div class="text-center p-4 bg-yellow-900/30 rounded-lg">
+                    <div class="text-3xl font-bold text-yellow-400" id="pending-count">-</div>
+                    <div class="text-sm text-gray-400 mt-1">待办任务</div>
+                </div>
+                <div class="text-center p-4 bg-green-900/30 rounded-lg">
+                    <div class="text-3xl font-bold text-green-400" id="completed-count">-</div>
+                    <div class="text-sm text-gray-400 mt-1">已完成</div>
+                </div>
+            </div>
+            <div class="bg-black/30 rounded-lg p-4">
+                <h3 class="font-bold mb-2">📊 会议总结</h3>
+                <p id="meeting-text" class="text-gray-300 whitespace-pre-line">加载中...</p>
+            </div>
+            <div class="mt-4 text-sm text-gray-500">
+                下次会议：<span id="next-meeting" class="text-blue-400 font-mono">--</span>
+            </div>
+        </div>
+
+        <!-- Agent TODO List -->
+        <h2 class="text-2xl font-bold mb-4 flex items-center">
+            <span class="mr-2">🤖</span> 各 Agent 任务
+        </h2>
+        <div id="agent-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
+            <div class="text-center text-gray-500 py-8">加载中...</div>
+        </div>
+
+        <!-- 会议纪要详情 -->
+        <div class="card p-6">
+            <h2 class="text-2xl font-bold mb-4 flex items-center">
+                <span class="mr-2">📝</span> 会议纪要详情
+            </h2>
+            <div id="meeting-details" class="space-y-4">
+                <div class="text-gray-500">加载中...</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const agentEmojis = {
+            '基本面 Agent': '📊',
+            '技术面 Agent': '📈',
+            '情绪 Agent': '😊',
+            '主 Agent': '🎯',
+            '质检 Agent': '🔍',
+            '程序员 Agent': '💻'
+        };
+
+        const priorityColors = {
+            'high': 'bg-red-500',
+            'medium': 'bg-yellow-500',
+            'low': 'bg-green-500'
+        };
+
+        async function loadPageData() {
+            await loadMeeting();
+            await loadAgents();
+            document.getElementById('last-update').textContent = new Date().toLocaleTimeString('zh-CN');
+        }
+
+        async function loadMeeting() {
+            try {
+                const res = await fetch('/api/latest-meeting');
+                const data = await res.json();
+                
+                if (data.meeting_id) {
+                    // 更新概览
+                    document.getElementById('attendees-count').textContent = data.attendees ? data.attendees.length : 0;
+                    
+                    let totalPending = 0, totalCompleted = 0;
+                    if (data.agent_status) {
+                        Object.values(data.agent_status).forEach(s => {
+                            totalPending += (s.pending || 0);
+                            totalCompleted += (s.completed || 0);
+                        });
+                    }
+                    document.getElementById('pending-count').textContent = totalPending;
+                    document.getElementById('completed-count').textContent = totalCompleted;
+                    
+                    // 会议总结
+                    document.getElementById('meeting-text').textContent = data.summary || '暂无总结';
+                    document.getElementById('next-meeting').textContent = data.next_meeting || '--';
+                    
+                    // 会议纪要详情
+                    renderMeetingDetails(data);
+                } else {
+                    document.getElementById('meeting-text').textContent = '暂无会议纪要';
+                }
+            } catch (e) {
+                console.error('加载会议失败:', e);
+                document.getElementById('meeting-text').textContent = '加载失败';
+            }
+        }
+
+        async function loadAgents() {
+            try {
+                const res = await fetch('/api/agent-todos');
+                const data = await res.json();
+                
+                const html = Object.entries(data).map(([name, info]) => {
+                    const emoji = agentEmojis[name] || '🤖';
+                    const tasks = info.tasks || [];
+                    const pending = tasks.filter(t => t.status === 'pending');
+                    const doing = tasks.filter(t => t.status === 'doing');
+                    const done = tasks.filter(t => t.status === 'done').slice(-2);
+                    
+                    return `
+                        <div class="agent-card card p-4">
+                            <div class="flex items-center justify-between mb-3">
+                                <div class="flex items-center">
+                                    <span class="text-3xl mr-2">${emoji}</span>
+                                    <div>
+                                        <div class="font-bold">${name}</div>
+                                        <div class="text-xs text-gray-400">${pending.length} 待办 · ${done.length} 已完成</div>
+                                    </div>
+                                </div>
+                                ${pending.length > 0 ? '<span class="px-2 py-1 bg-yellow-600 rounded text-xs">忙碌</span>' : '<span class="px-2 py-1 bg-green-600 rounded text-xs">空闲</span>'}
+                            </div>
+                            
+                            ${pending.length > 0 || doing.length > 0 ? `
+                                <div class="space-y-2 mb-3">
+                                    <div class="text-xs font-semibold text-gray-400">📋 当前任务</div>
+                                    ${[...pending, ...doing].slice(0, 3).map(t => `
+                                        <div class="flex items-start text-sm">
+                                            <span class="w-2 h-2 ${priorityColors[t.priority] || 'bg-gray-500'} rounded-full mt-1 mr-2 flex-shrink-0"></span>
+                                            <span class="text-gray-300">${t.task}</span>
+                                        </div>
+                                    `).join('')}
+                                </div>
+                            ` : '<div class="text-gray-500 text-sm mb-3">暂无任务</div>'}
+                            
+                            ${done.length > 0 ? `
+                                <div class="space-y-2">
+                                    <div class="text-xs font-semibold text-gray-400">✅ 最近完成</div>
+                                    ${done.map(t => `
+                                        <div class="flex items-start text-sm opacity-60">
+                                            <span class="text-green-400 mr-2">✓</span>
+                                            <span class="text-gray-400 line-through">${t.task}</span>
+                                        </div>
+                                    `).join('')}
+                                </div>
+                            ` : ''}
+                        </div>
+                    `;
+                }).join('');
+                
+                document.getElementById('agent-grid').innerHTML = html;
+            } catch (e) {
+                console.error('加载 Agent 失败:', e);
+                document.getElementById('agent-grid').innerHTML = '<div class="text-center text-gray-500 py-8">加载失败</div>';
+            }
+        }
+
+        function renderMeetingDetails(data) {
+            if (!data.agent_status) {
+                document.getElementById('meeting-details').innerHTML = '<div class="text-gray-500">无详情</div>';
+                return;
+            }
+            
+            const html = Object.entries(data.agent_status).map(([name, status]) => {
+                const emoji = agentEmojis[name] || '🤖';
+                return `
+                    <div class="border-b border-gray-700 pb-3 last:border-0">
+                        <div class="flex items-center mb-2">
+                            <span class="text-xl mr-2">${emoji}</span>
+                            <span class="font-bold">${name}</span>
+                            <span class="ml-auto text-sm text-gray-400">
+                                待办：${status.pending} · 进行中：${status.doing} · 完成：${status.completed}
+                            </span>
+                        </div>
+                        ${status.current_tasks && status.current_tasks.length > 0 ? `
+                            <div class="ml-6 space-y-1">
+                                ${status.current_tasks.map(t => `
+                                    <div class="text-sm text-gray-400">• ${t.task}</div>
+                                `).join('')}
+                            </div>
+                        ` : ''}
+                    </div>
+                `;
+            }).join('');
+            
+            document.getElementById('meeting-details').innerHTML = html;
+        }
+
+        // 初始化
+        loadPageData();
+        setInterval(loadPageData, 30000); // 30 秒刷新
+    </script>
+</body>
+</html>

@@ -1,0 +1,157 @@
+{
+  "system": {
+    "name": "股票多 Agent 系统",
+    "version": "v1.7",
+    "timezone": "Asia/Shanghai",
+    "data_dir": "/Users/egg/.openclaw/workspace/agents/stock-coordinator/data",
+    "log_level": "INFO"
+  },
+  
+  "data_sources": {
+    "tencent": {
+      "enabled": true,
+      "base_url": "http://qt.gtimg.cn/q=",
+      "timeout": 5,
+      "retry_times": 3,
+      "cache_ttl": 60,
+      "market_prefix": {
+        "A_sh": "sh",
+        "A_sz": "sz",
+        "HK": "hk",
+        "US": ""
+      }
+    },
+    "eastmoney": {
+      "enabled": true,
+      "north_flow_url": "http://push2.eastmoney.com/api/qt/kamt.rtmin/Get",
+      "timeout": 10,
+      "retry_times": 3,
+      "cache_ttl": 300
+    }
+  },
+  
+  "agents": {
+    "fundamental": {
+      "enabled": true,
+      "weight": 0.35,
+      "dimensions": ["revenue_growth", "profit_growth", "roe", "pe_ratio", "pb_ratio"],
+      "thresholds": {
+        "revenue_growth": {"excellent": 30, "good": 15, "normal": 5},
+        "profit_growth": {"excellent": 40, "good": 20, "normal": 10},
+        "roe": {"excellent": 20, "good": 15, "normal": 10}
+      }
+    },
+    "technical": {
+      "enabled": true,
+      "weight": 0.30,
+      "dimensions": ["ma_trend", "macd", "rsi"],
+      "parameters": {
+        "ma_periods": [5, 10, 20, 60],
+        "rsi_period": 14,
+        "macd_fast": 12,
+        "macd_slow": 26,
+        "macd_signal": 9
+      }
+    },
+    "sentiment": {
+      "enabled": true,
+      "weight": 0.20,
+      "dimensions": ["price_sentiment", "volume_sentiment", "ma_sentiment", "rsi_sentiment"],
+      "weights": {"price": 0.35, "volume": 0.25, "ma": 0.25, "rsi": 0.15}
+    },
+    "capital": {
+      "enabled": true,
+      "weight": 0.15,
+      "dimensions": ["north_flow", "main_flow", "volume_flow"],
+      "thresholds": {
+        "north_flow": {
+          "large_inflow": 50000000,
+          "inflow": 10000000,
+          "outflow": -10000000,
+          "large_outflow": -50000000
+        }
+      }
+    }
+  },
+  
+  "rating": {
+    "weights": {
+      "fundamental": 0.35,
+      "technical": 0.30,
+      "sentiment": 0.20,
+      "capital": 0.15
+    },
+    "thresholds": {
+      "strong_buy": 85,
+      "buy": 70,
+      "hold": 50,
+      "sell": 30,
+      "strong_sell": 0
+    },
+    "confidence": {
+      "high": 80,
+      "medium": 60,
+      "low": 40
+    }
+  },
+  
+  "scheduler": {
+    "timezone": "Asia/Shanghai",
+    "daily_validation": {
+      "enabled": true,
+      "time": "09:00",
+      "script": "scripts/auto_agent.py daily"
+    },
+    "weekly_review": {
+      "enabled": true,
+      "day": "friday",
+      "time": "20:00",
+      "script": "scripts/auto_agent.py weekly"
+    },
+    "cache_cleanup": {
+      "enabled": true,
+      "time": "03:00",
+      "action": "cleanup_expired"
+    }
+  },
+  
+  "cache": {
+    "enabled": true,
+    "directory": "/Users/egg/.openclaw/workspace/shared/stock-system/data/cache",
+    "ttl": {
+      "realtime": 60,
+      "daily": 3600,
+      "financial": 86400,
+      "default": 300
+    },
+    "cleanup": {
+      "max_age": 604800,
+      "max_size": 104857600
+    }
+  },
+  
+  "features": {
+    "fundamental_analysis": true,
+    "technical_analysis": true,
+    "sentiment_analysis": true,
+    "capital_analysis": true,
+    "auto_validation": true,
+    "weekly_review": true,
+    "cache_enabled": true,
+    "ai_prediction": false,
+    "auto_trading": false
+  },
+  
+  "stock_pool": {
+    "A": [
+      {"code": "600519", "name": "贵州茅台", "priority": "high"},
+      {"code": "000858", "name": "五粮液", "priority": "high"},
+      {"code": "300750", "name": "宁德时代", "priority": "high"}
+    ],
+    "HK": [
+      {"code": "00700", "name": "腾讯控股", "priority": "high"},
+      {"code": "09988", "name": "阿里巴巴", "priority": "medium"}
+    ],
+    "US": []
+  }
+}

@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🤖 Agent 实时监控</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'china-red': '#E74C3C',
+                        'china-green': '#27AE60',
+                        'dark-bg': '#1A1A2E',
+                        'dark-card': '#16213E',
+                        'dark-border': '#0F3460'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        html { overflow-y: auto; overflow-x: hidden; }
+        body {
+            background: linear-gradient(135deg, #1A1A2E 0%, #16213E 100%);
+            min-height: 100vh;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+        .card {
+            background: rgba(22, 33, 62, 0.8);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(15, 52, 96, 0.5);
+        }
+        .full-width {
+            width: 100%;
+            padding-left: 2rem;
+            padding-right: 2rem;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+        .animate-pulse-slow {
+            animation: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        .log-entry {
+            font-family: 'Monaco', 'Menlo', monospace;
+            font-size: 0.85rem;
+        }
+    </style>
+</head>
+<body class="text-white">
+    <div class="full-width mx-auto py-8">
+        <!-- 标题 -->
+        <div class="text-center mb-8">
+            <h1 class="text-4xl lg:text-5xl font-bold mb-2">🤖 Agent 实时监控</h1>
+            <p class="text-gray-400 text-lg">追踪每个 Agent 的活动状态</p>
+            <p class="text-sm text-gray-500 mt-2">最后更新：<span id="last-update">--</span></p>
+        </div>
+
+        <!-- Agent 状态概览 -->
+        <div class="card rounded-xl p-6 mb-6">
+            <h2 class="text-2xl font-bold mb-4 flex items-center">
+                <span class="mr-2">📊</span> Agent 状态概览
+            </h2>
+            <div class="grid grid-cols-2 lg:grid-cols-5 gap-4" id="agent-overview">
+                <!-- 动态生成 -->
+            </div>
+        </div>
+
+        <!-- 详细状态 -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6" id="agent-details">
+            <!-- 动态生成 -->
+        </div>
+
+        <!-- 最近活动日志 -->
+        <div class="card rounded-xl p-6">
+            <h2 class="text-2xl font-bold mb-4 flex items-center">
+                <span class="mr-2">📜</span> 最近活动日志
+            </h2>
+            <div class="bg-black bg-opacity-50 rounded-lg p-4 h-96 overflow-y-auto" id="activity-log">
+                <div class="text-center text-gray-500 py-8">加载中...</div>
+            </div>
+        </div>
+
+        <!-- 刷新提示 -->
+        <div class="text-center mt-6 mb-8 text-gray-500 text-sm">
+            <span class="inline-flex items-center">
+                <span class="w-2 h-2 bg-green-400 rounded-full mr-2 animate-pulse-slow"></span>
+                自动刷新中 · 每 10 秒
+            </span>
+        </div>
+    </div>
+
+    <script>
+        function getStatusColor(status) {
+            if (status === 'active') return 'text-green-400 border-green-500 bg-green-500 bg-opacity-10';
+            if (status === 'idle') return 'text-yellow-400 border-yellow-500 bg-yellow-500 bg-opacity-10';
+            if (status === 'offline') return 'text-red-400 border-red-500 bg-red-500 bg-opacity-10';
+            return 'text-gray-400 border-gray-500';
+        }
+
+        function getStatusText(status) {
+            const texts = {
+                'active': '运行中',
+                'idle': '空闲',
+                'offline': '离线',
+                'error': '错误',
+                'unknown': '未知'
+            };
+            return texts[status] || status;
+        }
+
+        async function loadAgentData() {
+            try {
+                const response = await fetch('/api/data');
+                const data = await response.json();
+                
+                document.getElementById('last-update').textContent = data.last_update;
+                
+                // 更新概览
+                const overviewHtml = Object.entries(data.agents).map(([id, agent]) => `
+                    <div class="text-center p-4 bg-dark-bg rounded-lg border ${getStatusColor(agent.status).split(' ')[2]}">
+                        <div class="text-4xl mb-2">${agent.emoji}</div>
+                        <div class="font-bold text-sm mb-1">${agent.name}</div>
+                        <div class="text-xs ${getStatusColor(agent.status).split(' ')[0]}">${agent.text}</div>
+                        ${agent.tasks > 0 ? `<div class="text-xs text-gray-500 mt-1">任务：${agent.tasks}</div>` : ''}
+                    </div>
+                `).join('');
+                document.getElementById('agent-overview').innerHTML = overviewHtml;
+                
+                // 更新详细状态
+                const detailsHtml = Object.entries(data.agents).map(([id, agent]) => `
+                    <div class="card rounded-xl p-6">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-xl font-bold flex items-center">
+                                <span class="text-3xl mr-2">${agent.emoji}</span>
+                                ${agent.name}
+                            </h3>
+                            <span class="px-3 py-1 rounded-full text-xs font-bold ${getStatusColor(agent.status)}">
+                                ${getStatusText(agent.status)}
+                            </span>
+                        </div>
+                        <div class="space-y-2 text-sm">
+                            <div class="flex justify-between">
+                                <span class="text-gray-400">状态 ID:</span>
+                                <span class="font-mono">${id}</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-gray-400">最后运行:</span>
+                                <span>${agent.last_run || '无记录'}</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-gray-400">完成任务:</span>
+                                <span class="text-china-red">${agent.tasks}</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-gray-400">状态:</span>
+                                <span class="${getStatusColor(agent.status).split(' ')[0]}">${agent.text}</span>
+                            </div>
+                        </div>
+                    </div>
+                `).join('');
+                document.getElementById('agent-details').innerHTML = detailsHtml;
+                
+                // 加载活动日志
+                loadActivityLog();
+                
+            } catch (error) {
+                console.error('加载 Agent 数据失败:', error);
+            }
+        }
+
+        async function loadActivityLog() {
+            try {
+                const response = await fetch('/api/logs');
+                const logs = await response.json();
+                
+                const logHtml = logs.map(log => `
+                    <div class="log-entry mb-2 pb-2 border-b border-gray-700 last:border-0">
+                        <div class="flex items-start">
+                            <span class="text-gray-500 mr-3 flex-shrink-0">${log.time}</span>
+                            <span class="text-2xl mr-2">${log.emoji}</span>
+                            <div>
+                                <div class="font-bold ${log.color}">${log.agent}</div>
+                                <div class="text-gray-300">${log.message}</div>
+                            </div>
+                        </div>
+                    </div>
+                `).join('');
+                
+                document.getElementById('activity-log').innerHTML = logHtml || 
+                    '<div class="text-center text-gray-500 py-8">暂无活动日志</div>';
+                
+            } catch (error) {
+                console.error('加载日志失败:', error);
+            }
+        }
+
+        // 初始加载
+        loadAgentData();
+        
+        // 每 10 秒自动刷新
+        setInterval(loadAgentData, 10000);
+    </script>
+</body>
+</html>

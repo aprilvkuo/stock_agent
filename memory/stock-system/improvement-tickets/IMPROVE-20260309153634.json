@@ -1,0 +1,223 @@
+{
+  "id": "IMPROVE-20260309153634",
+  "type": "task",
+  "priority": "medium",
+  "status": "open",
+  "created_at": "2026-03-09T15:36:34.618545",
+  "updated_at": "2026-03-09T15:36:34.618545",
+  "closed_at": null,
+  "provider": "programmer",
+  "consumer": "coordinator",
+  "service_type": "task_implementation",
+  "trigger_rating": {
+    "overall_score": 0,
+    "scores": {},
+    "feedback": "任务来源：TODO.md - TASK-015",
+    "suggestions": [
+      "实现失败请求的死信队列隔离机制"
+    ]
+  },
+  "issue": {
+    "description": "任务来源：TODO.md - TASK-015",
+    "scores": {},
+    "feedback": "任务来源：TODO.md - TASK-015",
+    "impact": "严重影响服务质量，需要立即改进"
+  },
+  "improvement_plan": {
+    "actions": [
+      {
+        "task": "开始任务：添加死信队列",
+        "status": "pending",
+        "assignee": "programmer",
+        "due_date": "2026-03-12",
+        "priority": "medium"
+      },
+      {
+        "task": "实现功能",
+        "status": "pending",
+        "assignee": "programmer",
+        "due_date": "2026-03-12",
+        "priority": "medium"
+      },
+      {
+        "task": "自测功能",
+        "status": "pending",
+        "assignee": "programmer",
+        "due_date": "2026-03-12",
+        "priority": "medium"
+      },
+      {
+        "task": "提交验收",
+        "status": "pending",
+        "assignee": "programmer",
+        "due_date": "2026-03-12",
+        "priority": "medium"
+      }
+    ],
+    "estimated_effort": "2小时",
+    "deadline": "2026-03-12",
+    "actual_completion": null
+  },
+  "progress": [
+    {
+      "date": "2026-03-09T15:36:34.606872",
+      "action": "ticket_created",
+      "note": "工单创建，优先级 critical"
+    },
+    {
+      "date": "2026-03-09T15:36:34.607492",
+      "action": "task_assigned",
+      "note": "任务分配给 程序员 Agent"
+    },
+    {
+      "date": "2026-03-09T15:36:34.607860",
+      "action": "ticket_created",
+      "note": "工单创建，优先级 critical"
+    },
+    {
+      "date": "2026-03-09T15:36:34.608231",
+      "action": "task_assigned",
+      "note": "任务分配给 程序员 Agent"
+    },
+    {
+      "date": "2026-03-09T15:36:34.608555",
+      "action": "ticket_created",
+      "note": "工单创建，优先级 critical"
+    },
+    {
+      "date": "2026-03-09T15:36:34.608920",
+      "action": "task_assigned",
+      "note": "任务分配给 程序员 Agent"
+    },
+    {
+      "date": "2026-03-09T15:36:34.609242",
+      "action": "ticket_created",
+      "note": "工单创建，优先级 critical"
+    },
+    {
+      "date": "2026-03-09T15:36:34.609600",
+      "action": "task_assigned",
+      "note": "任务分配给 程序员 Agent"
+    },
+    {
+      "date": "2026-03-09T15:36:34.609943",
+      "action": "ticket_created",
+      "note": "工单创建，优先级 critical"
+    },
+    {
+      "date": "2026-03-09T15:36:34.610315",
+      "action": "task_assigned",
+      "note": "任务分配给 程序员 Agent"
+    },
+    {
+      "date": "2026-03-09T15:36:34.610657",
+      "action": "ticket_created",
+      "note": "工单创建，优先级 critical"
+    },
+    {
+      "date": "2026-03-09T15:36:34.611039",
+      "action": "task_assigned",
+      "note": "任务分配给 程序员 Agent"
+    },
+    {
+      "date": "2026-03-09T15:36:34.611389",
+      "action": "ticket_created",
+      "note": "工单创建，优先级 critical"
+    },
+    {
+      "date": "2026-03-09T15:36:34.611777",
+      "action": "task_assigned",
+      "note": "任务分配给 质检 Agent"
+    },
+    {
+      "date": "2026-03-09T15:36:34.612164",
+      "action": "ticket_created",
+      "note": "工单创建，优先级 critical"
+    },
+    {
+      "date": "2026-03-09T15:36:34.612544",
+      "action": "task_assigned",
+      "note": "任务分配给 质检 Agent"
+    },
+    {
+      "date": "2026-03-09T15:36:34.612908",
+      "action": "ticket_created",
+      "note": "工单创建，优先级 critical"
+    },
+    {
+      "date": "2026-03-09T15:36:34.613826",
+      "action": "task_assigned",
+      "note": "任务分配给 质检 Agent"
+    },
+    {
+      "date": "2026-03-09T15:36:34.614194",
+      "action": "ticket_created",
+      "note": "工单创建，优先级 critical"
+    },
+    {
+      "date": "2026-03-09T15:36:34.614601",
+      "action": "task_assigned",
+      "note": "任务分配给 质检 Agent"
+    },
+    {
+      "date": "2026-03-09T15:36:34.614990",
+      "action": "ticket_created",
+      "note": "工单创建，优先级 critical"
+    },
+    {
+      "date": "2026-03-09T15:36:34.615561",
+      "action": "task_assigned",
+      "note": "任务分配给 质检 Agent"
+    },
+    {
+      "date": "2026-03-09T15:36:34.615968",
+      "action": "ticket_created",
+      "note": "工单创建，优先级 critical"
+    },
+    {
+      "date": "2026-03-09T15:36:34.616399",
+      "action": "task_assigned",
+      "note": "任务分配给 主 Agent"
+    },
+    {
+      "date": "2026-03-09T15:36:34.616806",
+      "action": "ticket_created",
+      "note": "工单创建，优先级 critical"
+    },
+    {
+      "date": "2026-03-09T15:36:34.617262",
+      "action": "task_assigned",
+      "note": "任务分配给 主 Agent"
+    },
+    {
+      "date": "2026-03-09T15:36:34.617686",
+      "action": "ticket_created",
+      "note": "工单创建，优先级 critical"
+    },
+    {
+      "date": "2026-03-09T15:36:34.618148",
+      "action": "task_assigned",
+      "note": "任务分配给 程序员 Agent"
+    },
+    {
+      "date": "2026-03-09T15:36:34.618549",
+      "action": "ticket_created",
+      "note": "工单创建，优先级 critical"
+    },
+    {
+      "date": "2026-03-09T15:36:34.618986",
+      "action": "task_assigned",
+      "note": "任务分配给 程序员 Agent"
+    }
+  ],
+  "verification": {
+    "verified": false,
+    "verified_by": "",
+    "verified_at": null,
+    "new_rating": null
+  },
+  "task_id": "TASK-015",
+  "task_title": "添加死信队列",
+  "task_description": "实现失败请求的死信队列隔离机制",
+  "estimated_hours": 2
+}

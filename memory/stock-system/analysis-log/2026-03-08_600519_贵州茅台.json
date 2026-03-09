@@ -1,0 +1,55 @@
+{
+  "timestamp": "2026-03-08T11:45:27.937121",
+  "stock_code": "600519",
+  "stock_name": "贵州茅台",
+  "price": 1402.0,
+  "change_pct": 3.0,
+  "agents": {
+    "fundamental": {
+      "rating": "持有",
+      "confidence": 65,
+      "score": 50
+    },
+    "technical": {
+      "rating": "持有",
+      "confidence": 70,
+      "score": 50
+    },
+    "sentiment": {
+      "rating": "中性",
+      "confidence": 60,
+      "score": 50
+    }
+  },
+  "decision": {
+    "score": 50.0,
+    "rating": "🔴 回避",
+    "position": "0%",
+    "weights": {
+      "fundamental": 0.5,
+      "technical": 0.3,
+      "sentiment": 0.2
+    }
+  },
+  "predictions": [
+    {
+      "type": "price_breakthrough",
+      "target": 1472.1000000000001,
+      "validate_date": "2026-04-07"
+    },
+    {
+      "type": "stop_loss",
+      "target": 1331.8999999999999,
+      "validate_date": "2026-04-07"
+    }
+  ],
+  "raw_data": {
+    "pe": null,
+    "pb": null,
+    "roe": 20.37,
+    "revenue_growth": null,
+    "profit_growth": null,
+    "rsi": 62,
+    "macd": "金叉向上"
+  }
+}

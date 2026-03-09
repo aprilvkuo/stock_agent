@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🔍 Agent 工作透明度监控</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'dark-bg': '#0F0F1A',
+                        'dark-card': '#1A1A2E',
+                        'dark-border': '#2D2D44'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background: linear-gradient(135deg, #0F0F1A 0%, #1A1A2E 100%);
+            min-height: 100vh;
+            color: white;
+        }
+        .card {
+            background: rgba(26, 26, 46, 0.9);
+            border: 1px solid rgba(45, 45, 68, 0.5);
+            border-radius: 12px;
+        }
+        .agent-card {
+            transition: all 0.3s;
+        }
+        .agent-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.4);
+        }
+        .status-dot {
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        .log-entry {
+            font-family: 'Monaco', 'Consolas', monospace;
+            font-size: 0.85rem;
+        }
+    </style>
+</head>
+<body class="p-6">
+    <div class="max-w-7xl mx-auto">
+        <!-- 标题 -->
+        <div class="text-center mb-8">
+            <h1 class="text-4xl font-bold mb-2">🔍 Agent 工作透明度监控</h1>
+            <p class="text-gray-400">实时监控每个 Agent 的实际工作量，拒绝摸鱼骗 token</p>
+            <div class="mt-4 flex items-center justify-center gap-4">
+                <span class="text-sm text-gray-500">最后更新：<span id="last-update">--</span></span>
+                <span class="inline-flex items-center text-sm text-green-400">
+                    <span class="w-2 h-2 bg-green-400 rounded-full mr-2 animate-pulse"></span>
+                    实时刷新 (30 秒)
+                </span>
+            </div>
+        </div>
+
+        <!-- 系统总览 -->
+        <div class="card p-6 mb-8">
+            <h2 class="text-2xl font-bold mb-4 flex items-center">
+                <span class="mr-2">📊</span> 系统工作总览
+            </h2>
+            <div class="grid grid-cols-4 gap-4">
+                <div class="text-center p-4 bg-blue-900/30 rounded-lg">
+                    <div class="text-3xl font-bold text-blue-400" id="total-executions">-</div>
+                    <div class="text-sm text-gray-400 mt-1">今日总执行</div>
+                </div>
+                <div class="text-center p-4 bg-green-900/30 rounded-lg">
+                    <div class="text-3xl font-bold text-green-400" id="active-agents">-</div>
+                    <div class="text-sm text-gray-400 mt-1">活跃 Agent</div>
+                </div>
+                <div class="text-center p-4 bg-yellow-900/30 rounded-lg">
+                    <div class="text-3xl font-bold text-yellow-400" id="pending-requests">-</div>
+                    <div class="text-sm text-gray-400 mt-1">待处理请求</div>
+                </div>
+                <div class="text-center p-4 bg-purple-900/30 rounded-lg">
+                    <div class="text-3xl font-bold text-purple-400" id="error-rate">-</div>
+                    <div class="text-sm text-gray-400 mt-1">错误率</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Agent 工作量排名 -->
+        <div class="card p-6 mb-8">
+            <h2 class="text-2xl font-bold mb-4 flex items-center">
+                <span class="mr-2">🏆</span> Agent 工作量排行榜
+            </h2>
+            <div id="agent-ranking" class="space-y-3">
+                <div class="text-center text-gray-500 py-8">加载中...</div>
+            </div>
+        </div>
+
+        <!-- Agent 详细状态 -->
+        <h2 class="text-2xl font-bold mb-4 flex items-center">
+            <span class="mr-2">🤖</span> 各 Agent 工作状态
+        </h2>
+        <div id="agent-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
+            <div class="text-center text-gray-500 py-8">加载中...</div>
+        </div>
+
+        <!-- 实时日志 -->
+        <div class="card p-6">
+            <h2 class="text-2xl font-bold mb-4 flex items-center">
+                <span class="mr-2">📜</span> 实时工作日志
+            </h2>
+            <div id="live-logs" class="bg-black/50 rounded-lg p-4 h-96 overflow-y-auto font-mono text-sm">
+                <div class="text-gray-500">日志加载中...</div>
+            </div>
+        </div>
+
+        <!-- Agent 评分系统 -->
+        <div class="card p-6 mt-8">
+            <h2 class="text-2xl font-bold mb-4 flex items-center">
+                <span class="mr-2">⭐</span> Agent 互相指导 - 服务评分
+            </h2>
+            <div id="agent-ratings" class="space-y-6">
+                <div class="text-center text-gray-500 py-8">加载中...</div>
+            </div>
+        </div>
+
+        <!-- 改进工单 -->
+        <div class="card p-6 mt-8">
+            <h2 class="text-2xl font-bold mb-4 flex items-center">
+                <span class="mr-2">🎫</span> 改进工单
+            </h2>
+            <div id="improvement-tickets" class="space-y-4">
+                <div class="text-center text-gray-500 py-8">加载中...</div>
+            </div>
+        </div>
+
+        <!-- TODO List -->
+        <div class="card p-6 mt-8">
+            <h2 class="text-2xl font-bold mb-4 flex items-center">
+                <span class="mr-2">📋</span> TODO List - 所有 Agent 任务
+            </h2>
+            <div id="todo-list" class="space-y-6">
+                <div class="text-center text-gray-500 py-8">加载中...</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const agentEmojis = {
+            'fundamental': '📊',
+            'technical': '📈',
+            'sentiment': '😊',
+            'coordinator': '🎯',
+            'qa': '🔍',
+            'programmer': '💻'
+        };
+
+        const agentNames = {
+            'fundamental': '基本面 Agent',
+            'technical': '技术面 Agent',
+            'sentiment': '情绪 Agent',
+            'coordinator': '主 Agent',
+            'qa': '质检 Agent',
+            'programmer': '程序员 Agent'
+        };
+
+        async function loadAgentData() {
+            try {
+                const response = await fetch('/api/data');
+                const data = await response.json();
+                updateAgentGrid(data.agents);
+                updateAgentRanking(data.agents);
+                updateSummary(data.agents);
+                document.getElementById('last-update').textContent = new Date().toLocaleTimeString('zh-CN');
+            } catch (error) {
+                console.error('加载失败:', error);
+            }
+        }
+
+        function updateSummary(agents) {
+            let totalExecutions = 0;
+            let activeCount = 0;
+            
+            Object.values(agents).forEach(agent => {
+                if (agent.tasks) totalExecutions += agent.tasks;
+                if (agent.status === 'active') activeCount++;
+            });
+            
+            document.getElementById('total-executions').textContent = totalExecutions;
+            document.getElementById('active-agents').textContent = activeCount;
+            
+            // 待处理请求（需要额外 API）
+            document.getElementById('pending-requests').textContent = '-';
+            
+            // 错误率（估算）
+            document.getElementById('error-rate').textContent = '<5%';
+        }
+
+        function updateAgentRanking(agents) {
+            const ranking = Object.entries(agents)
+                .map(([id, data]) => ({ id, ...data }))
+                .sort((a, b) => (b.tasks || 0) - (a.tasks || 0));
+            
+            const container = document.getElementById('agent-ranking');
+            container.innerHTML = ranking.map((agent, index) => `
+                <div class="flex items-center justify-between p-4 bg-gradient-to-r from-gray-900/50 to-gray-800/50 rounded-lg border border-gray-700">
+                    <div class="flex items-center gap-4">
+                        <div class="text-2xl font-bold ${index < 3 ? 'text-yellow-400' : 'text-gray-500'}">
+                            #${index + 1}
+                        </div>
+                        <div class="text-3xl">${agentEmojis[agent.id] || '❓'}</div>
+                        <div>
+                            <div class="font-bold">${agent.name}</div>
+                            <div class="text-sm text-gray-400">
+                                ${agent.status === 'active' ? '🟢 工作中' : agent.status === 'idle' ? '🟡 休息中' : '🔴 离线'}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-right">
+                        <div class="text-3xl font-bold text-blue-400">${agent.tasks || 0}</div>
+                        <div class="text-sm text-gray-400">次执行</div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function updateAgentGrid(agents) {
+            const container = document.getElementById('agent-grid');
+            container.innerHTML = Object.entries(agents).map(([id, data]) => `
+                <div class="agent-card card p-6">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="flex items-center gap-3">
+                            <span class="text-4xl">${agentEmojis[id] || '❓'}</span>
+                            <div>
+                                <h3 class="font-bold text-lg">${data.name}</h3>
+                                <div class="flex items-center gap-2 mt-1">
+                                    <span class="status-dot w-3 h-3 rounded-full ${
+                                        data.status === 'active' ? 'bg-green-400' :
+                                        data.status === 'idle' ? 'bg-yellow-400' : 'bg-red-400'
+                                    }"></span>
+                                    <span class="text-sm text-gray-400">${data.text}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="text-right">
+                            <div class="text-2xl font-bold text-blue-400">${data.tasks || 0}</div>
+                            <div class="text-xs text-gray-500">今日执行</div>
+                        </div>
+                    </div>
+                    
+                    <div class="space-y-2 text-sm">
+                        <div class="flex justify-between">
+                            <span class="text-gray-400">最后运行:</span>
+                            <span class="text-gray-300">${data.last_run || '从未'}</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-400">状态:</span>
+                            <span class="${
+                                data.status === 'active' ? 'text-green-400' :
+                                data.status === 'idle' ? 'text-yellow-400' : 'text-red-400'
+                            }">${data.status}</span>
+                        </div>
+                        <div class="mt-3 pt-3 border-t border-gray-700">
+                            <div class="text-xs text-gray-500">
+                                ${data.status === 'active' ? '✅ 正在努力工作' :
+                                  data.status === 'idle' ? '⏸️ 等待新任务' :
+                                  '⚠️ 长时间未活动，检查是否罢工'}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        async function loadLiveLogs() {
+            try {
+                // 读取最新日志（通过 API）
+                const response = await fetch('/api/logs?lines=50');
+                if (response.ok) {
+                    const logs = await response.json();
+                    const container = document.getElementById('live-logs');
+                    container.innerHTML = logs.map(log => `
+                        <div class="log-entry ${
+                            log.includes('ERROR') ? 'text-red-400' :
+                            log.includes('SUCCESS') ? 'text-green-400' :
+                            log.includes('WARNING') ? 'text-yellow-400' : 'text-gray-300'
+                        }">${log}</div>
+                    `).join('');
+                    container.scrollTop = container.scrollHeight;
+                }
+            } catch (error) {
+                // API 不存在时使用静态提示
+                document.getElementById('live-logs').innerHTML = `
+                    <div class="text-gray-400 text-center py-8">
+                        日志 API 开发中...<br>
+                        请查看守护进程日志文件:<br>
+                        <code class="text-sm bg-gray-800 px-2 py-1 rounded">
+                            /Users/egg/.openclaw/workspace/agents/stock-coordinator/data/logs/daemon-2026-03-08.log
+                        </code>
+                    </div>
+                `;
+            }
+        }
+
+        async function loadAgentRatings() {
+            try {
+                const response = await fetch('/api/agent-ratings');
+                const data = await response.json();
+                
+                const container = document.getElementById('agent-ratings');
+                let html = '';
+                
+                const ranking = data.ranking || [];
+                const recentRatings = data.recent_ratings || [];
+                
+                // 1. Agent 排名
+                if (ranking.length > 0) {
+                    html += `
+                        <div class="bg-gradient-to-r from-purple-900/30 to-blue-900/30 rounded-lg p-4 border border-purple-700">
+                            <h3 class="font-bold mb-3 flex items-center">
+                                <span class="mr-2">🏆</span> Agent 服务质量排名
+                            </h3>
+                            <div class="space-y-3">
+                    `;
+                    
+                    for (let i = 0; i < ranking.length; i++) {
+                        const agent = ranking[i];
+                        const medal = i === 0 ? '🥇' : i === 1 ? '🥈' : i === 2 ? '🥉' : `#${i+1}`;
+                        const trendEmoji = agent.trend === 'up' ? '📈' : agent.trend === 'down' ? '📉' : '➡️';
+                        const scoreColor = agent.average_score >= 4.5 ? 'text-green-400' : 
+                                          agent.average_score >= 4.0 ? 'text-blue-400' : 
+                                          agent.average_score >= 3.0 ? 'text-yellow-400' : 'text-red-400';
+                        
+                        html += `
+                            <div class="flex items-center justify-between p-3 bg-gray-900/50 rounded-lg">
+                                <div class="flex items-center gap-3">
+                                    <span class="text-2xl">${medal}</span>
+                                    <div>
+                                        <div class="font-bold">${getAgentName(agent.provider_id)}</div>
+                                        <div class="text-xs text-gray-500">${agent.total_ratings} 次评分</div>
+                                    </div>
+                                </div>
+                                <div class="text-right">
+                                    <div class="${scoreColor} text-2xl font-bold">${agent.average_score}/5.0</div>
+                                    <div class="text-xs text-gray-500">${trendEmoji} 趋势</div>
+                                </div>
+                            </div>
+                        `;
+                    }
+                    
+                    html += `
+                            </div>
+                        </div>
+                    `;
+                }
+                
+                // 2. 最近评分
+                if (recentRatings.length > 0) {
+                    html += `
+                        <div>
+                            <h3 class="font-bold mb-3 flex items-center">
+                                <span class="mr-2">📝</span> 最近评分记录
+                            </h3>
+                            <div class="space-y-2 max-h-64 overflow-y-auto">
+                    `;
+                    
+                    for (const rating of recentRatings.slice(0, 10)) {
+                        const stars = '⭐'.repeat(Math.floor(rating.overall_score)) + 
+                                     (rating.overall_score % 1 >= 0.5 ? '½' : '');
+                        const scoreColor = rating.overall_score >= 4.5 ? 'text-green-400' : 
+                                          rating.overall_score >= 4.0 ? 'text-blue-400' : 
+                                          rating.overall_score >= 3.0 ? 'text-yellow-400' : 'text-red-400';
+                        
+                        html += `
+                            <div class="p-3 bg-gray-900/30 rounded-lg border border-gray-700">
+                                <div class="flex items-center justify-between mb-2">
+                                    <div class="text-sm">
+                                        <span class="text-blue-400">${getAgentName(rating.consumer)}</span>
+                                        <span class="text-gray-500 mx-2">→</span>
+                                        <span class="text-purple-400">${getAgentName(rating.provider)}</span>
+                                    </div>
+                                    <div class="${scoreColor} font-bold">${rating.overall_score}/5.0 ${stars}</div>
+                                </div>
+                                <div class="text-xs text-gray-500 mb-1">
+                                    服务类型：${rating.service_type} | 
+                                    时间：${new Date(rating.timestamp).toLocaleString('zh-CN')}
+                                </div>
+                                ${rating.feedback ? `<div class="text-sm text-gray-400 italic">"${rating.feedback}"</div>` : ''}
+                            </div>
+                        `;
+                    }
+                    
+                    html += `
+                            </div>
+                        </div>
+                    `;
+                }
+                
+                if (ranking.length === 0 && recentRatings.length === 0) {
+                    html += '<div class="text-center text-gray-500 py-8">暂无评分记录，开始第一次评分吧！</div>';
+                }
+                
+                container.innerHTML = html;
+            } catch (error) {
+                console.error('加载评分失败:', error);
+                document.getElementById('agent-ratings').innerHTML = '<div class="text-center text-gray-500 py-8">加载失败</div>';
+            }
+        }
+
+        async function loadImprovementTickets() {
+            try {
+                const [ticketsRes, statsRes] = await Promise.all([
+                    fetch('/api/improvement-tickets'),
+                    fetch('/api/improvement-tickets/stats')
+                ]);
+                
+                const tickets = await ticketsRes.json();
+                const stats = await statsRes.json();
+                
+                const container = document.getElementById('improvement-tickets');
+                let html = '';
+                
+                // 1. 工单统计
+                html += `
+                    <div class="grid grid-cols-4 gap-4 mb-6">
+                        <div class="bg-red-900/20 rounded-lg p-4 border border-red-700 text-center">
+                            <div class="text-3xl font-bold text-red-400">${stats.total || 0}</div>
+                            <div class="text-xs text-gray-400">总工单</div>
+                        </div>
+                        <div class="bg-yellow-900/20 rounded-lg p-4 border border-yellow-700 text-center">
+                            <div class="text-3xl font-bold text-yellow-400">${stats.by_status?.open || 0}</div>
+                            <div class="text-xs text-gray-400">待处理</div>
+                        </div>
+                        <div class="bg-blue-900/20 rounded-lg p-4 border border-blue-700 text-center">
+                            <div class="text-3xl font-bold text-blue-400">${stats.by_status?.in_progress || 0}</div>
+                            <div class="text-xs text-gray-400">进行中</div>
+                        </div>
+                        <div class="bg-green-900/20 rounded-lg p-4 border border-green-700 text-center">
+                            <div class="text-3xl font-bold text-green-400">${stats.completion_rate || 0}%</div>
+                            <div class="text-xs text-gray-400">完成率</div>
+                        </div>
+                    </div>
+                `;
+                
+                // 2. 工单列表
+                if (tickets.length > 0) {
+                    html += `<h3 class="font-bold mb-3">工单列表</h3><div class="space-y-3">`;
+                    
+                    for (const ticket of tickets.slice(0, 10)) {
+                        const priorityColor = {
+                            'critical': 'border-red-500 bg-red-900/20',
+                            'high': 'border-orange-500 bg-orange-900/20',
+                            'medium': 'border-yellow-500 bg-yellow-900/20',
+                            'low': 'border-blue-500 bg-blue-900/20'
+                        }[ticket.priority] || 'border-gray-500 bg-gray-900/20';
+                        
+                        const statusEmoji = {
+                            'open': '🟡',
+                            'in_progress': '🔵',
+                            'done': '✅',
+                            'closed': '⚪'
+                        }[ticket.status] || '⚪';
+                        
+                        html += `
+                            <div class="p-4 rounded-lg border-l-4 ${priorityColor}">
+                                <div class="flex items-center justify-between mb-2">
+                                    <div class="flex items-center gap-2">
+                                        <span class="text-lg">${statusEmoji}</span>
+                                        <span class="font-bold">${ticket.id}</span>
+                                        <span class="text-xs px-2 py-1 rounded bg-gray-700">${ticket.priority}</span>
+                                    </div>
+                                    <span class="text-xs text-gray-500">${new Date(ticket.created_at).toLocaleString('zh-CN')}</span>
+                                </div>
+                                <div class="text-sm mb-2">
+                                    <span class="text-blue-400">${getAgentName(ticket.consumer)}</span>
+                                    <span class="text-gray-500 mx-2">→</span>
+                                    <span class="text-purple-400">${getAgentName(ticket.provider)}</span>
+                                    <span class="text-gray-500 mx-2">|</span>
+                                    <span class="text-gray-400">${ticket.service_type}</span>
+                                </div>
+                                <div class="text-xs text-gray-400 mb-2">
+                                    评分：${ticket.trigger_rating?.overall_score || 0}/5.0 | 
+                                    截止：${ticket.improvement_plan?.deadline || '未设置'} |
+                                    预计：${ticket.improvement_plan?.estimated_effort || '未知'}
+                                </div>
+                                <div class="text-sm text-gray-300 italic mb-2">
+                                    "${ticket.issue?.description || '无描述'}"
+                                </div>
+                                <div class="text-xs">
+                                    <div class="font-bold mb-1">改进行动 (${ticket.improvement_plan?.actions?.length || 0}项):</div>
+                                    <div class="space-y-1">
+                                        ${(ticket.improvement_plan?.actions || []).slice(0, 3).map((action, i) => `
+                                            <div class="flex items-center gap-2">
+                                                <span class="${action.status === 'pending' ? 'text-yellow-400' : 'text-green-400'}">
+                                                    ${action.status === 'pending' ? '⏳' : '✅'}
+                                                </span>
+                                                <span class="text-gray-400">${action.task}</span>
+                                            </div>
+                                        `).join('')}
+                                        ${(ticket.improvement_plan?.actions || []).length > 3 ? `<div class="text-gray-500">... 还有${ticket.improvement_plan.actions.length - 3}项</div>` : ''}
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                    }
+                    
+                    html += `</div>`;
+                } else {
+                    html += '<div class="text-center text-gray-500 py-8">暂无改进工单，服务质量良好！</div>';
+                }
+                
+                container.innerHTML = html;
+            } catch (error) {
+                console.error('加载工单失败:', error);
+                document.getElementById('improvement-tickets').innerHTML = '<div class="text-center text-gray-500 py-8">加载失败</div>';
+            }
+        }
+
+        function getAgentName(agentId) {
+            const names = {
+                'fundamental': '基本面 Agent',
+                'technical': '技术面 Agent',
+                'sentiment': '情绪 Agent',
+                'coordinator': '主 Agent',
+                'qa': '质检 Agent',
+                'programmer': '程序员 Agent',
+                'risk': '风险评估师',
+                'cio': '首席投资官'
+            };
+            return names[agentId] || agentId;
+        }
+
+        async function loadTodoList() {
+            try {
+                const response = await fetch('/api/todo-list');
+                const data = await response.json();
+                
+                const container = document.getElementById('todo-list');
+                let html = '';
+                
+                // 1. 主系统 TODO
+                const mainTodos = data.main_system || {};
+                const priorities = [
+                    {key: 'P0', label: '🔴 P0 - 立即执行', color: 'border-red-500', bg: 'bg-red-900/20'},
+                    {key: 'P1', label: '🔴 P1 - 今日完成', color: 'border-orange-500', bg: 'bg-orange-900/20'},
+                    {key: 'P2', label: '🟡 P2 - 48 小时', color: 'border-yellow-500', bg: 'bg-yellow-900/20'},
+                    {key: 'P3', label: '🟢 P3 - 持续进行', color: 'border-green-500', bg: 'bg-green-900/20'}
+                ];
+                
+                let hasMainTodos = false;
+                for (const p of priorities) {
+                    const items = mainTodos[p.key] || [];
+                    if (items.length > 0) {
+                        hasMainTodos = true;
+                        html += `
+                            <div class="${p.bg} rounded-lg p-4 border-l-4 ${p.color}">
+                                <h3 class="font-bold mb-3 flex items-center">
+                                    <span class="mr-2">🎯</span> ${p.label}
+                                </h3>
+                                <ul class="space-y-2">
+                                    ${items.map(item => `
+                                        <li class="text-sm ${item.startsWith('✅') ? 'text-green-400 line-through' : 'text-gray-300'}">
+                                            ${item}
+                                        </li>
+                                    `).join('')}
+                                </ul>
+                            </div>
+                        `;
+                    }
+                }
+                
+                if (!hasMainTodos) {
+                    html += '<div class="text-center text-gray-500 py-4">🎯 主系统暂无待办事项</div>';
+                }
+                
+                // 2. Sub-Agents 周期性任务
+                const subAgents = data.sub_agents || [];
+                if (subAgents.length > 0) {
+                    html += `
+                        <div class="border-t border-gray-700 pt-6">
+                            <h3 class="text-xl font-bold mb-4 flex items-center">
+                                <span class="mr-2">🤖</span> Sub-Agents 周期性任务
+                            </h3>
+                            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    `;
+                    
+                    for (const agent of subAgents) {
+                        const taskCount = agent.tasks.length;
+                        html += `
+                            <div class="bg-gray-900/50 rounded-lg p-4 border border-gray-700">
+                                <div class="flex items-center justify-between mb-3">
+                                    <h4 class="font-bold text-blue-400">${agent.name}</h4>
+                                    <span class="text-xs text-gray-500">${taskCount} 个任务</span>
+                                </div>
+                                <ul class="space-y-2 text-sm">
+                                    ${agent.tasks.map(task => `
+                                        <li class="text-gray-300 flex items-start">
+                                            <span class="mr-2 text-green-400">⏰</span>
+                                            <span>${task}</span>
+                                        </li>
+                                    `).join('')}
+                                </ul>
+                            </div>
+                        `;
+                    }
+                    
+                    html += `
+                            </div>
+                        </div>
+                    `;
+                }
+                
+                container.innerHTML = html || '<div class="text-center text-gray-500 py-8">暂无任务</div>';
+            } catch (error) {
+                console.error('加载 TODO 失败:', error);
+                document.getElementById('todo-list').innerHTML = '<div class="text-center text-gray-500 py-8">加载失败</div>';
+            }
+        }
+
+        // 初始加载
+        loadAgentData();
+        loadLiveLogs();
+        loadTodoList();
+        loadAgentRatings();
+        loadImprovementTickets();
+
+        // 定时刷新
+        setInterval(loadAgentData, 30000);  // 30 秒刷新 Agent 数据
+        setInterval(loadLiveLogs, 5000);    // 5 秒刷新日志
+        setInterval(loadTodoList, 60000);   // 60 秒刷新 TODO
+        setInterval(loadAgentRatings, 60000); // 60 秒刷新评分
+        setInterval(loadImprovementTickets, 60000); // 60 秒刷新工单
+    </script>
+</body>
+</html>

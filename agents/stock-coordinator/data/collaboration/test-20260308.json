@@ -1,0 +1,76 @@
+{
+  "request_id": "test-20260308",
+  "created_at": "2026-03-08T14:10:11.685131",
+  "agents": {
+    "基本面 Agent": {
+      "initial": {
+        "rating": "买入",
+        "confidence": 85,
+        "reasons": [
+          "ROE 25%",
+          "营收增速 30%",
+          "现金流充足"
+        ],
+        "data_quality": "high"
+      },
+      "adjusted": null,
+      "self_assessment": null,
+      "comments": []
+    },
+    "技术面 Agent": {
+      "initial": {
+        "rating": "持有",
+        "confidence": 70,
+        "reasons": [
+          "均线粘合",
+          "成交量萎缩"
+        ],
+        "data_quality": "medium"
+      },
+      "adjusted": {
+        "rating": "买入",
+        "confidence": 75,
+        "reasons": [
+          "均线粘合",
+          "基本面强劲",
+          "北向资金流入"
+        ],
+        "data_quality": "medium"
+      },
+      "self_assessment": {
+        "confidence_level": "medium",
+        "data_quality": "medium",
+        "issues": [
+          "缺少布林带数据",
+          "成交量分析不足"
+        ],
+        "suggestions": [
+          "增加布林带分析",
+          "改进成交量算法"
+        ]
+      },
+      "comments": [],
+      "adjust_reason": "参考基本面 Agent 的判断，上调评级"
+    }
+  },
+  "discussion": [
+    {
+      "timestamp": "2026-03-08T14:10:11.685543",
+      "agent": "基本面 Agent",
+      "type": "comment",
+      "message": "我认为这只股票基本面非常强劲，ROE 连续 3 年>25%"
+    },
+    {
+      "timestamp": "2026-03-08T14:10:11.685671",
+      "agent": "技术面 Agent",
+      "type": "comment",
+      "message": "技术面确实一般，但基本面好可以弥补"
+    }
+  ],
+  "final_decision": {
+    "rating": "买入",
+    "confidence": 80,
+    "reason": "基本面强劲 + 技术面改善"
+  },
+  "updated_at": "2026-03-08T14:10:11.685928"
+}

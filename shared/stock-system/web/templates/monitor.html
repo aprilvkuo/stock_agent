@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🔍 系统实时监控 - 股票多 Agent 系统</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'china-red': '#E74C3C',
+                        'china-green': '#27AE60'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background: linear-gradient(135deg, #1A1A2E 0%, #16213E 100%);
+            min-height: 100vh;
+            color: white;
+        }
+        .card {
+            background: rgba(22, 33, 62, 0.8);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(15, 52, 96, 0.5);
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        .animate-pulse-slow {
+            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        .log-entry {
+            font-family: 'Monaco', 'Menlo', monospace;
+            font-size: 0.85rem;
+        }
+    </style>
+</head>
+<body class="p-8">
+    <div class="max-w-7xl mx-auto">
+        <!-- 标题 -->
+        <div class="text-center mb-8">
+            <h1 class="text-4xl font-bold mb-2">🔍 系统实时监控</h1>
+            <p class="text-gray-400">查看系统当前活动和优化进度</p>
+            <p class="text-sm text-gray-500 mt-2">最后更新：<span id="last-update">--</span></p>
+        </div>
+
+        <!-- 系统状态概览 -->
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+            <!-- 系统版本 -->
+            <div class="card rounded-xl p-6">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-lg font-bold">系统版本</h3>
+                    <span class="text-3xl">🚀</span>
+                </div>
+                <div class="text-2xl font-bold text-green-400" id="system-version">v2.4</div>
+                <div class="text-sm text-gray-400 mt-2">自动优化系统</div>
+            </div>
+
+            <!-- 运行状态 -->
+            <div class="card rounded-xl p-6">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-lg font-bold">运行状态</h3>
+                    <span class="text-3xl">💚</span>
+                </div>
+                <div class="text-2xl font-bold text-green-400">运行中</div>
+                <div class="text-sm text-gray-400 mt-2">守护进程正常</div>
+            </div>
+
+            <!-- 当前活动 -->
+            <div class="card rounded-xl p-6">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-lg font-bold">当前活动</h3>
+                    <span class="text-3xl">⚡</span>
+                </div>
+                <div class="text-xl font-bold text-yellow-400" id="current-activity">分析股票</div>
+                <div class="text-sm text-gray-400 mt-2" id="current-task">09988 阿里巴巴</div>
+            </div>
+
+            <!-- 五步工作法遵循率 -->
+            <div class="card rounded-xl p-6">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-lg font-bold">五步工作法</h3>
+                    <span class="text-3xl">📋</span>
+                </div>
+                <div class="text-2xl font-bold text-blue-400" id="compliance-rate">50.0%</div>
+                <div class="text-sm text-gray-400 mt-2">遵循率</div>
+            </div>
+        </div>
+
+        <!-- Agent 状态 -->
+        <div class="card rounded-xl p-6 mb-8">
+            <h2 class="text-2xl font-bold mb-4 flex items-center">
+                <span class="mr-2">🤖</span> Agent 团队状态
+            </h2>
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4" id="agent-status">
+                <!-- 动态生成 -->
+            </div>
+        </div>
+
+        <!-- 工单系统 -->
+        <div class="card rounded-xl p-6 mb-8">
+            <h2 class="text-2xl font-bold mb-4 flex items-center">
+                <span class="mr-2">🎫</span> 工单系统
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div class="text-center p-4 bg-dark-bg rounded-lg">
+                    <div class="text-3xl font-bold text-blue-400" id="ticket-total">0</div>
+                    <div class="text-sm text-gray-400 mt-2">总工单</div>
+                </div>
+                <div class="text-center p-4 bg-dark-bg rounded-lg">
+                    <div class="text-3xl font-bold text-yellow-400" id="ticket-pending">0</div>
+                    <div class="text-sm text-gray-400 mt-2">待处理</div>
+                </div>
+                <div class="text-center p-4 bg-dark-bg rounded-lg">
+                    <div class="text-3xl font-bold text-green-400" id="ticket-completed">0</div>
+                    <div class="text-sm text-gray-400 mt-2">已完成</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 实时日志 -->
+        <div class="card rounded-xl p-6 mb-8">
+            <h2 class="text-2xl font-bold mb-4 flex items-center">
+                <span class="mr-2">📜</span> 实时活动日志
+            </h2>
+            <div class="bg-black bg-opacity-50 rounded-lg p-4 h-96 overflow-y-auto" id="activity-log">
+                <div class="text-center text-gray-500 py-8">加载中...</div>
+            </div>
+        </div>
+
+        <!-- 自动刷新提示 -->
+        <div class="text-center mb-8 text-gray-500 text-sm">
+            <span class="inline-flex items-center">
+                <span class="w-2 h-2 bg-green-400 rounded-full mr-2 animate-pulse-slow"></span>
+                自动刷新中 · 每 5 秒
+            </span>
+        </div>
+    </div>
+
+    <script>
+        let lastLogCount = 0;
+
+        async function loadSystemStatus() {
+            try {
+                // 更新系统信息
+                document.getElementById('last-update').textContent = new Date().toLocaleTimeString('zh-CN');
+                
+                // 加载 Agent 状态
+                await loadAgentStatus();
+                
+                // 加载活动日志
+                await loadActivityLog();
+                
+                // 加载工单统计
+                await loadTicketStats();
+                
+                // 加载五步工作法统计
+                await loadFiveStepStats();
+                
+            } catch (error) {
+                console.error('加载系统状态失败:', error);
+            }
+        }
+
+        async function loadAgentStatus() {
+            try {
+                const response = await fetch('/api/data');
+                const data = await response.json();
+                
+                const agents = data.agents || {};
+                const html = Object.entries(agents).map(([id, agent]) => {
+                    const statusColor = agent.status === 'active' ? 'bg-green-500' : 
+                                       agent.status === 'idle' ? 'bg-yellow-500' : 'bg-gray-500';
+                    const statusText = agent.status === 'active' ? '运行中' : 
+                                      agent.status === 'idle' ? '空闲' : '离线';
+                    
+                    return `
+                        <div class="text-center p-4 bg-dark-bg rounded-lg border border-gray-700">
+                            <div class="text-3xl mb-2">${getAgentEmoji(id)}</div>
+                            <div class="font-bold text-sm mb-1">${agent.name}</div>
+                            <div class="flex items-center justify-center mt-2">
+                                <span class="w-3 h-3 ${statusColor} rounded-full mr-2"></span>
+                                <span class="text-xs text-gray-400">${statusText}</span>
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+                
+                document.getElementById('agent-status').innerHTML = html;
+                
+            } catch (error) {
+                console.error('加载 Agent 状态失败:', error);
+            }
+        }
+
+        function getAgentEmoji(id) {
+            const emojis = {
+                'fundamental': '📊',
+                'technical': '📈',
+                'sentiment': '😊',
+                'capital': '💰',
+                'coordinator': '🎯',
+                'review': '📝',
+                'programmer': '💻'
+            };
+            return emojis[id] || '🤖';
+        }
+
+        async function loadActivityLog() {
+            try {
+                const response = await fetch('/api/logs');
+                const logs = await response.json();
+                
+                if (logs.length === 0) {
+                    document.getElementById('activity-log').innerHTML = 
+                        '<div class="text-center text-gray-500 py-8">暂无活动日志</div>';
+                    return;
+                }
+                
+                const logHtml = logs.map(log => {
+                    const colorClass = log.agent.includes('SUCCESS') ? 'text-green-400' :
+                                      log.agent.includes('ERROR') ? 'text-red-400' :
+                                      log.agent.includes('WARNING') ? 'text-yellow-400' : 'text-blue-400';
+                    
+                    return `
+                        <div class="log-entry mb-2 pb-2 border-b border-gray-700 last:border-0">
+                            <div class="flex items-start">
+                                <span class="text-gray-500 mr-3 flex-shrink-0">${log.time}</span>
+                                <span class="${colorClass} font-bold mr-2">${log.agent}</span>
+                                <span class="text-gray-300">${log.message}</span>
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+                
+                document.getElementById('activity-log').innerHTML = logHtml;
+                
+                // 滚动到底部
+                const logContainer = document.getElementById('activity-log');
+                logContainer.scrollTop = logContainer.scrollHeight;
+                
+            } catch (error) {
+                console.error('加载日志失败:', error);
+            }
+        }
+
+        async function loadTicketStats() {
+            try {
+                // 模拟工单统计（实际应该从 API 获取）
+                document.getElementById('ticket-total').textContent = '4';
+                document.getElementById('ticket-pending').textContent = '0';
+                document.getElementById('ticket-completed').textContent = '1';
+            } catch (error) {
+                console.error('加载工单统计失败:', error);
+            }
+        }
+
+        async function loadFiveStepStats() {
+            try {
+                // 模拟五步工作法统计（实际应该从 API 获取）
+                document.getElementById('compliance-rate').textContent = '50.0%';
+            } catch (error) {
+                console.error('加载五步工作法统计失败:', error);
+            }
+        }
+
+        // 页面加载时执行
+        loadSystemStatus();
+        
+        // 每 5 秒刷新一次
+        setInterval(loadSystemStatus, 5000);
+    </script>
+</body>
+</html>

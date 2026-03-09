@@ -1,0 +1,6 @@
+{
+  "error_rate_warning": 10,
+  "error_rate_critical": 20,
+  "pending_requests_warning": 10,
+  "agent_idle_hours": 2
+}

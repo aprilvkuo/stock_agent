@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📈 v2.0 分析报告 - 股票多 Agent 系统</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'china-red': '#E74C3C',
+                        'china-green': '#27AE60',
+                        'dark-bg': '#1A1A2E',
+                        'dark-card': '#16213E',
+                        'dark-border': '#0F3460'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background: linear-gradient(135deg, #1A1A2E 0%, #16213E 100%);
+            min-height: 100vh;
+        }
+        .card {
+            background: rgba(22, 33, 62, 0.8);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(15, 52, 96, 0.5);
+        }
+        .rating-badge {
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            font-weight: bold;
+            font-size: 0.875rem;
+        }
+        .rating-strong-buy { background: rgba(231, 76, 60, 0.3); color: #E74C3C; border: 2px solid #E74C3C; }
+        .rating-buy { background: rgba(39, 174, 96, 0.3); color: #27AE60; border: 2px solid #27AE60; }
+        .rating-hold { background: rgba(241, 196, 15, 0.3); color: #F1C40F; border: 2px solid #F1C40F; }
+        .rating-sell { background: rgba(149, 165, 166, 0.3); color: #95A5A6; border: 2px solid #95A5A6; }
+    </style>
+</head>
+<body class="text-white">
+    <div class="container mx-auto px-4 py-8 max-w-7xl">
+        <!-- 返回按钮和标题 -->
+        <div class="mb-6">
+            <a href="/" class="inline-flex items-center text-gray-400 hover:text-white mb-4 transition-colors">
+                ← 返回监控大盘
+            </a>
+            <h1 class="text-4xl font-bold mb-2">📈 v2.0 分析报告</h1>
+            <p class="text-gray-400">股票多 Agent 系统 - 最新分析结果</p>
+        </div>
+
+        <!-- 统计卡片 -->
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+            <div class="card rounded-lg p-4">
+                <div class="text-gray-400 text-sm mb-1">总分析次数</div>
+                <div class="text-3xl font-bold" id="totalCount">-</div>
+            </div>
+            <div class="card rounded-lg p-4">
+                <div class="text-gray-400 text-sm mb-1">待验证预测</div>
+                <div class="text-3xl font-bold" id="pendingCount">-</div>
+            </div>
+            <div class="card rounded-lg p-4">
+                <div class="text-gray-400 text-sm mb-1">核心股票池</div>
+                <div class="text-3xl font-bold">4 只</div>
+            </div>
+            <div class="card rounded-lg p-4">
+                <div class="text-gray-400 text-sm mb-1">系统版本</div>
+                <div class="text-3xl font-bold">v2.0</div>
+            </div>
+        </div>
+
+        <!-- 刷新按钮 -->
+        <div class="mb-4 flex justify-between items-center">
+            <button onclick="loadReports()" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 rounded-lg transition-colors">
+                🔄 刷新列表
+            </button>
+            <div class="text-gray-400 text-sm">
+                最后更新：<span id="lastUpdate">-</span>
+            </div>
+        </div>
+
+        <!-- 报告列表 -->
+        <div class="card rounded-lg overflow-hidden">
+            <div class="overflow-x-auto">
+                <table class="w-full">
+                    <thead class="bg-gray-800">
+                        <tr>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">日期</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">代码</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">名称</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">评级</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">操作</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-700" id="reportList">
+                        <tr>
+                            <td colspan="5" class="px-6 py-4 text-center text-gray-400">加载中...</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- 验证队列 -->
+        <div class="mt-8">
+            <h2 class="text-2xl font-bold mb-4">⏳ 验证队列</h2>
+            <div class="card rounded-lg overflow-hidden">
+                <div class="overflow-x-auto">
+                    <table class="w-full">
+                        <thead class="bg-gray-800">
+                            <tr>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase">分析日期</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase">代码</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase">名称</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase">行动</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase">目标价</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase">止损价</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase">验证日期</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase">状态</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-700" id="validationList">
+                            <tr>
+                                <td colspan="8" class="px-6 py-4 text-center text-gray-400">加载中...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function getRatingBadge(rating) {
+            const badges = {
+                'STRONG_BUY': '<span class="rating-badge rating-strong-buy">🔥 强烈买入</span>',
+                'BUY': '<span class="rating-badge rating-buy">✅ 买入</span>',
+                'HOLD': '<span class="rating-badge rating-hold">⏸️ 持有</span>',
+                'SELL': '<span class="rating-badge rating-sell">❌ 卖出</span>',
+            };
+            return badges[rating] || '<span class="rating-badge">' + rating + '</span>';
+        }
+
+        async function loadReports() {
+            try {
+                const response = await fetch('/api/v2/logs?limit=50');
+                const logs = await response.json();
+                
+                document.getElementById('totalCount').textContent = logs.length;
+                document.getElementById('lastUpdate').textContent = new Date().toLocaleTimeString('zh-CN');
+                
+                const tbody = document.getElementById('reportList');
+                
+                if (logs.length === 0) {
+                    tbody.innerHTML = '<tr><td colspan="5" class="px-6 py-4 text-center text-gray-400">暂无分析报告</td></tr>';
+                    return;
+                }
+                
+                tbody.innerHTML = logs.map(log => `
+                    <tr class="hover:bg-gray-800 transition-colors">
+                        <td class="px-6 py-4 whitespace-nowrap">${log.date}</td>
+                        <td class="px-6 py-4 whitespace-nowrap font-mono">${log.code}</td>
+                        <td class="px-6 py-4 whitespace-nowrap">${log.name}</td>
+                        <td class="px-6 py-4 whitespace-nowrap">${getRatingBadge(log.rating)}</td>
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            <a href="/v2-report${encodeURIComponent(log.filepath)}" 
+                               class="text-blue-400 hover:text-blue-300 transition-colors">
+                                📄 查看详情
+                            </a>
+                        </td>
+                    </tr>
+                `).join('');
+                
+            } catch (error) {
+                console.error('加载报告失败:', error);
+                document.getElementById('reportList').innerHTML = 
+                    '<tr><td colspan="5" class="px-6 py-4 text-center text-red-400">加载失败</td></tr>';
+            }
+        }
+
+        async function loadValidationQueue() {
+            try {
+                const response = await fetch('/api/v2/validation');
+                const items = await response.json();
+                
+                document.getElementById('pendingCount').textContent = items.length;
+                
+                const tbody = document.getElementById('validationList');
+                
+                if (items.length === 0) {
+                    tbody.innerHTML = '<tr><td colspan="8" class="px-6 py-4 text-center text-gray-400">暂无待验证项目</td></tr>';
+                    return;
+                }
+                
+                tbody.innerHTML = items.map(item => `
+                    <tr class="hover:bg-gray-800 transition-colors">
+                        <td class="px-6 py-4 whitespace-nowrap">${item.date}</td>
+                        <td class="px-6 py-4 whitespace-nowrap font-mono">${item.code}</td>
+                        <td class="px-6 py-4 whitespace-nowrap">${item.name}</td>
+                        <td class="px-6 py-4 whitespace-nowrap">${item.action}</td>
+                        <td class="px-6 py-4 whitespace-nowrap">¥${item.target}</td>
+                        <td class="px-6 py-4 whitespace-nowrap">¥${item.stop_loss}</td>
+                        <td class="px-6 py-4 whitespace-nowrap">${item.validate_date}</td>
+                        <td class="px-6 py-4 whitespace-nowrap">${item.status}</td>
+                    </tr>
+                `).join('');
+                
+            } catch (error) {
+                console.error('加载验证队列失败:', error);
+            }
+        }
+
+        // 页面加载时获取数据
+        document.addEventListener('DOMContentLoaded', () => {
+            loadReports();
+            loadValidationQueue();
+        });
+    </script>
+</body>
+</html>

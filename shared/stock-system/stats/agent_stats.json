@@ -1,0 +1,54 @@
+{
+  "timestamp": "2026-03-09T03:02:11.893581",
+  "stats": {
+    "fundamental": {
+      "name": "基本面 Agent",
+      "success": 0,
+      "error": 0,
+      "total": 0,
+      "success_rate": 0,
+      "error_rate": 0
+    },
+    "technical": {
+      "name": "技术面 Agent",
+      "success": 0,
+      "error": 0,
+      "total": 0,
+      "success_rate": 0,
+      "error_rate": 0
+    },
+    "sentiment": {
+      "name": "情绪 Agent",
+      "success": 0,
+      "error": 0,
+      "total": 0,
+      "success_rate": 0,
+      "error_rate": 0
+    },
+    "coordinator": {
+      "name": "主 Agent",
+      "success": 36,
+      "error": 0,
+      "total": 36,
+      "success_rate": 100.0,
+      "error_rate": 0.0
+    },
+    "qa": {
+      "name": "质检 Agent",
+      "success": 12,
+      "error": 0,
+      "total": 12,
+      "success_rate": 100.0,
+      "error_rate": 0.0
+    },
+    "programmer": {
+      "name": "程序员 Agent",
+      "success": 24,
+      "error": 0,
+      "total": 24,
+      "success_rate": 100.0,
+      "error_rate": 0.0
+    }
+  },
+  "anomalies": []
+}

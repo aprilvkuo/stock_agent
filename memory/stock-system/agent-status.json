@@ -1,0 +1,42 @@
+{
+  "fundamental": {
+    "name": "基本面分析师",
+    "status": "running",
+    "current_task": "测试任务",
+    "start_time": "2026-03-09 10:30:47",
+    "progress": 50,
+    "last_update": "2026-03-09 10:30:47"
+  },
+  "technical": {
+    "name": "技术面分析师",
+    "status": "idle",
+    "current_task": "",
+    "start_time": null,
+    "progress": 0,
+    "last_update": null
+  },
+  "sentiment": {
+    "name": "情绪面分析师",
+    "status": "idle",
+    "current_task": "",
+    "start_time": null,
+    "progress": 0,
+    "last_update": null
+  },
+  "risk": {
+    "name": "风险评估师",
+    "status": "idle",
+    "current_task": "",
+    "start_time": null,
+    "progress": 0,
+    "last_update": null
+  },
+  "cio": {
+    "name": "首席投资官",
+    "status": "idle",
+    "current_task": "",
+    "start_time": null,
+    "progress": 0,
+    "last_update": null
+  }
+}

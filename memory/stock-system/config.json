@@ -1,0 +1,89 @@
+{
+  "system": {
+    "version": "v2.0",
+    "name": "股票多 Agent 系统 - 最优简洁架构",
+    "updated": "2026-03-09"
+  },
+  "agents": {
+    "fundamental": {
+      "name": "基本面分析师",
+      "weight": 0.30,
+      "enabled": true
+    },
+    "technical": {
+      "name": "技术面分析师",
+      "weight": 0.25,
+      "enabled": true
+    },
+    "sentiment": {
+      "name": "情绪面分析师",
+      "weight": 0.20,
+      "enabled": true
+    },
+    "risk": {
+      "name": "风险评估师",
+      "weight": 0.15,
+      "enabled": true
+    },
+    "cio": {
+      "name": "首席投资官",
+      "weight": 0.10,
+      "enabled": true
+    }
+  },
+  "rating": {
+    "thresholds": {
+      "strong_buy": 85,
+      "buy": 70,
+      "hold": 50,
+      "sell": 30
+    },
+    "score_map": {
+      "bullish": 80,
+      "neutral": 50,
+      "bearish": 20
+    }
+  },
+  "risk": {
+    "levels": {
+      "low": {"max_position": 0.30, "stop_loss_pct": 0.10},
+      "medium": {"max_position": 0.20, "stop_loss_pct": 0.08},
+      "high": {"max_position": 0.10, "stop_loss_pct": 0.05},
+      "critical": {"max_position": 0.00, "stop_loss_pct": 0.00}
+    }
+  },
+  "cache": {
+    "ttl": {
+      "realtime": 60,
+      "daily": 3600,
+      "financial": 86400
+    },
+    "enabled": true
+  },
+  "scheduler": {
+    "daily_validation": "09:00",
+    "weekly_review": "Friday 20:00"
+  },
+  "features": {
+    "fundamental_analysis": true,
+    "technical_analysis": true,
+    "sentiment_analysis": true,
+    "risk_assessment": true,
+    "dynamic_weights": true,
+    "auto_validation": true
+  },
+  "stock_pool": {
+    "core": [
+      {"code": "600519", "name": "贵州茅台", "market": "A"},
+      {"code": "00700", "name": "腾讯控股", "market": "HK"},
+      {"code": "AAPL", "name": "苹果公司", "market": "US"},
+      {"code": "BABA", "name": "阿里巴巴", "market": "US"}
+    ],
+    "optional": [
+      {"code": "000858", "name": "五粮液", "market": "A"},
+      {"code": "002230", "name": "科大讯飞", "market": "A"},
+      {"code": "601138", "name": "工业富联", "market": "A"}
+    ],
+    "note": "详细配置见 stock-pool.json (独立文件，升级不受影响)"
+  }
+}

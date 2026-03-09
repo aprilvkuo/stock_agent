@@ -1,0 +1,83 @@
+{
+  "version": "v2.0",
+  "updated": "2026-03-09",
+  "description": "固定监控股票池 - 每次系统升级不受影响",
+  
+  "core_pool": [
+    {
+      "code": "600519",
+      "name": "贵州茅台",
+      "market": "A",
+      "industry": "白酒",
+      "weight": 0.30,
+      "priority": "high",
+      "added_date": "2026-03-08"
+    },
+    {
+      "code": "00700",
+      "name": "腾讯控股",
+      "market": "HK",
+      "industry": "互联网",
+      "weight": 0.25,
+      "priority": "high",
+      "added_date": "2026-03-08"
+    },
+    {
+      "code": "AAPL",
+      "name": "苹果公司",
+      "market": "US",
+      "industry": "科技",
+      "weight": 0.25,
+      "priority": "high",
+      "added_date": "2026-03-09"
+    },
+    {
+      "code": "BABA",
+      "name": "阿里巴巴",
+      "market": "US",
+      "industry": "电商/云",
+      "weight": 0.20,
+      "priority": "high",
+      "added_date": "2026-03-09"
+    }
+  ],
+  
+  "optional_pool": [
+    {
+      "code": "000858",
+      "name": "五粮液",
+      "market": "A",
+      "industry": "白酒",
+      "weight": 0.10,
+      "priority": "medium"
+    },
+    {
+      "code": "002230",
+      "name": "科大讯飞",
+      "market": "A",
+      "industry": "AI",
+      "weight": 0.10,
+      "priority": "medium"
+    },
+    {
+      "code": "601138",
+      "name": "工业富联",
+      "market": "A",
+      "industry": "制造",
+      "weight": 0.10,
+      "priority": "medium"
+    }
+  ],
+  
+  "analysis_schedule": {
+    "daily": ["600519", "00700", "AAPL", "BABA"],
+    "weekly": ["000858", "002230", "601138"]
+  },
+  
+  "notes": [
+    "核心池 4 只股票每次必分析",
+    "可选池股票按需分析",
+    "苹果和阿里需要 stock-analyzer 支持美股",
+    "权重总和为 1.0，用于组合分析"
+  ]
+}

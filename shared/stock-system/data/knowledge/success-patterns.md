@@ -1,0 +1,3 @@
+# success-patterns.md
+
+等待数据...

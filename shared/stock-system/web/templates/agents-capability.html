@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🤖 Agent 能力说明 - 股票多 Agent 系统</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'china-red': '#E74C3C',
+                        'china-green': '#27AE60',
+                        'dark-bg': '#1A1A2E',
+                        'dark-card': '#16213E',
+                        'dark-border': '#0F3460'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background: linear-gradient(135deg, #1A1A2E 0%, #16213E 100%);
+            min-height: 100vh;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        }
+        .card {
+            background: rgba(22, 33, 62, 0.8);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(15, 52, 96, 0.5);
+        }
+        .agent-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(231, 76, 60, 0.2);
+        }
+        .data-source-badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin: 0.25rem;
+        }
+        .badge-eastmoney { background: rgba(231, 76, 60, 0.2); color: #E74C3C; }
+        .badge-financial { background: rgba(52, 152, 219, 0.2); color: #3498DB; }
+        .badge-news { background: rgba(46, 204, 113, 0.2); color: #2ECC71; }
+        .badge-technical { background: rgba(155, 89, 182, 0.2); color: #9B59B6; }
+    </style>
+</head>
+<body class="text-white">
+    <div class="container mx-auto px-4 py-8 max-w-7xl">
+        <!-- 返回按钮和标题 -->
+        <div class="mb-8">
+            <a href="/" class="inline-flex items-center text-gray-400 hover:text-white mb-4 transition-colors">
+                ← 返回首页
+            </a>
+            <h1 class="text-3xl font-bold mb-2">🤖 Agent 能力说明</h1>
+            <p class="text-gray-400">了解每个 Agent 的职责、数据源和分析能力</p>
+        </div>
+
+        <!-- Agent 卡片 -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+            
+            <!-- 基本面 Agent -->
+            <div class="agent-card card rounded-xl p-6 transition-all duration-300">
+                <div class="flex items-center mb-4">
+                    <div class="text-4xl mr-3">📊</div>
+                    <div>
+                        <h2 class="text-xl font-bold">基本面 Agent</h2>
+                        <p class="text-sm text-gray-400">Fundamental Analysis</p>
+                    </div>
+                </div>
+                
+                <div class="space-y-4">
+                    <div>
+                        <h3 class="text-sm font-semibold text-gray-300 mb-2">🎯 核心职责</h3>
+                        <ul class="text-sm text-gray-400 space-y-1">
+                            <li>• 分析公司财务报表</li>
+                            <li>• 评估估值水平 (PE/PB/ROE)</li>
+                            <li>• 判断财务健康状况</li>
+                            <li>• 分析营收和利润增长</li>
+                        </ul>
+                    </div>
+                    
+                    <div>
+                        <h3 class="text-sm font-semibold text-gray-300 mb-2">📚 数据来源</h3>
+                        <div>
+                            <span class="data-source-badge badge-eastmoney">东方财富 API</span>
+                            <span class="data-source-badge badge-financial">财报数据</span>
+                            <span class="data-source-badge badge-eastmoney">F10 资料</span>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <h3 class="text-sm font-semibold text-gray-300 mb-2">📈 分析指标</h3>
+                        <div class="grid grid-cols-2 gap-2 text-xs">
+                            <div class="bg-dark-bg p-2 rounded">PE 市盈率</div>
+                            <div class="bg-dark-bg p-2 rounded">PB 市净率</div>
+                            <div class="bg-dark-bg p-2 rounded">ROE 净资产收益率</div>
+                            <div class="bg-dark-bg p-2 rounded">营收增速</div>
+                            <div class="bg-dark-bg p-2 rounded">利润增速</div>
+                            <div class="bg-dark-bg p-2 rounded">毛利率</div>
+                            <div class="bg-dark-bg p-2 rounded">净利率</div>
+                            <div class="bg-dark-bg p-2 rounded">负债率</div>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <h3 class="text-sm font-semibold text-gray-300 mb-2">⚙️ 评估标准</h3>
+                        <ul class="text-xs text-gray-400 space-y-1">
+                            <li>✅ ROE &gt; 25%: 优秀</li>
+                            <li>✅ PE &lt; 15: 低估</li>
+                            <li>✅ 营收增速 &gt; 20%: 高增长</li>
+                            <li>⚠️ PB &gt; 8: 偏高</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 技术面 Agent -->
+            <div class="agent-card card rounded-xl p-6 transition-all duration-300">
+                <div class="flex items-center mb-4">
+                    <div class="text-4xl mr-3">📈</div>
+                    <div>
+                        <h2 class="text-xl font-bold">技术面 Agent</h2>
+                        <p class="text-sm text-gray-400">Technical Analysis</p>
+                    </div>
+                </div>
+                
+                <div class="space-y-4">
+                    <div>
+                        <h3 class="text-sm font-semibold text-gray-300 mb-2">🎯 核心职责</h3>
+                        <ul class="text-sm text-gray-400 space-y-1">
+                            <li>• 分析 K 线走势</li>
+                            <li>• 计算技术指标</li>
+                            <li>• 判断支撑/阻力位</li>
+                            <li>• 识别买卖信号</li>
+                        </ul>
+                    </div>
+                    
+                    <div>
+                        <h3 class="text-sm font-semibold text-gray-300 mb-2">📚 数据来源</h3>
+                        <div>
+                            <span class="data-source-badge badge-eastmoney">东方财富 API</span>
+                            <span class="data-source-badge badge-technical">K 线数据</span>
+                            <span class="data-source-badge badge-technical">成交量</span>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <h3 class="text-sm font-semibold text-gray-300 mb-2">📈 技术指标</h3>
+                        <div class="grid grid-cols-2 gap-2 text-xs">
+                            <div class="bg-dark-bg p-2 rounded">MA5/20/60 均线</div>
+                            <div class="bg-dark-bg p-2 rounded">RSI 相对强弱</div>
+                            <div class="bg-dark-bg p-2 rounded">MACD 平滑异同</div>
+                            <div class="bg-dark-bg p-2 rounded">KDJ 随机指标</div>
+                            <div class="bg-dark-bg p-2 rounded">BOLL 布林带</div>
+                            <div class="bg-dark-bg p-2 rounded">成交量</div>
+                            <div class="bg-dark-bg p-2 rounded">支撑位</div>
+                            <div class="bg-dark-bg p-2 rounded">阻力位</div>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <h3 class="text-sm font-semibold text-gray-300 mb-2">⚙️ 判断标准</h3>
+                        <ul class="text-xs text-gray-400 space-y-1">
+                            <li>✅ 均线多头排列：看涨</li>
+                            <li>✅ MACD 金叉：买入信号</li>
+                            <li>✅ RSI 30-70: 正常区间</li>
+                            <li>⚠️ RSI &gt; 70: 超买</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 情绪 Agent -->
+            <div class="agent-card card rounded-xl p-6 transition-all duration-300">
+                <div class="flex items-center mb-4">
+                    <div class="text-4xl mr-3">😊</div>
+                    <div>
+                        <h2 class="text-xl font-bold">情绪 Agent</h2>
+                        <p class="text-sm text-gray-400">Sentiment Analysis</p>
+                    </div>
+                </div>
+                
+                <div class="space-y-4">
+                    <div>
+                        <h3 class="text-sm font-semibold text-gray-300 mb-2">🎯 核心职责</h3>
+                        <ul class="text-sm text-gray-400 space-y-1">
+                            <li>• 分析市场舆情</li>
+                            <li>• 监控涨跌幅</li>
+                            <li>• 分析成交量异动</li>
+                            <li>• 评估市场热度</li>
+                        </ul>
+                    </div>
+                    
+                    <div>
+                        <h3 class="text-sm font-semibold text-gray-300 mb-2">📚 数据来源</h3>
+                        <div>
+                            <span class="data-source-badge badge-eastmoney">东方财富 API</span>
+                            <span class="data-source-badge badge-news">新闻资讯</span>
+                            <span class="data-source-badge badge-news">股吧评论</span>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <h3 class="text-sm font-semibold text-gray-300 mb-2">📈 分析维度</h3>
+                        <div class="grid grid-cols-2 gap-2 text-xs">
+                            <div class="bg-dark-bg p-2 rounded">涨跌幅</div>
+                            <div class="bg-dark-bg p-2 rounded">成交量</div>
+                            <div class="bg-dark-bg p-2 rounded">资金流向</div>
+                            <div class="bg-dark-bg p-2 rounded">新闻舆情</div>
+                            <div class="bg-dark-bg p-2 rounded">机构评级</div>
+                            <div class="bg-dark-bg p-2 rounded">社交媒体</div>
+                            <div class="bg-dark-bg p-2 rounded">龙虎榜</div>
+                            <div class="bg-dark-bg p-2 rounded">大宗交易</div>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <h3 class="text-sm font-semibold text-gray-300 mb-2">⚙️ 判断标准</h3>
+                        <ul class="text-xs text-gray-400 space-y-1">
+                            <li>✅ 涨幅 &gt; 3%: 强势</li>
+                            <li>✅ 成交量放大：关注</li>
+                            <li>✅ 正面新闻多：乐观</li>
+                            <li>⚠️ 大幅波动：谨慎</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 主 Agent -->
+            <div class="agent-card card rounded-xl p-6 transition-all duration-300">
+                <div class="flex items-center mb-4">
+                    <div class="text-4xl mr-3">🎯</div>
+                    <div>
+                        <h2 class="text-xl font-bold">主 Agent</h2>
+                        <p class="text-sm text-gray-400">Coordinator</p>
+                    </div>
+                </div>
+                
+                <div class="space-y-4">
+                    <div>
+                        <h3 class="text-sm font-semibold text-gray-300 mb-2">🎯 核心职责</h3>
+                        <ul class="text-sm text-gray-400 space-y-1">
+                            <li>• 汇总三个 Agent 结果</li>
+                            <li>• 综合评估投资建议</li>
+                            <li>• 生成最终评级</li>
+                            <li>• 写入验证队列</li>
+                        </ul>
+                    </div>
+                    
+                    <div>
+                        <h3 class="text-sm font-semibold text-gray-300 mb-2">📚 数据来源</h3>
+                        <div>
+                            <span class="data-source-badge badge-financial">基本面报告</span>
+                            <span class="data-source-badge badge-technical">技术面报告</span>
+                            <span class="data-source-badge badge-news">情绪面报告</span>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <h3 class="text-sm font-semibold text-gray-300 mb-2">⚙️ 决策逻辑</h3>
+                        <ul class="text-xs text-gray-400 space-y-1">
+                            <li>• 三个维度综合评分</li>
+                            <li>• 权重：基本面 40% + 技术面 30% + 情绪面 30%</li>
+                            <li>• 生成：推荐/观望/回避</li>
+                            <li>• 给出目标价和止损位</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 复盘 Agent -->
+            <div class="agent-card card rounded-xl p-6 transition-all duration-300 opacity-75">
+                <div class="flex items-center mb-4">
+                    <div class="text-4xl mr-3">📝</div>
+                    <div>
+                        <h2 class="text-xl font-bold">复盘 Agent</h2>
+                        <p class="text-sm text-gray-400">Review Agent</p>
+                    </div>
+                </div>
+                
+                <div class="space-y-4">
+                    <div>
+                        <h3 class="text-sm font-semibold text-gray-300 mb-2">🎯 核心职责</h3>
+                        <ul class="text-sm text-gray-400 space-y-1">
+                            <li>• 验证历史预测准确性</li>
+                            <li>• 分析预测偏差原因</li>
+                            <li>• 优化分析模型</li>
+                            <li>• 生成改进建议</li>
+                        </ul>
+                    </div>
+                    
+                    <div>
+                        <h3 class="text-sm font-semibold text-gray-300 mb-2">📚 数据来源</h3>
+                        <div>
+                            <span class="data-source-badge badge-financial">历史预测</span>
+                            <span class="data-source-badge badge-eastmoney">实际走势</span>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <h3 class="text-sm font-semibold text-gray-300 mb-2">⚙️ 工作流程</h3>
+                        <ul class="text-xs text-gray-400 space-y-1">
+                            <li>• 定期验证预测结果</li>
+                            <li>• 统计成功率</li>
+                            <li>• 识别错误模式</li>
+                            <li>• 更新知识库</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 复盘 Agent（增强版） -->
+            <div class="agent-card card rounded-xl p-6 transition-all duration-300 border-green-600/50">
+                <div class="flex items-center mb-4">
+                    <div class="text-4xl mr-3">📝</div>
+                    <div>
+                        <h2 class="text-xl font-bold text-green-400">复盘 Agent（增强版）</h2>
+                        <p class="text-sm text-gray-400">Review Agent</p>
+                    </div>
+                </div>
+                
+                <div class="space-y-4">
+                    <div>
+                        <h3 class="text-sm font-semibold text-gray-300 mb-2">🎯 核心职责</h3>
+                        <ul class="text-sm text-gray-400 space-y-1">
+                            <li>• 验证预测准确性</li>
+                            <li>• 分析 Agent 性能表现</li>
+                            <li>• 更新知识库和经验规则</li>
+                            <li>• 生成改进建议和复盘报告</li>
+                        </ul>
+                    </div>
+                    
+                    <div>
+                        <h3 class="text-sm font-semibold text-gray-300 mb-2">⏰ 触发条件</h3>
+                        <ul class="text-xs text-gray-400 space-y-1">
+                            <li>✅ 空闲 3 分钟自动触发</li>
+                            <li>✅ 每小时定时触发</li>
+                            <li>✅ 手动触发</li>
+                        </ul>
+                    </div>
+                    
+                    <div>
+                        <h3 class="text-sm font-semibold text-gray-300 mb-2">📊 输出成果</h3>
+                        <ul class="text-xs text-gray-400 space-y-1">
+                            <li>• 复盘报告 (review-*.md)</li>
+                            <li>• 知识库更新 (stock-wisdom.md)</li>
+                            <li>• 改进计划 (短/中/长期)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- 工作流程图 -->
+        <div class="card rounded-xl p-6 mb-8">
+            <h2 class="text-2xl font-bold mb-6">🔄 工作流程</h2>
+            
+            <div class="flex flex-col md:flex-row items-center justify-between space-y-4 md:space-y-0">
+                <div class="text-center">
+                    <div class="text-5xl mb-2">📥</div>
+                    <div class="font-semibold">用户请求</div>
+                    <div class="text-xs text-gray-400">添加股票</div>
+                </div>
+                
+                <div class="hidden md:block text-gray-500 text-2xl">→</div>
+                
+                <div class="text-center">
+                    <div class="text-5xl mb-2">📊📈😊</div>
+                    <div class="font-semibold">三 Agent 并行分析</div>
+                    <div class="text-xs text-gray-400">基本面 + 技术面 + 情绪面</div>
+                </div>
+                
+                <div class="hidden md:block text-gray-500 text-2xl">→</div>
+                
+                <div class="text-center">
+                    <div class="text-5xl mb-2">🎯</div>
+                    <div class="font-semibold">主 Agent 汇总</div>
+                    <div class="text-xs text-gray-400">综合决策</div>
+                </div>
+                
+                <div class="hidden md:block text-gray-500 text-2xl">→</div>
+                
+                <div class="text-center">
+                    <div class="text-5xl mb-2">📤</div>
+                    <div class="font-semibold">输出结果</div>
+                    <div class="text-xs text-gray-400">推荐/观望/回避</div>
+                </div>
+                
+                <div class="hidden md:block text-gray-500 text-2xl">→</div>
+                
+                <div class="text-center">
+                    <div class="text-5xl mb-2">🧬</div>
+                    <div class="font-semibold text-green-400">复盘总结</div>
+                    <div class="text-xs text-gray-400">持续改进</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 透明度说明 -->
+        <div class="card rounded-xl p-6">
+            <h2 class="text-2xl font-bold mb-4">🔍 如何查看 Agent 工作细节</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                    <h3 class="font-semibold mb-2">📄 查看分析结果文件</h3>
+                    <div class="text-sm text-gray-400 space-y-2">
+                        <div>• 位置：<code class="bg-dark-bg px-2 py-1 rounded">/agents/stock-coordinator/data/queue/results/</code></div>
+                        <div>• 文件名：<code class="bg-dark-bg px-2 py-1 rounded">result-REQUEST-ID-fundamental.md</code></div>
+                        <div>• 包含：数据来源、分析过程、判断依据</div>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="font-semibold mb-2">📊 在报表网站查看</h3>
+                    <div class="text-sm text-gray-400 space-y-2">
+                        <div>• 访问：<code class="bg-dark-bg px-2 py-1 rounded">http://localhost:5001/report/股票代码</code></div>
+                        <div>• 查看：三个维度的详细分析</div>
+                        <div>• 包含：数据指标、判断理由、风险提示</div>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="font-semibold mb-2">📊 查看复盘报告</h3>
+                    <div class="text-sm text-gray-400 space-y-2">
+                        <div>• 访问：<code class="bg-dark-bg px-2 py-1 rounded">http://localhost:5001/evolution</code></div>
+                        <div class="text-xs text-gray-500 mt-1">（复盘报告页面）</div>
+                        <div>• 查看：Agent 性能统计</div>
+                        <div>• 包含：成功率、改进计划</div>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="font-semibold mb-2">📋 查看系统日志</h3>
+                    <div class="text-sm text-gray-400 space-y-2">
+                        <div>• 位置：<code class="bg-dark-bg px-2 py-1 rounded">/agents/stock-coordinator/data/logs/</code></div>
+                        <div>• 文件：<code class="bg-dark-bg px-2 py-1 rounded">daemon-YYYY-MM-DD.log</code></div>
+                        <div>• 包含：每个 Agent 的执行记录</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

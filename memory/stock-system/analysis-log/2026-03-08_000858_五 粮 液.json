@@ -1,0 +1,55 @@
+{
+  "timestamp": "2026-03-08T11:43:28.384621",
+  "stock_code": "000858",
+  "stock_name": "五 粮 液",
+  "price": 102.4,
+  "change_pct": 97.0,
+  "agents": {
+    "fundamental": {
+      "rating": "持有",
+      "confidence": 60,
+      "score": 50
+    },
+    "technical": {
+      "rating": "持有",
+      "confidence": 60,
+      "score": 50
+    },
+    "sentiment": {
+      "rating": "乐观",
+      "confidence": 63.5,
+      "score": 70
+    }
+  },
+  "decision": {
+    "score": 54.0,
+    "rating": "🔴 回避",
+    "position": "0%",
+    "weights": {
+      "fundamental": 0.5,
+      "technical": 0.3,
+      "sentiment": 0.2
+    }
+  },
+  "predictions": [
+    {
+      "type": "price_breakthrough",
+      "target": 107.52000000000001,
+      "validate_date": "2026-04-07"
+    },
+    {
+      "type": "stop_loss",
+      "target": 97.28,
+      "validate_date": "2026-04-07"
+    }
+  ],
+  "raw_data": {
+    "pe": null,
+    "pb": null,
+    "roe": 13.86,
+    "revenue_growth": null,
+    "profit_growth": null,
+    "rsi": 58,
+    "macd": "红柱扩大"
+  }
+}

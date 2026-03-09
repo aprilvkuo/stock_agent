@@ -1,0 +1,378 @@
+# 📋 股票多 Agent 系统配置文件
+
+**版本**: v1.0  
+**创建日期**: 2026-03-08  
+**维护位置**: `/Users/egg/.openclaw/workspace/shared/stock-system/config.yaml`
+
+---
+
+## 🎯 系统配置
+
+### 基础设置
+```yaml
+system:
+  name: "股票多 Agent 系统"
+  version: "v1.6"
+  timezone: "Asia/Shanghai"
+  data_dir: "/Users/egg/.openclaw/workspace/agents/stock-coordinator/data"
+  log_level: "INFO"  # DEBUG, INFO, WARNING, ERROR
+```
+
+---
+
+## 📊 数据源配置
+
+### 腾讯财经 API（实时股价）
+```yaml
+data_sources:
+  tencent:
+    enabled: true
+    base_url: "http://qt.gtimg.cn/q="
+    timeout: 5  # 秒
+    retry_times: 3
+    cache_ttl: 60  # 缓存时间（秒）
+    
+    # 支持的市前缀
+    market_prefix:
+      A_sh: "sh"  # 上交所
+      A_sz: "sz"  # 深交所
+      HK: "hk"    # 港股
+      US: ""      # 美股（暂不支持）
+```
+
+### 东方财富 API（资金流向）
+```yaml
+  eastmoney:
+    enabled: true
+    north_flow_url: "http://push2.eastmoney.com/api/qt/kamt.rtmin/Get"
+    timeout: 10
+    retry_times: 3
+    cache_ttl: 300  # 5 分钟
+```
+
+### 新浪财经 API（备选）
+```yaml
+  sina:
+    enabled: false  # 备用数据源
+    base_url: "http://hq.sinajs.cn/list="
+    timeout: 5
+    retry_times: 2
+```
+
+---
+
+## 🤖 Agent 配置
+
+### 基本面 Agent
+```yaml
+agents:
+  fundamental:
+    enabled: true
+    weight: 0.35  # 权重（动态调整）
+    
+    # 分析维度
+    dimensions:
+      - revenue_growth      # 营收增速
+      - profit_growth       # 利润增速
+      - roe                 # 净资产收益率
+      - pe_ratio           # 市盈率
+      - pb_ratio           # 市净率
+      - cash_flow          # 现金流（待实现）
+      - debt_ratio         # 负债率（待实现）
+    
+    # 评级阈值
+    thresholds:
+      revenue_growth:
+        excellent: 30   # >30% 优秀
+        good: 15        # >15% 良好
+        normal: 5       # >5% 正常
+      profit_growth:
+        excellent: 40
+        good: 20
+        normal: 10
+      roe:
+        excellent: 20
+        good: 15
+        normal: 10
+```
+
+### 技术面 Agent
+```yaml
+  technical:
+    enabled: true
+    weight: 0.30
+    
+    # 分析维度
+    dimensions:
+      - ma_trend        # 均线趋势
+      - macd            # MACD
+      - rsi             # RSI
+      - bollinger       # 布林带（待实现）
+      - kdj             # KDJ（待实现）
+    
+    # 参数配置
+    parameters:
+      ma_periods: [5, 10, 20, 60]  # 均线周期
+      rsi_period: 14
+      macd_fast: 12
+      macd_slow: 26
+      macd_signal: 9
+```
+
+### 情绪 Agent
+```yaml
+  sentiment:
+    enabled: true
+    weight: 0.20
+    
+    # 分析维度
+    dimensions:
+      - price_sentiment    # 价格情绪
+      - volume_sentiment   # 成交量情绪
+      - ma_sentiment       # 均线情绪
+      - rsi_sentiment      # RSI 情绪
+    
+    # 权重配置
+    weights:
+      price: 0.35
+      volume: 0.25
+      ma: 0.25
+      rsi: 0.15
+```
+
+### 质检 Agent
+```yaml
+  qa:
+    enabled: true
+    weight: 0.15  # 预留权重（实际不参与决策）
+    
+    # 监控维度
+    dimensions:
+      - system_health     # 系统健康检查
+      - agent_performance # Agent 表现统计
+      - visual_check      # 视觉检查（网页 UI）
+      - knowledge_check   # 知识库检查
+    
+    # 报告配置
+    reports:
+      health_report: "monitor/health_report.json"
+      ui_report: "monitor/ui_report.json"
+      screenshot_dir: "monitor/screenshots"
+```
+
+---
+
+## 📈 评级配置
+
+### 综合评级权重
+```yaml
+rating:
+  # 权重配置（6 个 Agent，3 个参与决策）
+  weights:
+    fundamental: 0.35  # 基本面 Agent
+    technical: 0.30    # 技术面 Agent
+    sentiment: 0.35    # 情绪 Agent（权重提升至 0.35）
+  
+  # 评级阈值
+  thresholds:
+    strong_buy: 85   # 强烈买入
+    buy: 70          # 买入
+    hold: 50         # 持有
+    sell: 30         # 卖出
+    strong_sell: 0   # 强烈卖出
+  
+  # 置信度阈值
+  confidence:
+    high: 80    # 高置信度
+    medium: 60  # 中置信度
+    low: 40     # 低置信度
+```
+
+---
+
+## ⏰ 定时任务配置
+
+### Heartbeat 配置
+```yaml
+scheduler:
+  timezone: "Asia/Shanghai"
+  
+  # 每日验证
+  daily_validation:
+    enabled: true
+    time: "09:00"  # 每个交易日 09:00
+    script: "scripts/auto_agent.py daily"
+  
+  # 周度复盘
+  weekly_review:
+    enabled: true
+    day: "friday"  # 周五
+    time: "20:00"
+    script: "scripts/auto_agent.py weekly"
+  
+  # 缓存清理
+  cache_cleanup:
+    enabled: true
+    time: "03:00"  # 凌晨 3 点
+    action: "cleanup_expired"
+```
+
+---
+
+## 🔔 通知配置
+
+### 微信通知（待实现）
+```yaml
+notifications:
+  wechat:
+    enabled: false
+    webhook_url: ""
+    
+  # 邮件通知
+  email:
+    enabled: false
+    smtp_server: ""
+    smtp_port: 587
+    username: ""
+    password: ""
+    
+  # 系统通知
+  system:
+    enabled: true
+    level: "important"  # all, important, critical
+```
+
+---
+
+## 📊 缓存配置
+
+### 数据缓存
+```yaml
+cache:
+  enabled: true
+  directory: "/Users/egg/.openclaw/workspace/shared/stock-system/data/cache"
+  
+  # 不同类型数据的 TTL
+  ttl:
+    realtime: 60       # 实时数据：60 秒
+    daily: 3600        # 日线数据：1 小时
+    financial: 86400   # 财务数据：24 小时
+    default: 300       # 默认：5 分钟
+  
+  # 清理策略
+  cleanup:
+    max_age: 604800    # 最大保存 7 天
+    max_size: 104857600  # 最大 100MB
+```
+
+---
+
+## 🔒 安全配置
+
+### API 密钥（示例）
+```yaml
+security:
+  # 不要在此文件中存储真实密钥！
+  # 使用环境变量或单独的 secrets.yaml
+  
+  api_keys:
+    tencent: "${TENCENT_API_KEY}"
+    eastmoney: "${EASTMONEY_API_KEY}"
+  
+  # 访问控制
+  access_control:
+    enabled: false
+    allowed_ips: []
+```
+
+---
+
+## 📝 日志配置
+
+### 日志设置
+```yaml
+logging:
+  level: "INFO"
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+  
+  # 日志文件
+  file:
+    enabled: true
+    path: "/Users/egg/.openclaw/workspace/agents/stock-coordinator/data/logs/system.log"
+    max_size: 10485760  # 10MB
+    backup_count: 5     # 保留 5 个备份
+  
+  # 控制台输出
+  console:
+    enabled: true
+    color: true
+```
+
+---
+
+## 🎯 功能开关
+
+### 特性标志
+```yaml
+features:
+  # 核心功能（6 个 Agent，3 个参与决策）
+  fundamental_analysis: true  # 基本面 Agent
+  technical_analysis: true    # 技术面 Agent
+  sentiment_analysis: true    # 情绪 Agent
+  
+  # 辅助功能
+  qa_monitoring: true         # 质检 Agent
+  programmer_support: true    # 程序员 Agent
+  coordinator_summary: true   # 主 Agent 汇总
+  
+  # 高级功能
+  auto_validation: true
+  weekly_review: true
+  cache_enabled: true
+  
+  # 实验性功能
+  ai_prediction: false
+  auto_trading: false
+  multi_stock_compare: false
+```
+
+---
+
+## 📍 监控股票池
+
+### 默认监控列表
+```yaml
+stock_pool:
+  # A 股
+  A:
+    - code: "600519"
+      name: "贵州茅台"
+      priority: "high"
+    
+    - code: "000858"
+      name: "五粮液"
+      priority: "high"
+    
+    - code: "300750"
+      name: "宁德时代"
+      priority: "high"
+  
+  # 港股
+  HK:
+    - code: "00700"
+      name: "腾讯控股"
+      priority: "high"
+    
+    - code: "09988"
+      name: "阿里巴巴"
+      priority: "medium"
+  
+  # 美股（暂不支持）
+  US: []
+```
+
+---
+
+**配置文件版本**: v1.0  
+**最后更新**: 2026-03-08 13:25  
+**下次更新**: 实施新功能时

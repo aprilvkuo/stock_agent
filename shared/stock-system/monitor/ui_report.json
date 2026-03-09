@@ -1,0 +1,42 @@
+{
+  "timestamp": "2026-03-08T20:00:08.248390",
+  "pages": {
+    "主页": {
+      "url": "http://localhost:5001/",
+      "checked_at": "2026-03-08T20:00:08.248417",
+      "status": "✅ 正常",
+      "issues": [],
+      "status_code": 200
+    },
+    "实时监控": {
+      "url": "http://localhost:5001/monitor",
+      "checked_at": "2026-03-08T20:00:08.259201",
+      "status": "✅ 正常",
+      "issues": [],
+      "status_code": 200
+    },
+    "Agent 状态": {
+      "url": "http://localhost:5001/agents",
+      "checked_at": "2026-03-08T20:00:08.261122",
+      "status": "✅ 正常",
+      "issues": [],
+      "status_code": 200
+    },
+    "持仓管理": {
+      "url": "http://localhost:5001/holdings",
+      "checked_at": "2026-03-08T20:00:08.262898",
+      "status": "✅ 正常",
+      "issues": [],
+      "status_code": 200
+    },
+    "复盘报告": {
+      "url": "http://localhost:5001/evolution",
+      "checked_at": "2026-03-08T20:00:08.264525",
+      "status": "✅ 正常",
+      "issues": [],
+      "status_code": 200
+    }
+  },
+  "issues": [],
+  "screenshot_dir": "/Users/egg/.openclaw/workspace/shared/stock-system/monitor/screenshots"
+}

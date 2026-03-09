@@ -1,0 +1,80 @@
+{
+  "timestamp": "2026-03-09T02:43:24.297138",
+  "version": "1.0",
+  "qa_review": {
+    "agent": "质检 Agent",
+    "total_checks": 4,
+    "issues_found": 0,
+    "tickets_created": 0,
+    "health_score": 100,
+    "performance": "needs_review",
+    "needs_improvement": "self_reflection"
+  },
+  "agent_evaluations": {
+    "fundamental": {
+      "name": "基本面 Agent",
+      "run_count": 0,
+      "error_count": 0,
+      "success_rate": 0,
+      "performance": "needs_improvement"
+    },
+    "technical": {
+      "name": "技术面 Agent",
+      "run_count": 0,
+      "error_count": 0,
+      "success_rate": 0,
+      "performance": "needs_improvement"
+    },
+    "sentiment": {
+      "name": "情绪 Agent",
+      "run_count": 0,
+      "error_count": 0,
+      "success_rate": 0,
+      "performance": "needs_improvement"
+    },
+    "coordinator": {
+      "name": "主 Agent",
+      "run_count": 32,
+      "error_count": 0,
+      "success_rate": 100.0,
+      "performance": "excellent"
+    },
+    "qa": {
+      "name": "质检 Agent",
+      "run_count": 10,
+      "error_count": 0,
+      "success_rate": 100.0,
+      "performance": "excellent"
+    },
+    "programmer": {
+      "name": "程序员 Agent",
+      "run_count": 16,
+      "error_count": 0,
+      "success_rate": 100.0,
+      "performance": "excellent"
+    }
+  },
+  "optimizations": [
+    {
+      "agent": "fundamental",
+      "issue": "成功率0%低于 80%",
+      "suggestion": "建议优化基本面 Agent，当前成功率0%"
+    },
+    {
+      "agent": "technical",
+      "issue": "成功率0%低于 80%",
+      "suggestion": "建议优化技术面 Agent，当前成功率0%"
+    },
+    {
+      "agent": "sentiment",
+      "issue": "成功率0%低于 80%",
+      "suggestion": "建议优化情绪 Agent，当前成功率0%"
+    }
+  ],
+  "recommendations": [
+    "🟡 基本面 Agent需要优化",
+    "🟡 技术面 Agent需要优化",
+    "🟡 情绪 Agent需要优化",
+    "🔍 质检 Agent 需要审查"
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "id": "TICKET-20260308143748",
+  "title": "修复网站状态显示不准确",
+  "description": "主 Agent 实际运行中，但网站显示 offline",
+  "severity": "medium",
+  "status": "closed",
+  "assign_to": "程序员 Agent",
+  "created_at": "2026-03-08T14:37:48.507445",
+  "error_type": "ui_display",
+  "error_message": "主 Agent 状态显示 offline 但实际在运行",
+  "file_path": "/Users/egg/.openclaw/workspace/shared/stock-system/web/app.py",
+  "line_number": null,
+  "suggested_fix": "检查状态检测逻辑",
+  "priority": 3,
+  "closed_at": "2026-03-08T19:05:37.662854",
+  "resolution": "auto_fixed"
+}

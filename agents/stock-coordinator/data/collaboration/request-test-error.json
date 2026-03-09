@@ -1,0 +1,61 @@
+{
+  "request_id": "request-test-error",
+  "created_at": "2026-03-08T18:39:28.698377",
+  "agents": {
+    "fundamental": {
+      "initial": {
+        "rating": "持有",
+        "confidence": 50,
+        "reasons": [],
+        "data_quality": "medium"
+      },
+      "adjusted": null,
+      "self_assessment": null,
+      "comments": []
+    },
+    "technical": {
+      "initial": {
+        "rating": "持有",
+        "confidence": 50,
+        "reasons": [],
+        "data_quality": "medium"
+      },
+      "adjusted": null,
+      "self_assessment": null,
+      "comments": []
+    },
+    "sentiment": {
+      "initial": {
+        "rating": "持有",
+        "confidence": 50,
+        "reasons": [],
+        "data_quality": "medium"
+      },
+      "adjusted": null,
+      "self_assessment": null,
+      "comments": []
+    }
+  },
+  "discussion": [
+    {
+      "timestamp": "2026-03-08T18:39:28.698750",
+      "agent": "主 Agent",
+      "type": "comment",
+      "message": "启动协作流程，共3个 Agent 参与"
+    }
+  ],
+  "final_decision": {
+    "score": 30.0,
+    "rating": "🔴 回避",
+    "position": "0%",
+    "target_price": 137.23499999999999,
+    "stop_price": 124.16499999999998,
+    "breakdown": {
+      "fundamental": 30.0,
+      "technical": 30.0,
+      "sentiment": 30.0
+    },
+    "collab_used": true
+  },
+  "updated_at": "2026-03-08T18:39:28.699130"
+}

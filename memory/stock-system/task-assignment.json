@@ -1,0 +1,333 @@
+{
+  "created_at": "2026-03-09T15:36:34.619402",
+  "total_tasks": 15,
+  "agents": {
+    "programmer": {
+      "name": "程序员 Agent",
+      "skills": [
+        "代码开发",
+        "Bug 修复",
+        "功能实现",
+        "测试"
+      ],
+      "tasks": [
+        {
+          "id": "TASK-001",
+          "title": "集成 Agent 状态更新到 auto_agent.py",
+          "description": "修改 auto_agent.py 添加状态更新调用，实现分析流程的状态展示",
+          "priority": "high",
+          "assignee": "programmer",
+          "estimated_hours": 2,
+          "deadline_days": 1
+        },
+        {
+          "id": "TASK-002",
+          "title": "集成 Agent 状态更新到 analyze_core_pool.py",
+          "description": "修改 analyze_core_pool.py 添加状态更新调用",
+          "priority": "high",
+          "assignee": "programmer",
+          "estimated_hours": 1,
+          "deadline_days": 1
+        },
+        {
+          "id": "TASK-003",
+          "title": "创建守护进程脚本",
+          "description": "实现自动化调度守护进程，每 30 秒检查请求",
+          "priority": "high",
+          "assignee": "programmer",
+          "estimated_hours": 4,
+          "deadline_days": 2
+        },
+        {
+          "id": "TASK-004",
+          "title": "实现守护进程单实例锁",
+          "description": "使用 PID 文件实现单实例锁，防止多实例运行",
+          "priority": "high",
+          "assignee": "programmer",
+          "estimated_hours": 1,
+          "deadline_days": 2
+        },
+        {
+          "id": "TASK-005",
+          "title": "实现请求级文件锁",
+          "description": "防止并发处理同一请求",
+          "priority": "medium",
+          "assignee": "programmer",
+          "estimated_hours": 2,
+          "deadline_days": 3
+        },
+        {
+          "id": "TASK-006",
+          "title": "创建质检 Agent 脚本",
+          "description": "实现质量监控 Agent，检查核心指标",
+          "priority": "high",
+          "assignee": "programmer",
+          "estimated_hours": 4,
+          "deadline_days": 2
+        },
+        {
+          "id": "TASK-014",
+          "title": "添加自动重试机制",
+          "description": "守护进程添加失败自动重试机制（最多 3 次）",
+          "priority": "medium",
+          "assignee": "programmer",
+          "estimated_hours": 2,
+          "deadline_days": 3
+        },
+        {
+          "id": "TASK-015",
+          "title": "添加死信队列",
+          "description": "实现失败请求的死信队列隔离机制",
+          "priority": "medium",
+          "assignee": "programmer",
+          "estimated_hours": 2,
+          "deadline_days": 3
+        }
+      ]
+    },
+    "qa": {
+      "name": "质检 Agent",
+      "skills": [
+        "质量检查",
+        "测试验证",
+        "代码审查"
+      ],
+      "tasks": [
+        {
+          "id": "TASK-007",
+          "title": "实现质检核心指标检查",
+          "description": "定义并实现核心质量指标检查逻辑",
+          "priority": "medium",
+          "assignee": "qa",
+          "estimated_hours": 2,
+          "deadline_days": 3
+        },
+        {
+          "id": "TASK-008",
+          "title": "实现异常检测",
+          "description": "实现系统异常检测和告警",
+          "priority": "medium",
+          "assignee": "qa",
+          "estimated_hours": 2,
+          "deadline_days": 3
+        },
+        {
+          "id": "TASK-009",
+          "title": "测试完整评分流程",
+          "description": "测试 Agent 互相指导系统的完整评分流程",
+          "priority": "medium",
+          "assignee": "qa",
+          "estimated_hours": 2,
+          "deadline_days": 2
+        },
+        {
+          "id": "TASK-010",
+          "title": "验证低分触发工单",
+          "description": "验证低分（<3 分）自动触发改进工单的功能",
+          "priority": "medium",
+          "assignee": "qa",
+          "estimated_hours": 1,
+          "deadline_days": 2
+        },
+        {
+          "id": "TASK-011",
+          "title": "验证周度报告生成",
+          "description": "验证反馈报告生成器的周度报告功能",
+          "priority": "low",
+          "assignee": "qa",
+          "estimated_hours": 1,
+          "deadline_days": 3
+        }
+      ]
+    },
+    "coordinator": {
+      "name": "主 Agent",
+      "skills": [
+        "任务协调",
+        "汇总决策",
+        "资源分配"
+      ],
+      "tasks": [
+        {
+          "id": "TASK-012",
+          "title": "收集 Agent 反馈",
+          "description": "收集各 Agent 对评分系统的反馈意见",
+          "priority": "low",
+          "assignee": "coordinator",
+          "estimated_hours": 2,
+          "deadline_days": 3
+        },
+        {
+          "id": "TASK-013",
+          "title": "优化评分维度",
+          "description": "根据反馈优化评分维度和权重",
+          "priority": "low",
+          "assignee": "coordinator",
+          "estimated_hours": 2,
+          "deadline_days": 5
+        }
+      ]
+    },
+    "fundamental": {
+      "name": "基本面 Agent",
+      "skills": [
+        "财报分析",
+        "估值判断"
+      ],
+      "tasks": []
+    },
+    "technical": {
+      "name": "技术面 Agent",
+      "skills": [
+        "K 线分析",
+        "技术指标"
+      ],
+      "tasks": []
+    },
+    "sentiment": {
+      "name": "情绪 Agent",
+      "skills": [
+        "情绪分析",
+        "市场热度"
+      ],
+      "tasks": []
+    }
+  },
+  "tickets": [
+    {
+      "id": "IMPROVE-20260309153634",
+      "task_id": "TASK-001",
+      "task_title": "集成 Agent 状态更新到 auto_agent.py",
+      "provider": "programmer",
+      "priority": "high",
+      "deadline": "2026-03-12",
+      "status": "open"
+    },
+    {
+      "id": "IMPROVE-20260309153634",
+      "task_id": "TASK-002",
+      "task_title": "集成 Agent 状态更新到 analyze_core_pool.py",
+      "provider": "programmer",
+      "priority": "high",
+      "deadline": "2026-03-12",
+      "status": "open"
+    },
+    {
+      "id": "IMPROVE-20260309153634",
+      "task_id": "TASK-003",
+      "task_title": "创建守护进程脚本",
+      "provider": "programmer",
+      "priority": "high",
+      "deadline": "2026-03-12",
+      "status": "open"
+    },
+    {
+      "id": "IMPROVE-20260309153634",
+      "task_id": "TASK-004",
+      "task_title": "实现守护进程单实例锁",
+      "provider": "programmer",
+      "priority": "high",
+      "deadline": "2026-03-12",
+      "status": "open"
+    },
+    {
+      "id": "IMPROVE-20260309153634",
+      "task_id": "TASK-005",
+      "task_title": "实现请求级文件锁",
+      "provider": "programmer",
+      "priority": "medium",
+      "deadline": "2026-03-12",
+      "status": "open"
+    },
+    {
+      "id": "IMPROVE-20260309153634",
+      "task_id": "TASK-006",
+      "task_title": "创建质检 Agent 脚本",
+      "provider": "programmer",
+      "priority": "high",
+      "deadline": "2026-03-12",
+      "status": "open"
+    },
+    {
+      "id": "IMPROVE-20260309153634",
+      "task_id": "TASK-007",
+      "task_title": "实现质检核心指标检查",
+      "provider": "qa",
+      "priority": "medium",
+      "deadline": "2026-03-12",
+      "status": "open"
+    },
+    {
+      "id": "IMPROVE-20260309153634",
+      "task_id": "TASK-008",
+      "task_title": "实现异常检测",
+      "provider": "qa",
+      "priority": "medium",
+      "deadline": "2026-03-12",
+      "status": "open"
+    },
+    {
+      "id": "IMPROVE-20260309153634",
+      "task_id": "TASK-009",
+      "task_title": "测试完整评分流程",
+      "provider": "qa",
+      "priority": "medium",
+      "deadline": "2026-03-12",
+      "status": "open"
+    },
+    {
+      "id": "IMPROVE-20260309153634",
+      "task_id": "TASK-010",
+      "task_title": "验证低分触发工单",
+      "provider": "qa",
+      "priority": "medium",
+      "deadline": "2026-03-12",
+      "status": "open"
+    },
+    {
+      "id": "IMPROVE-20260309153634",
+      "task_id": "TASK-011",
+      "task_title": "验证周度报告生成",
+      "provider": "qa",
+      "priority": "low",
+      "deadline": "2026-03-12",
+      "status": "open"
+    },
+    {
+      "id": "IMPROVE-20260309153634",
+      "task_id": "TASK-012",
+      "task_title": "收集 Agent 反馈",
+      "provider": "coordinator",
+      "priority": "low",
+      "deadline": "2026-03-12",
+      "status": "open"
+    },
+    {
+      "id": "IMPROVE-20260309153634",
+      "task_id": "TASK-013",
+      "task_title": "优化评分维度",
+      "provider": "coordinator",
+      "priority": "low",
+      "deadline": "2026-03-12",
+      "status": "open"
+    },
+    {
+      "id": "IMPROVE-20260309153634",
+      "task_id": "TASK-014",
+      "task_title": "添加自动重试机制",
+      "provider": "programmer",
+      "priority": "medium",
+      "deadline": "2026-03-12",
+      "status": "open"
+    },
+    {
+      "id": "IMPROVE-20260309153634",
+      "task_id": "TASK-015",
+      "task_title": "添加死信队列",
+      "provider": "programmer",
+      "priority": "medium",
+      "deadline": "2026-03-12",
+      "status": "open"
+    }
+  ]
+}

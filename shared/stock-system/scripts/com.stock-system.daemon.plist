@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>com.stock-system.daemon</string>
+    
+    <key>ProgramArguments</key>
+    <array>
+        <string>/usr/bin/python3</string>
+        <string>/Users/egg/.openclaw/workspace/shared/stock-system/scripts/daemon.py</string>
+    </array>
+    
+    <key>WorkingDirectory</key>
+    <string>/Users/egg/.openclaw/workspace/shared/stock-system/scripts</string>
+    
+    <key>RunAtLoad</key>
+    <true/>
+    
+    <key>KeepAlive</key>
+    <true/>
+    
+    <key>StandardOutPath</key>
+    <string>/Users/egg/.openclaw/workspace/agents/stock-coordinator/data/logs/daemon-stdout.log</string>
+    
+    <key>StandardErrorPath</key>
+    <string>/Users/egg/.openclaw/workspace/agents/stock-coordinator/data/logs/daemon-stderr.log</string>
+    
+    <key>EnvironmentVariables</key>
+    <dict>
+        <key>PYTHONIOENCODING</key>
+        <string>utf-8</string>
+    </dict>
+</dict>
+</plist>

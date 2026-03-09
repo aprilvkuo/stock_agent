@@ -1,0 +1,4975 @@
+{
+  "created_at": "2026-03-08T14:48:36.016821",
+  "executions": [
+    {
+      "timestamp": "2026-03-08T14:48:36.016835",
+      "agent": "基本面 Agent",
+      "task": "分析 600519",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 120.5,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-08T14:48:36.017136",
+      "agent": "技术面 Agent",
+      "task": "分析 00700",
+      "steps_completed": [
+        "DO",
+        "CHECK"
+      ],
+      "duration_seconds": 60.0,
+      "compliant": false
+    },
+    {
+      "timestamp": "2026-03-08T15:04:05.121807",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 0.0007228851318359375,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-08T15:04:06.208064",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 0.0006630420684814453,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-08T15:09:06.256478",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 0.0007231235504150391,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-08T15:09:07.378778",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 0.0005748271942138672,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-08T15:14:07.488396",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 0.0007779598236083984,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-08T15:14:08.211120",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 0.0005650520324707031,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-08T15:21:09.310103",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 0.000720977783203125,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-08T15:21:11.406761",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 0.0006480216979980469,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-08T15:26:10.584535",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 0.0008950233459472656,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-08T15:26:12.669862",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 0.0006361007690429688,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-08T15:31:11.772532",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 0.0007538795471191406,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-08T15:31:13.659210",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 0.0005738735198974609,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-08T15:36:12.915941",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 0.0007872581481933594,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-08T15:36:14.783341",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 0.0006270408630371094,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-08T15:41:59.197764",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 0.0007448196411132812,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-08T15:42:00.994921",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 0.0007638931274414062,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-08T15:47:00.487782",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 0.000759124755859375,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-08T15:47:02.306273",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 0.0006411075592041016,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-08T15:52:01.830529",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 0.0007691383361816406,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-08T15:52:03.475515",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 0.0005981922149658203,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-08T16:01:02.360912",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 0.0007233619689941406,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-08T16:01:03.927709",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 0.0005960464477539062,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-08T16:06:03.667595",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 0.0007700920104980469,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-08T16:06:05.186770",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 0.0006427764892578125,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-08T16:13:30.609816",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 0.0007300376892089844,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-08T16:13:32.410072",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 0.0005712509155273438,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-08T16:18:31.851403",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 0.0007429122924804688,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-08T16:18:33.464691",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 0.0005908012390136719,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-08T16:23:33.030733",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 0.0007307529449462891,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-08T16:23:34.495373",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 0.0005879402160644531,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-08T16:29:38.148858",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 0.0007262229919433594,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-08T16:29:39.991654",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 0.0005650520324707031,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-08T16:34:39.263945",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 0.000701904296875,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-08T16:34:41.129591",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 0.0006821155548095703,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-08T16:39:40.464657",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 0.0007181167602539062,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-08T16:39:42.179768",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 0.0006020069122314453,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-08T16:44:41.797114",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 0.0008180141448974609,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-08T16:44:43.297198",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 0.0005741119384765625,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-08T16:49:42.994749",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 0.0008409023284912109,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-08T16:49:44.368254",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 0.0005729198455810547,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-08T16:51:41.208078",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 0.0005838871002197266,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-08T16:54:44.571079",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 0.000843048095703125,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-08T16:54:45.794331",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 0.0005831718444824219,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-08T16:56:42.748470",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 0.0005900859832763672,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-08T16:59:46.087587",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 0.0007421970367431641,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-08T16:59:47.245901",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 0.0006167888641357422,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-08T17:01:44.026292",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 0.0005817413330078125,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-08T17:04:47.654339",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 0.0008370876312255859,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-08T17:04:48.607527",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 0.0006847381591796875,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-08T17:06:45.337679",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 0.00075531005859375,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-08T17:09:49.230882",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 0.0008141994476318359,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-08T17:09:50.013095",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 0.0005698204040527344,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-08T17:11:46.747861",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 0.0006887912750244141,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-08T17:14:50.823112",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 0.000759124755859375,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-08T17:14:51.489066",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 0.0005769729614257812,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-08T17:16:48.010238",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 0.0006680488586425781,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-08T17:19:52.337248",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 0.0007150173187255859,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-08T17:19:53.005969",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 0.0005629062652587891,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-08T17:21:49.545536",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 0.0006811618804931641,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-08T17:24:53.786391",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 0.0008790493011474609,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-08T17:24:54.431944",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 0.0005660057067871094,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-08T17:26:51.008169",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 0.0006740093231201172,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-08T17:29:55.397308",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 0.0008111000061035156,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-08T17:29:55.706628",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 0.0005748271942138672,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-08T17:31:52.468588",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 0.0006799697875976562,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-08T17:34:57.080475",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 0.0006821155548095703,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-08T17:34:57.105152",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 0.0007250308990478516,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-08T17:36:54.027957",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 0.0006830692291259766,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-08T17:39:58.369670",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 0.0006871223449707031,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-08T17:39:58.394720",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 0.0007450580596923828,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-08T17:41:55.561911",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 0.0006661415100097656,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-08T17:44:59.916245",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 0.0007107257843017578,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-08T17:44:59.949060",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 0.0007231235504150391,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-08T17:46:57.013463",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 0.0006871223449707031,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-08T17:50:01.438912",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 0.0006887912750244141,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-08T17:50:01.463784",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 0.0007231235504150391,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-08T17:51:58.544569",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 0.0006892681121826172,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-08T17:55:02.838141",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 0.0007088184356689453,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-08T17:55:02.886655",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 0.0007460117340087891,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-08T17:57:00.018554",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 0.0006670951843261719,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-08T18:00:04.396682",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 0.0006966590881347656,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-08T18:00:04.421459",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 0.0007278919219970703,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-08T18:02:01.437950",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 0.0006699562072753906,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-08T18:05:05.931187",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 0.0006890296936035156,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-08T18:05:05.961797",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 0.0007359981536865234,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-08T18:07:02.885804",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 0.0006730556488037109,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-08T18:10:07.226264",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 0.0006651878356933594,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-08T18:10:07.286408",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 0.0008852481842041016,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-08T18:12:04.404310",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 0.0006878376007080078,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-08T18:15:08.749006",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 0.0006122589111328125,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-08T18:15:08.793329",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 0.0007002353668212891,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-08T18:17:05.721351",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 0.006224870681762695,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-08T18:20:10.278260",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 0.0008959770202636719,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-08T18:22:07.109177",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 0.0007002353668212891,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-08T18:25:11.522936",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 0.0006959438323974609,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-08T18:25:11.584538",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 0.0007290840148925781,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-08T18:30:49.939924",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 0.0007867813110351562,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-08T18:30:54.636008",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 0.0005738735198974609,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-08T18:39:28.765822",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 0.14228296279907227,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-08T18:39:42.367941",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 0.0007269382476806641,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-08T18:44:30.813269",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 0.0010421276092529297,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-08T18:44:44.186740",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 0.0007219314575195312,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-08T18:50:46.876316",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 0.000978231430053711,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-08T18:54:59.166416",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 0.0010960102081298828,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-08T18:55:43.152803",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 0.0002701282501220703,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-08T19:00:44.840186",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 0.0002582073211669922,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-08T19:05:46.603552",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 0.0002300739288330078,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-08T19:10:48.633410",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 0.00025177001953125,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-08T19:15:50.995378",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 0.0002570152282714844,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-08T19:20:52.568134",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 0.00029206275939941406,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-08T19:25:54.551441",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 0.0002460479736328125,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-08T19:30:56.796335",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 0.0002617835998535156,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-08T19:35:58.574535",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 0.00026702880859375,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-08T19:41:00.735713",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 0.00025081634521484375,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-08T19:46:02.578413",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 0.0002589225769042969,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-08T19:51:04.280009",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 0.0002663135528564453,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-08T19:56:06.562793",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 0.0003082752227783203,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-08T20:01:08.636277",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 0.00026416778564453125,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-08T20:09:29.127646",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 4.7206878662109375e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-08T20:14:30.099880",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 6.389617919921875e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-08T20:19:31.377740",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 4.673004150390625e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-08T20:24:32.145584",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 4.8160552978515625e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-08T20:29:33.170330",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 4.1961669921875e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-08T20:34:34.280294",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 5.1021575927734375e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-08T20:39:35.405206",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 4.410743713378906e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-08T20:44:36.277959",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 4.9114227294921875e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-08T20:49:37.423694",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 4.291534423828125e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-08T20:54:38.593525",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 5.5789947509765625e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-08T20:59:39.646715",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 4.887580871582031e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-08T21:04:40.538288",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 5.0067901611328125e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-08T21:09:41.612517",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 4.887580871582031e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-08T21:14:42.928167",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 4.8160552978515625e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-08T21:19:44.150027",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 4.410743713378906e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-08T21:24:45.509261",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 4.792213439941406e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-08T21:34:47.696120",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 4.696846008300781e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-08T21:39:48.954634",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 4.482269287109375e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-08T21:44:49.904464",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 4.7206878662109375e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-08T21:49:50.903621",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 4.506111145019531e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-08T21:54:52.157996",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 4.982948303222656e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-08T21:59:53.479406",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 3.600120544433594e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-08T22:04:54.866856",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 4.696846008300781e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-08T22:09:56.171474",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 5.030632019042969e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-08T22:14:57.366471",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 4.6253204345703125e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-08T22:19:58.545855",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 4.696846008300781e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-08T22:24:59.661916",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 4.8160552978515625e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-08T22:35:00.804380",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 4.410743713378906e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-08T22:40:01.908337",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 6.389617919921875e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-08T22:45:03.079970",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 6.198883056640625e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-08T22:50:04.377857",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 7.557868957519531e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-08T22:55:05.541125",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 4.506111145019531e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-08T23:00:06.603548",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 4.8160552978515625e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-08T23:05:08.008012",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 4.506111145019531e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-08T23:10:09.146419",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 4.38690185546875e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-08T23:15:10.374225",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 3.600120544433594e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-08T23:20:11.089203",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 4.38690185546875e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-08T23:25:12.189744",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 4.1961669921875e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-08T23:34:15.032052",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 4.315376281738281e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-08T23:39:16.103337",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 3.790855407714844e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-08T23:44:17.077416",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 3.719329833984375e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-08T23:49:18.387461",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 4.410743713378906e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-08T23:54:19.507882",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 4.696846008300781e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-08T23:59:20.347508",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 4.57763671875e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-09T00:04:21.724201",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 5.125999450683594e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-09T00:09:22.954132",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 4.267692565917969e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-09T00:14:24.230256",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 4.1961669921875e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-09T00:19:25.059384",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 4.696846008300781e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-09T00:24:26.085203",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 4.8160552978515625e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-09T00:29:27.053075",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 4.601478576660156e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-09T00:34:28.056363",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 4.506111145019531e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-09T00:39:29.181918",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 4.267692565917969e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-09T00:44:30.599283",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 4.8160552978515625e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-09T00:49:31.749086",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 4.38690185546875e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-09T00:54:32.947940",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 5.507469177246094e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-09T00:59:33.913544",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 3.719329833984375e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-09T01:04:35.296472",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 4.57763671875e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-09T01:09:36.589383",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 4.696846008300781e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-09T01:14:37.541950",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 4.792213439941406e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-09T01:19:38.971754",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 4.458427429199219e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-09T01:24:40.254777",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 4.1961669921875e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-09T01:29:41.581679",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 4.00543212890625e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-09T01:34:43.022217",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 4.315376281738281e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-09T01:39:44.390759",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 5.030632019042969e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-09T01:44:45.460448",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 5.078315734863281e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-09T01:49:46.581842",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 3.790855407714844e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-09T01:54:47.863879",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 4.291534423828125e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-09T01:59:49.016188",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 4.8160552978515625e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-09T02:04:50.201010",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 4.506111145019531e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-09T02:09:51.003583",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 5.078315734863281e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-09T02:14:52.063238",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 4.291534423828125e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-09T02:19:53.199960",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 4.601478576660156e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-09T02:24:54.194852",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 5.1975250244140625e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-09T02:29:55.322253",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 4.506111145019531e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-09T02:34:56.549859",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 4.601478576660156e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-09T02:39:57.912956",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 5.4836273193359375e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-09T02:44:59.014775",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 5.0067901611328125e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-09T02:49:59.930264",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 4.601478576660156e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-09T02:55:00.858855",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 4.1961669921875e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-09T03:00:02.045046",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 4.792213439941406e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-09T03:05:03.294738",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 4.601478576660156e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-09T03:10:04.517225",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 4.7206878662109375e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-09T03:15:05.595433",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 4.410743713378906e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-09T03:20:06.870561",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 4.887580871582031e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-09T03:25:08.238198",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 4.887580871582031e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-09T03:30:09.567132",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 4.7206878662109375e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-09T03:35:10.987760",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 2.5033950805664062e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-09T03:40:12.323499",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 4.887580871582031e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-09T03:45:13.788117",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 4.506111145019531e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-09T03:50:14.715222",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 4.601478576660156e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-09T03:55:15.909773",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 4.410743713378906e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-09T04:00:16.947859",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 4.38690185546875e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-09T04:05:18.269013",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 4.57763671875e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-09T04:10:19.526775",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 4.1961669921875e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-09T04:15:20.683271",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 5.0067901611328125e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-09T04:20:21.783715",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 4.291534423828125e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-09T04:25:23.010745",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 4.601478576660156e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-09T04:30:24.012221",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 5.2928924560546875e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-09T04:35:24.945583",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 5.0067901611328125e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-09T04:40:26.285553",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 4.1961669921875e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-09T04:45:27.367962",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 4.410743713378906e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-09T04:50:28.539321",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 4.506111145019531e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-09T04:55:29.803347",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 4.696846008300781e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-09T05:00:30.892723",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 5.030632019042969e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-09T05:05:32.287528",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 4.315376281738281e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-09T05:10:33.600625",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 5.078315734863281e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-09T05:15:34.643850",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 4.315376281738281e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-09T05:20:35.756983",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 4.291534423828125e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-09T05:25:37.026372",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 4.1961669921875e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-09T05:30:38.160150",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 4.506111145019531e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-09T05:35:39.465289",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 4.601478576660156e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-09T05:40:40.708507",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 4.506111145019531e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-09T05:45:41.878375",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 4.935264587402344e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-09T05:50:43.319567",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 5.078315734863281e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-09T05:55:44.547116",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 4.601478576660156e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-09T06:00:45.443979",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 4.57763671875e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-09T06:05:46.504818",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 3.814697265625e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-09T06:10:47.620828",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 3.814697265625e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-09T06:15:48.730485",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 4.887580871582031e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-09T06:20:49.906598",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 4.291534423828125e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-09T06:25:51.072920",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 3.886222839355469e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-09T06:30:52.418170",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 4.696846008300781e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-09T06:35:53.377672",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 4.124641418457031e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-09T06:40:54.518044",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 4.506111145019531e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-09T06:45:55.488746",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 4.887580871582031e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-09T06:50:56.491615",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 4.887580871582031e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-09T06:55:57.825067",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 0.0001308917999267578,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-09T07:00:58.966838",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 4.482269287109375e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-09T07:05:59.872784",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 4.410743713378906e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-09T07:11:00.745685",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 3.4809112548828125e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-09T07:16:02.230439",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 4.9114227294921875e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-09T07:21:03.378818",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 4.315376281738281e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-09T07:26:04.423989",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 5.0067901611328125e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-09T07:31:05.510014",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 5.0067901611328125e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-09T07:36:06.624977",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 3.409385681152344e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-09T07:41:07.752179",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 4.506111145019531e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-09T07:46:09.247942",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 4.506111145019531e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-09T07:51:10.410031",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 4.601478576660156e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-09T07:56:11.703087",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 4.100799560546875e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-09T08:01:12.783570",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 4.410743713378906e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-09T08:06:14.112166",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 4.410743713378906e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-09T08:11:15.122808",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 6.723403930664062e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-09T08:16:16.383832",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 3.981590270996094e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-09T08:21:17.632375",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 4.887580871582031e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-09T08:26:18.790765",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 3.7670135498046875e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-09T08:31:20.050644",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 5.412101745605469e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-09T08:36:21.282352",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 4.38690185546875e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-09T08:41:22.048600",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 3.62396240234375e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-09T08:46:23.374715",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 6.008148193359375e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-09T08:51:24.697223",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 3.3855438232421875e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-09T08:56:25.931431",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 4.220008850097656e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-09T09:01:26.824986",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 2.288818359375e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-09T09:06:27.948834",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 4.220008850097656e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-09T09:11:28.806027",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 4.100799560546875e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-09T09:16:30.115628",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 4.220008850097656e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-09T09:21:31.619019",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 3.4809112548828125e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-09T09:26:32.956369",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 4.029273986816406e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-09T09:31:34.124414",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 4.506111145019531e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-09T09:36:35.355318",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 2.7894973754882812e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-09T09:41:36.060209",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 2.6226043701171875e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-09T09:46:37.048324",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 4.6253204345703125e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-09T09:51:38.150053",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 4.00543212890625e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-09T09:56:39.055963",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 4.315376281738281e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-09T10:01:39.690550",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 3.790855407714844e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-09T10:06:40.985886",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 4.38690185546875e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-09T10:11:42.427625",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 3.361701965332031e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-09T10:16:43.595139",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 3.504753112792969e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-09T10:21:44.643056",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 3.0994415283203125e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-09T10:26:45.727044",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 3.910064697265625e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-09T10:31:46.960000",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 3.695487976074219e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-09T10:36:47.750036",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 3.790855407714844e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-09T10:41:48.511737",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 3.600120544433594e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-09T10:46:50.081630",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 2.6941299438476562e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-09T10:51:50.981308",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 3.1948089599609375e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-09T10:56:52.003362",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 3.719329833984375e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-09T11:01:52.690639",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 3.814697265625e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-09T11:06:53.560894",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 3.5762786865234375e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-09T11:11:54.457339",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 3.075599670410156e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-09T11:16:55.323175",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 4.7206878662109375e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-09T11:21:56.434332",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 3.814697265625e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-09T11:26:57.681236",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 3.886222839355469e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-09T11:31:58.361944",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 3.409385681152344e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-09T11:36:59.823776",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 3.1948089599609375e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-09T11:42:00.857220",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 3.504753112792969e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-09T11:47:01.895247",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 4.9114227294921875e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-09T11:52:03.206173",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 3.1948089599609375e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-09T11:57:04.362890",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 4.291534423828125e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-09T12:02:05.470270",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 3.3855438232421875e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-09T12:07:06.708900",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 5.602836608886719e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-09T12:12:07.796447",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 3.790855407714844e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-09T12:17:08.689286",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 3.409385681152344e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-09T12:22:09.509563",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 3.504753112792969e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-09T12:27:11.005637",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 4.1961669921875e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-09T12:32:11.947894",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 3.886222839355469e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-09T12:37:13.350340",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 3.2901763916015625e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-09T12:42:14.736157",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 3.266334533691406e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-09T12:47:16.084500",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 4.887580871582031e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-09T12:52:17.449838",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 3.0994415283203125e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-09T12:57:18.448049",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 3.719329833984375e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-09T13:02:19.204850",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 3.409385681152344e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-09T13:07:20.736391",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 3.314018249511719e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-09T13:12:21.444787",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 3.4809112548828125e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-09T13:17:22.726577",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 3.409385681152344e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-09T13:22:23.995894",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 3.504753112792969e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-09T13:27:25.256484",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 4.100799560546875e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-09T13:32:26.407952",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 3.62396240234375e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-09T13:37:27.676406",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 3.695487976074219e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-09T13:42:28.707762",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 3.409385681152344e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-09T13:47:29.965360",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 3.409385681152344e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-09T13:52:31.308763",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 3.910064697265625e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-09T13:57:32.196852",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 3.695487976074219e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-09T14:02:33.551947",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 3.5762786865234375e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-09T14:07:34.758392",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 3.1948089599609375e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-09T14:12:36.191861",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 3.695487976074219e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-09T14:17:37.433332",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 4.1961669921875e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-09T14:22:38.485542",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 4.1961669921875e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-09T14:27:39.395757",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 3.409385681152344e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-09T14:32:40.547564",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 4.291534423828125e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-09T14:37:41.579445",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 3.4809112548828125e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-09T14:42:42.584701",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 3.719329833984375e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-09T14:47:43.785018",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 4.410743713378906e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-09T14:52:45.332214",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 3.0994415283203125e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-09T14:57:46.199266",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 3.600120544433594e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-09T15:02:46.982715",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 3.600120544433594e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-09T15:07:48.497780",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 3.314018249511719e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-09T15:12:49.711197",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 3.600120544433594e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-09T15:17:51.050531",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 5.5789947509765625e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-09T15:22:52.067253",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 3.409385681152344e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-09T15:27:53.328374",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 3.528594970703125e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-09T15:32:54.287699",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 3.4809112548828125e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-09T15:37:55.093108",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 3.4809112548828125e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-09T15:42:55.929997",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 3.790855407714844e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-09T15:47:57.066827",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 3.5762786865234375e-05,
+      "compliant": true
+    },
+    {
+      "timestamp": "2026-03-09T15:52:58.135445",
+      "agent": "主 Agent",
+      "task": "协调股票分析",
+      "steps_completed": [
+        "UPDATE",
+        "READ",
+        "DO",
+        "CHECK",
+        "REVIEW"
+      ],
+      "duration_seconds": 3.314018249511719e-05,
+      "compliant": true
+    }
+  ],
+  "violations": [
+    {
+      "timestamp": "2026-03-08T14:48:36.017136",
+      "agent": "技术面 Agent",
+      "task": "分析 00700",
+      "missing_steps": [
+        "UPDATE",
+        "READ",
+        "REVIEW"
+      ]
+    }
+  ],
+  "stats": {
+    "total": 354,
+    "compliant": 353,
+    "violations": 1
+  }
+}
