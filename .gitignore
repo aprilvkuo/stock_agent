@@ -12,6 +12,13 @@
 .openclaw/
 .clawhub/
 
+# Draft area (optional - uncomment to exclude from git)
+# dev/drafts/
+# dev/experiments/
+
+# Backup
+.backup/
+
 # Temporary files
 tmp/
 *.tmp
