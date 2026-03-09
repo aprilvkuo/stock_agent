@@ -1,0 +1,23 @@
+{
+  "agent_id": "fundamental",
+  "agent_name": "基本面 Agent",
+  "agent_emoji": "📊",
+  "status": "busy",
+  "status_text": "🟡 忙碌中",
+  "todo_count": 1,
+  "doing_count": 0,
+  "done_count": 0,
+  "todo_list": [
+    {
+      "id": "issue-16",
+      "task": "[MIGRATED] [基本面 Agent] 分析 600519 贵州茅台财报",
+      "priority": "medium",
+      "status": "pending",
+      "url": "https://github.com/aprilvkuo/stock_agent/issues/16",
+      "created_at": "2026-03-09T14:04:02+00:00"
+    }
+  ],
+  "doing_list": [],
+  "last_sync": "2026-03-09T22:25:37.934957",
+  "github_label": "fundamental-agent"
+}
