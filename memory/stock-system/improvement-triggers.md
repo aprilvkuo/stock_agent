@@ -1167,3 +1167,55 @@
 **预计工作量**: 2-4 小时
 
 ---
+
+## IMPROVE-20260309184616 - 2026-03-09 18:46
+
+**优先级**: HIGH  
+**乙方**: programmer  
+**甲方**: coordinator  
+**服务类型**: code_structure  
+**评分**: 2/5.0 ⭐
+
+**问题描述**:
+当前工作区代码结构不够规范，需要明确草稿区和正式区的分离。shared/stock-system 和 memory/stock-system 需要规范化。
+
+**影响评估**:
+明显影响服务质量，需要优先改进
+
+**改进计划**:
+- [ ] 建立清晰的草稿区（dev/ 或 draft/）
+- [ ] 规范 shared/stock-system 目录结构
+- [ ] 规范 memory/stock-system 目录结构
+- [ ] 添加代码规范文档（CODE_STRUCTURE.md）
+- [ ] 添加 .gitignore 规则
+
+**截止日期**: 2026-03-12  
+**预计工作量**: 2-4 小时
+
+---
+
+## IMPROVE-20260309184708 - 2026-03-09 18:47
+
+**优先级**: HIGH  
+**乙方**: programmer  
+**甲方**: coordinator  
+**服务类型**: code_structure  
+**评分**: 2/5.0 ⭐
+
+**问题描述**:
+当前工作区代码结构不够规范，需要明确草稿区和正式区的分离。shared/stock-system 和 memory/stock-system 需要规范化。
+
+**影响评估**:
+明显影响服务质量，需要优先改进
+
+**改进计划**:
+- [ ] 建立清晰的草稿区（dev/ 或 draft/）
+- [ ] 规范 shared/stock-system 目录结构
+- [ ] 规范 memory/stock-system 目录结构
+- [ ] 添加代码规范文档（CODE_STRUCTURE.md）
+- [ ] 添加 .gitignore 规则
+
+**截止日期**: 2026-03-12  
+**预计工作量**: 2-4 小时
+
+---

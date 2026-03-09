@@ -271,7 +271,7 @@ class GitHubIssueManager:
 1. **接收任务** - @乙方 确认接收
 2. **创建 Branch** - `fix/{issue_id.lower()}`
 3. **解决问题** - 实施改进
-4. **创建 PR** - 关联此 Issue (`Closes #{issue_number}`)
+4. **创建 PR** - 关联此 Issue (`Closes #{{issue_number}}`)
 5. **Code Review** - 等待审核
 6. **Merge** - 合并后自动关闭
 
@@ -279,7 +279,7 @@ class GitHubIssueManager:
 
 **标签**: `improvement-ticket` `agent-feedback`
 
-> 💡 提示：完成改进后，请在 PR 描述中使用 `Closes #{issue_number}` 关联此 Issue
+> 💡 提示：完成改进后，请在 PR 描述中使用 `Closes #{{issue_number}}` 关联此 Issue
 """
         
         return body
@@ -421,16 +421,16 @@ if __name__ == '__main__':
             'date': datetime.now().isoformat()
         }
         
-        issue = create_improvement_issue(
-            provider_id='data-fetcher',
-            consumer_id='fundamental',
-            service_type='financial_data',
+        issue = issue_manager.create_improvement_issue(
+            provider_id="data-fetcher",
+            consumer_id="fundamental",
+            service_type="financial_data",
             rating=test_rating,
             improvement_plan=[
-                '添加 ROE 指标',
-                '添加毛利率指标',
-                '添加净利率指标',
-                '提升数据完整性至 95%+'
+                "添加 ROE 指标",
+                "添加毛利率指标",
+                "添加净利率指标",
+                "提升数据完整性至 95%+"
             ]
         )
         
