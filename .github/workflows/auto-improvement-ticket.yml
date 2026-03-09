@@ -1,28 +1,28 @@
-name: 🎫 自动改进工单创建
+name: Auto Improvement Ticket
 
 on:
   workflow_dispatch:
     inputs:
       provider:
-        description: '乙方 Agent ID (如：programmer)'
+        description: 'Provider Agent ID'
         required: true
         default: 'programmer'
       consumer:
-        description: '甲方 Agent ID (如：coordinator)'
+        description: 'Consumer Agent ID'
         required: true
         default: 'coordinator'
       service_type:
-        description: '服务类型'
+        description: 'Service Type'
         required: true
         default: 'code_structure'
       score:
-        description: '评分 (1-5)'
+        description: 'Score (1-5)'
         required: true
         default: '2'
       feedback:
-        description: '问题描述'
+        description: 'Feedback'
         required: true
-        default: '需要改进'
+        default: 'Needs improvement'
 
 permissions:
   issues: write
@@ -32,7 +32,7 @@ jobs:
   create-issue:
     runs-on: ubuntu-latest
     steps:
-      - name: 创建改进工单 Issue
+      - name: Create Issue
         uses: actions/github-script@v7
         with:
           script: |
@@ -42,20 +42,11 @@ jobs:
             const score = parseInt('${{ github.event.inputs.score }}');
             const feedback = '${{ github.event.inputs.feedback }}';
             
-            let priority, priorityLabel;
-            if (score <= 1) {
-              priority = 'CRITICAL';
-              priorityLabel = 'critical';
-            } else if (score <= 2) {
-              priority = 'HIGH';
-              priorityLabel = 'high-priority';
-            } else if (score <= 3) {
-              priority = 'MEDIUM';
-              priorityLabel = 'medium-priority';
-            } else {
-              priority = 'LOW';
-              priorityLabel = 'low-priority';
-            }
+            let priority;
+            if (score <= 1) priority = 'CRITICAL';
+            else if (score <= 2) priority = 'HIGH';
+            else if (score <= 3) priority = 'MEDIUM';
+            else priority = 'LOW';
             
             const now = new Date();
             const issueId = 'IMPROVE-' + now.toISOString().replace(/[-:T.]/g, '').slice(0, 14);
@@ -74,45 +65,46 @@ jobs:
             const providerGithub = AGENT_GITHUB[provider] || provider;
             const consumerGithub = AGENT_GITHUB[consumer] || consumer;
             
-            const issueBody = '# 🎫 改进工单：' + issueId + '\n\n' +
-              '**优先级**: ' + priority + '  \n' +
-              '**乙方**: @' + providerGithub + '  \n' +
-              '**甲方**: @' + consumerGithub + '  \n' +
-              '**服务类型**: `' + service_type + '`  \n' +
-              '**创建时间**: ' + now.toISOString() + '  \n' +
-              '**触发方式**: GitHub Actions 自动化\n\n' +
-              '---\n\n' +
-              '## ⭐ 总体评分\n\n' +
-              '**得分**: ' + score + '/5.0\n\n' +
-              '## 📝 问题描述\n\n' +
-              feedback + '\n\n' +
-              '## 💡 改进建议\n\n' +
-              '- [ ] 分析具体问题原因\n' +
-              '- [ ] 制定改进计划\n' +
-              '- [ ] 实施改进\n' +
-              '- [ ] 验证改进效果\n\n' +
-              '---\n\n' +
-              '## 📋 处理流程\n\n' +
-              '1. **接收任务** - @' + providerGithub + ' 确认接收\n' +
-              '2. **创建 Branch** - `fix/' + issueId.toLowerCase() + '`\n' +
-              '3. **解决问题** - 实施改进\n' +
-              '4. **创建 PR** - 关联此 Issue\n' +
-              '5. **Code Review** - 等待审核\n' +
-              '6. **Merge** - 合并后自动关闭\n\n' +
-              '---\n\n' +
-              '**标签**: `improvement-ticket` `agent-feedback` `automated`';
+            let issueBody = '# Improvement Ticket: ' + issueId + '\n\n';
+            issueBody += '**Priority**: ' + priority + '\n';
+            issueBody += '**Provider**: @' + providerGithub + '\n';
+            issueBody += '**Consumer**: @' + consumerGithub + '\n';
+            issueBody += '**Service Type**: `' + service_type + '`\n';
+            issueBody += '**Created**: ' + now.toISOString() + '\n';
+            issueBody += '**Trigger**: GitHub Actions\n\n';
+            issueBody += '---\n\n';
+            issueBody += '## Rating\n\n';
+            issueBody += '**Score**: ' + score + '/5.0\n\n';
+            issueBody += '## Issue Description\n\n';
+            issueBody += feedback + '\n\n';
+            issueBody += '## Action Items\n\n';
+            issueBody += '- [ ] Analyze the problem\n';
+            issueBody += '- [ ] Create improvement plan\n';
+            issueBody += '- [ ] Implement fixes\n';
+            issueBody += '- [ ] Verify results\n\n';
+            issueBody += '---\n\n';
+            issueBody += '## Workflow\n\n';
+            issueBody += '1. Accept task - @' + providerGithub + '\n';
+            issueBody += '2. Create branch - `fix/' + issueId.toLowerCase() + '`\n';
+            issueBody += '3. Implement fixes\n';
+            issueBody += '4. Create PR - Link this issue\n';
+            issueBody += '5. Code review\n';
+            issueBody += '6. Merge and close\n';
             
-            const labels = ['improvement-ticket', 'automated', priorityLabel];
+            const labels = ['improvement-ticket', 'automated'];
+            if (priority === 'CRITICAL') labels.push('critical');
+            else if (priority === 'HIGH') labels.push('high-priority');
+            else if (priority === 'MEDIUM') labels.push('medium-priority');
+            else labels.push('low-priority');
             
             const issue = await github.rest.issues.create({
               owner: context.repo.owner,
               repo: context.repo.repo,
-              title: '[' + priority + '] ' + providerGithub + ' 需要改进：' + service_type,
+              title: '[' + priority + '] ' + providerGithub + ' needs improvement: ' + service_type,
               body: issueBody,
               labels: labels
             });
             
-            console.log('✅ Issue 创建成功：#' + issue.data.number);
-            console.log('   标题：' + issue.data.title);
-            console.log('   创建者：' + issue.data.user.login);
-            console.log('   链接：' + issue.data.html_url);
+            console.log('Issue created: #' + issue.data.number);
+            console.log('Creator: ' + issue.data.user.login);
+            console.log('URL: ' + issue.data.html_url);
