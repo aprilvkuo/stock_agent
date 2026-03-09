@@ -1,0 +1,96 @@
+---
+name: 📋 任务工单
+description: 日常任务或定期工作
+title: "[TASK] 简短描述"
+labels: [task]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## 📋 任务工单
+        
+        用于分配日常任务、定期工作或其他需要完成的事项。
+
+  - type: textarea
+    id: task-description
+    attributes:
+      label: 📝 任务描述
+      description: 详细描述任务内容
+      placeholder: 请详细描述需要完成的任务
+    validations:
+      required: true
+
+  - type: textarea
+    id: objectives
+    attributes:
+      label: 🎯 目标
+      description: 任务完成后应达到的目标
+      placeholder: 任务完成后应该实现什么？
+    validations:
+      required: true
+
+  - type: dropdown
+    id: responsible-agent
+    attributes:
+      label: 🤖 负责方
+      description: 选择主要负责的 Agent
+      options:
+        - programmer-agent
+        - fundamental-agent
+        - technical-agent
+        - sentiment-agent
+        - coordinator-agent
+        - qa-agent
+        - cio-agent
+        - data-fetcher-agent
+        - multiple-agents
+    validations:
+      required: true
+
+  - type: textarea
+    id: completion-criteria
+    attributes:
+      label: ✅ 完成标准
+      description: 列出所有必须满足的完成标准
+      placeholder: |
+        - [ ] 标准 1
+        - [ ] 标准 2
+        - [ ] 标准 3
+      render: markdown
+    validations:
+      required: true
+
+  - type: input
+    id: deadline
+    attributes:
+      label: ⏰ 截止时间
+      description: 格式：YYYY-MM-DD
+      placeholder: "2026-03-15"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: priority
+    attributes:
+      label: 🔴 优先级
+      description: 选择任务优先级
+      options:
+        - P0 - 紧急且重要
+        - P1 - 重要
+        - P2 - 普通
+        - P3 - 低优先级
+      default: P2 - 普通
+    validations:
+      required: true
+
+  - type: textarea
+    id: resources
+    attributes:
+      label: 📎 相关资源
+      description: 相关链接、文档、参考资料等
+      placeholder: |
+        - 文档链接
+        - 相关 Issue
+        - 参考资料
+    validations:
+      required: false

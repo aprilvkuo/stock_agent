@@ -1,0 +1,36 @@
+name: Issue 自动化处理
+
+on:
+  issues:
+    types: [opened, labeled, assigned]
+
+jobs:
+  process-issue:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: 设置 Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      
+      - name: 安装依赖
+        run: |
+          pip install PyGithub python-dotenv
+      
+      - name: 处理新 Issue
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPO: ${{ github.repository }}
+        run: |
+          python scripts/issue_tracker.py --auto-assign
+      
+      - name: 通知负责 Agent
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPO: ${{ github.repository }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+        run: |
+          python scripts/notify_agent.py --issue-number $ISSUE_NUMBER

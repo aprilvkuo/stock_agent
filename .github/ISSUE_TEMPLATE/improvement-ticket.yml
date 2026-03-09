@@ -1,87 +1,89 @@
 ---
-name: 🎫 改进工单
-description: Agent 服务质量改进工单（低分自动触发）
-title: "[优先级] @Agent 需要改进：服务类型"
-labels: ["improvement-ticket", "agent-feedback"]
+name: 🚀 改进工单
+description: Agent 自我改进或系统优化
+title: "[IMPROVE] 简短描述"
+labels: [improvement-ticket]
 body:
   - type: markdown
     attributes:
       value: |
-        ## 🎫 改进工单
+        ## 🎯 改进工单
         
-        此模板用于 Agent 服务质量改进工单。
-        **注意**: 大部分改进工单由系统自动创建，无需手动填写。
-  
-  - type: dropdown
-    id: priority
-    attributes:
-      label: 优先级
-      description: 根据评分确定优先级
-      options:
-        - 🟡 Low (评分 3-4)
-        - 🟠 Medium (评分 2-3)
-        - 🔴 High (评分 1-2)
-        - 🚨 Critical (评分 0-1)
-      default: 1
-    validations:
-      required: true
-  
-  - type: input
-    id: provider
-    attributes:
-      label: 乙方 Agent
-      description: 需要改进的 Agent
-      placeholder: "e.g., data-fetcher"
-    validations:
-      required: true
-  
-  - type: input
-    id: consumer
-    attributes:
-      label: 甲方 Agent
-      description: 提出改进的 Agent
-      placeholder: "e.g., fundamental"
-    validations:
-      required: true
-  
-  - type: input
-    id: service-type
-    attributes:
-      label: 服务类型
-      description: 服务类型
-      placeholder: "e.g., financial_data, code_implementation"
-    validations:
-      required: true
-  
+        请详细描述需要改进的内容，帮助负责方快速理解任务。
+
   - type: textarea
-    id: problem
+    id: improvement-goal
     attributes:
-      label: 问题描述
-      description: 详细描述问题
-      placeholder: "数据缺少关键指标..."
-    validations:
-      required: true
-  
-  - type: textarea
-    id: suggestions
-    attributes:
-      label: 改进建议
-      description: 具体改进建议（每条一行）
+      label: 改进目标
+      description: 描述需要改进的内容
       placeholder: |
-        - 添加 ROE 指标
-        - 添加毛利率指标
-        - 提升数据完整性
+        例如：
+        - 优化情绪 Agent 的分析准确率
+        - 添加新的数据源
+        - 改进代码结构
+    validations:
+      required: true
+
+  - type: textarea
+    id: current-problems
+    attributes:
+      label: 📊 当前问题
+      description: 描述当前存在的问题或不足
+      placeholder: 当前系统存在什么问题？为什么需要改进？
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected-results
+    attributes:
+      label: ✅ 预期结果
+      description: 改进后应达到的效果
+      placeholder: |
+        - 准确率从 X% 提升到 Y%
+        - 响应时间减少 X%
+        - 支持新的功能 Z
+    validations:
+      required: true
+
+  - type: dropdown
+    id: responsible-agent
+    attributes:
+      label: 🤖 负责方
+      description: 选择主要负责的 Agent
+      options:
+        - programmer-agent
+        - fundamental-agent
+        - technical-agent
+        - sentiment-agent
+        - coordinator-agent
+        - qa-agent
+        - cio-agent
+        - multiple-agents
+    validations:
+      required: true
+
+  - type: textarea
+    id: implementation-suggestions
+    attributes:
+      label: 📝 实现建议
+      description: 可选 - 提供实现思路或建议
+      placeholder: 如果有实现思路，请在这里描述
     validations:
       required: false
-  
-  - type: dropdown
-    id: auto-created
+
+  - type: input
+    id: deadline
     attributes:
-      label: 是否自动创建
-      description: 是否由系统自动创建
-      options:
-        - "是"
-        - "否"
-      default: "是"
+      label: ⏰ 截止时间
+      description: 可选 - 格式：YYYY-MM-DD
+      placeholder: "2026-03-15"
     validations:
-      required: true
+      required: false
+
+  - type: textarea
+    id: additional-context
+    attributes:
+      label: 📎 附加信息
+      description: 任何相关的背景信息、文档链接等
+    validations:
+      required: false
