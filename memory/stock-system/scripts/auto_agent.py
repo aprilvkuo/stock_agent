@@ -13,6 +13,10 @@ import subprocess
 import re
 from concurrent.futures import ThreadPoolExecutor, as_completed
 
+# 导入 Git 版本控制
+sys.path.insert(0, os.path.dirname(__file__))
+from git_version_control import GitVersionControl
+
 # 评级转分数（全局常量）
 rating_to_score = {
     '买入': 80,
@@ -894,10 +898,13 @@ def analyze_stock_parallel(stock_code):
 
 
 def analyze_stock(stock_code):
-    """分析单只股票（v1.1 并发优化版）"""
+    """分析单只股票（v1.1 并发优化版 + Git 版本控制）"""
     print(f"\n{'='*60}")
     print(f"📊 分析股票：{stock_code}")
     print(f"{'='*60}\n")
+    
+    # 初始化 Git 控制器
+    git = GitVersionControl()
     
     # Step 1: 获取真实数据
     print("Step 1: 获取真实数据...")
@@ -951,6 +958,17 @@ def analyze_stock(stock_code):
     update_performance_tracker()
     print(f"✅ 已更新")
     
+    # Step 7: Git 提交（v1.7 新增）
+    print("\nStep 7: Git 版本控制...")
+    stock_name = data.get('stock_name', stock_code)
+    rating = decision['rating']
+    commit_msg = f"分析 {stock_name}({stock_code}) - 评级：{rating}"
+    git_record = git.commit("协调 Agent", commit_msg, auto_push=True)
+    if git_record:
+        print(f"✅ Git 提交：{git_record['hash'][:8]}")
+    else:
+        print(f"⚠️ Git 提交跳过（无变更或失败）")
+    
     print(f"\n{'='*60}")
     print(f"✅ {stock_code} 分析完成！（总耗时：{elapsed:.2f}秒）")
     print(f"{'='*60}\n")
@@ -959,24 +977,39 @@ def analyze_stock(stock_code):
 
 
 def run_daily_validation():
-    """执行每日验证"""
+    """执行每日验证（v1.7 新增 Git 版本控制）"""
     print(f"\n{'='*60}")
     print(f"📊 复盘 Agent - 每日验证")
     print(f"{'='*60}\n")
+    
+    # 初始化 Git 控制器
+    git = GitVersionControl()
     
     result = subprocess.run(
         ['python3', 'scripts/validate_predictions.py'],
         cwd=STOCK_SYSTEM
     )
     
+    # Git 提交验证结果
+    today = datetime.now().strftime('%Y-%m-%d')
+    commit_msg = f"每日验证 ({today})"
+    git_record = git.commit("系统 Agent", commit_msg, auto_push=True)
+    if git_record:
+        print(f"✅ Git 提交：{git_record['hash'][:8]}")
+    else:
+        print(f"⚠️ Git 提交跳过（无变更或失败）")
+    
     return result.returncode == 0
 
 
 def run_weekly_review():
-    """执行周度复盘"""
+    """执行周度复盘（v1.7 新增 Git 版本控制）"""
     print(f"\n{'='*60}")
     print(f"📊 复盘 Agent - 周度复盘")
     print(f"{'='*60}\n")
+    
+    # 初始化 Git 控制器
+    git = GitVersionControl()
     
     today = datetime.now()
     week_start = today - timedelta(days=today.weekday())
@@ -1110,6 +1143,15 @@ def run_weekly_review():
     print(f"   分析次数：{analysis_count}")
     print(f"   验证次数：{validated_count}")
     print(f"   准确率：{accuracy:.1f}%")
+    
+    # 5. Git 提交（v1.7 新增）
+    print("\nStep 5: Git 版本控制...")
+    commit_msg = f"周度复盘报告 ({week_start.strftime('%m-%d')}~{today.strftime('%m-%d')}) - 准确率：{accuracy:.1f}%"
+    git_record = git.commit("系统 Agent", commit_msg, auto_push=True)
+    if git_record:
+        print(f"✅ Git 提交：{git_record['hash'][:8]}")
+    else:
+        print(f"⚠️ Git 提交跳过（无变更或失败）")
     
     return report_path
 

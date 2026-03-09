@@ -1,0 +1,213 @@
+{
+  "id": "IMPROVE-20260309160744",
+  "type": "urgent_task",
+  "priority": "high",
+  "status": "open",
+  "created_at": "2026-03-09T16:07:44.826074",
+  "updated_at": "2026-03-09T16:07:44.826074",
+  "closed_at": null,
+  "provider": "qa",
+  "consumer": "coordinator",
+  "service_type": "urgent_task",
+  "trigger_rating": {
+    "overall_score": 0,
+    "scores": {},
+    "feedback": "用户任务：工作量统计优化 + 网页导航改造",
+    "suggestions": [
+      "全面测试工单系统的筛选、搜索、更新功能"
+    ]
+  },
+  "issue": {
+    "description": "用户任务：工作量统计优化 + 网页导航改造",
+    "scores": {},
+    "feedback": "用户任务：工作量统计优化 + 网页导航改造",
+    "impact": "严重影响服务质量，需要立即改进"
+  },
+  "improvement_plan": {
+    "actions": [
+      {
+        "task": "开始任务",
+        "status": "pending",
+        "assignee": "qa",
+        "due_date": "2026-03-11",
+        "priority": "high"
+      },
+      {
+        "task": "实施方案",
+        "status": "pending",
+        "assignee": "qa",
+        "due_date": "2026-03-11",
+        "priority": "high"
+      },
+      {
+        "task": "自测",
+        "status": "pending",
+        "assignee": "qa",
+        "due_date": "2026-03-11",
+        "priority": "medium"
+      },
+      {
+        "task": "提交验收",
+        "status": "pending",
+        "assignee": "qa",
+        "due_date": "2026-03-11",
+        "priority": "medium"
+      }
+    ],
+    "estimated_effort": "2小时",
+    "deadline": "2026-03-11",
+    "actual_completion": null
+  },
+  "progress": [
+    {
+      "date": "2026-03-09T16:07:44.808500",
+      "action": "ticket_created",
+      "note": "工单创建，优先级 critical"
+    },
+    {
+      "date": "2026-03-09T16:07:44.809513",
+      "action": "urgent_task_assigned",
+      "note": "🔴 紧急任务分配给 qa"
+    },
+    {
+      "date": "2026-03-09T16:07:44.810148",
+      "action": "ticket_created",
+      "note": "工单创建，优先级 critical"
+    },
+    {
+      "date": "2026-03-09T16:07:44.810838",
+      "action": "urgent_task_assigned",
+      "note": "🔴 紧急任务分配给 coordinator"
+    },
+    {
+      "date": "2026-03-09T16:07:44.811443",
+      "action": "ticket_created",
+      "note": "工单创建，优先级 critical"
+    },
+    {
+      "date": "2026-03-09T16:07:44.812136",
+      "action": "urgent_task_assigned",
+      "note": "🔴 紧急任务分配给 programmer"
+    },
+    {
+      "date": "2026-03-09T16:07:44.812765",
+      "action": "ticket_created",
+      "note": "工单创建，优先级 critical"
+    },
+    {
+      "date": "2026-03-09T16:07:44.813410",
+      "action": "urgent_task_assigned",
+      "note": "🔴 紧急任务分配给 qa"
+    },
+    {
+      "date": "2026-03-09T16:07:44.814027",
+      "action": "ticket_created",
+      "note": "工单创建，优先级 critical"
+    },
+    {
+      "date": "2026-03-09T16:07:44.814684",
+      "action": "urgent_task_assigned",
+      "note": "🔴 紧急任务分配给 programmer"
+    },
+    {
+      "date": "2026-03-09T16:07:44.815264",
+      "action": "ticket_created",
+      "note": "工单创建，优先级 critical"
+    },
+    {
+      "date": "2026-03-09T16:07:44.815902",
+      "action": "urgent_task_assigned",
+      "note": "🔴 紧急任务分配给 programmer"
+    },
+    {
+      "date": "2026-03-09T16:07:44.816492",
+      "action": "ticket_created",
+      "note": "工单创建，优先级 critical"
+    },
+    {
+      "date": "2026-03-09T16:07:44.817132",
+      "action": "urgent_task_assigned",
+      "note": "🔴 紧急任务分配给 programmer"
+    },
+    {
+      "date": "2026-03-09T16:07:44.817744",
+      "action": "ticket_created",
+      "note": "工单创建，优先级 critical"
+    },
+    {
+      "date": "2026-03-09T16:07:44.818389",
+      "action": "urgent_task_assigned",
+      "note": "🔴 紧急任务分配给 programmer"
+    },
+    {
+      "date": "2026-03-09T16:07:44.819670",
+      "action": "ticket_created",
+      "note": "工单创建，优先级 critical"
+    },
+    {
+      "date": "2026-03-09T16:07:44.820347",
+      "action": "urgent_task_assigned",
+      "note": "🔴 紧急任务分配给 programmer"
+    },
+    {
+      "date": "2026-03-09T16:07:44.820980",
+      "action": "ticket_created",
+      "note": "工单创建，优先级 critical"
+    },
+    {
+      "date": "2026-03-09T16:07:44.821600",
+      "action": "urgent_task_assigned",
+      "note": "🔴 紧急任务分配给 programmer"
+    },
+    {
+      "date": "2026-03-09T16:07:44.822192",
+      "action": "ticket_created",
+      "note": "工单创建，优先级 critical"
+    },
+    {
+      "date": "2026-03-09T16:07:44.822828",
+      "action": "urgent_task_assigned",
+      "note": "🔴 紧急任务分配给 programmer"
+    },
+    {
+      "date": "2026-03-09T16:07:44.823424",
+      "action": "ticket_created",
+      "note": "工单创建，优先级 critical"
+    },
+    {
+      "date": "2026-03-09T16:07:44.824119",
+      "action": "urgent_task_assigned",
+      "note": "🔴 紧急任务分配给 programmer"
+    },
+    {
+      "date": "2026-03-09T16:07:44.824769",
+      "action": "ticket_created",
+      "note": "工单创建，优先级 critical"
+    },
+    {
+      "date": "2026-03-09T16:07:44.825450",
+      "action": "urgent_task_assigned",
+      "note": "🔴 紧急任务分配给 programmer"
+    },
+    {
+      "date": "2026-03-09T16:07:44.826079",
+      "action": "ticket_created",
+      "note": "工单创建，优先级 critical"
+    },
+    {
+      "date": "2026-03-09T16:07:44.826752",
+      "action": "urgent_task_assigned",
+      "note": "🔴 紧急任务分配给 qa"
+    }
+  ],
+  "verification": {
+    "verified": false,
+    "verified_by": "",
+    "verified_at": null,
+    "new_rating": null
+  },
+  "task_id": "TICKET-007",
+  "task_title": "测试工单系统功能",
+  "task_description": "全面测试工单系统的筛选、搜索、更新功能",
+  "estimated_hours": 2
+}

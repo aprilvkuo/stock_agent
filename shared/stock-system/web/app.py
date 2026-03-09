@@ -386,6 +386,11 @@ def index():
     """主页 - 监控大盘"""
     return render_template('index.html')
 
+@app.route('/tickets')
+def tickets():
+    """工单系统页面"""
+    return render_template('tickets.html')
+
 @app.route('/api/data')
 def api_data():
     """API - 完整数据"""
