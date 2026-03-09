@@ -1,0 +1,87 @@
+name: 🎫 Issue 自动通知
+
+on:
+  issues:
+    types: [opened, labeled, assigned]
+
+jobs:
+  notify-agent:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 解析 Issue 信息
+        id: parse
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const issue = context.payload.issue;
+            const labels = issue.labels.map(l => l.name).join(', ');
+            const assignees = issue.assignees.map(a => a.login).join(', ');
+            
+            // 提取工单 ID
+            const issueIdMatch = issue.body.match(/IMPROVE-(\d+)/);
+            const issueId = issueIdMatch ? `IMPROVE-${issueIdMatch[1]}` : 'N/A';
+            
+            // 提取优先级
+            const priorityMatch = issue.body.match(/\*\*优先级\*\*: ([A-Z]+)/);
+            const priority = priorityMatch ? priorityMatch[1] : 'MEDIUM';
+            
+            // 提取乙方
+            const providerMatch = issue.body.match(/\*\*乙方\*\*: @([^\s]+)/);
+            const provider = providerMatch ? providerMatch[1] : 'unknown';
+            
+            console.log(`issue_id=${issueId}`);
+            console.log(`priority=${priority}`);
+            console.log(`provider=${provider}`);
+            console.log(`labels=${labels}`);
+            console.log(`assignees=${assignees}`);
+            
+            // 设置输出
+            core.setOutput('issue_id', issueId);
+            core.setOutput('priority', priority);
+            core.setOutput('provider', provider);
+      
+      - name: 发送通知
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const issue = context.payload.issue;
+            const provider = '${{ steps.parse.outputs.provider }}';
+            const issueId = '${{ steps.parse.outputs.issue_id }}';
+            const priority = '${{ steps.parse.outputs.priority }}';
+            
+            // 创建通知评论
+            const comment = `
+            ## 🤖 Agent 通知
+            
+            **工单 ID**: ${issueId}  
+            **优先级**: ${priority}  
+            **负责人**: @${provider}
+            
+            ### 📋 处理流程
+            
+            1. **确认接收** - 回复确认接收任务
+            2. **创建 Branch** - \`fix/${issueId.toLowerCase()}\`
+            3. **实施改进** - 解决问题
+            4. **创建 PR** - 关联此 Issue (\`Closes #${issue.number}\`)
+            5. **等待审核** - Code Review
+            6. **合并关闭** - Merge 后自动关闭
+            
+            ### 💡 提示
+            
+            - 如有疑问，请在此 Issue 中评论
+            - 完成后请创建 PR 并关联此 Issue
+            - 紧急情况请联系 @coordinator-agent
+            
+            ---
+            *此消息由自动化系统发送*
+            `;
+            
+            // 添加评论
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: issue.number,
+              body: comment
+            });
+            
+            console.log(`✅ 通知已发送给 @${provider}`);
