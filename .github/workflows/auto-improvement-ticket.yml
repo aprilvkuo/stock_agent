@@ -5,11 +5,11 @@ on:
   workflow_dispatch:
     inputs:
       provider:
-        description: '乙方 Agent ID'
+        description: '乙方 Agent ID (如：programmer)'
         required: true
         default: 'programmer'
       consumer:
-        description: '甲方 Agent ID'
+        description: '甲方 Agent ID (如：coordinator)'
         required: true
         default: 'coordinator'
       service_type:
@@ -24,79 +24,44 @@ on:
         description: '问题描述'
         required: true
         default: '需要改进'
-  
-  # 定时触发（每天检查）
-  schedule:
-    - cron: '0 9 * * *'  # 每天 9:00 UTC
-  
-  # 从本地脚本触发（通过 repository_dispatch）
-  repository_dispatch:
-    types: [create-improvement-ticket]
+
+permissions:
+  issues: write
+  contents: read
 
 jobs:
   create-issue:
     runs-on: ubuntu-latest
     steps:
-      - name: 解析输入
-        id: parse
-        uses: actions/github-script@v7
-        with:
-          script: |
-            // 从不同来源获取数据
-            let provider, consumer, service_type, score, feedback;
-            
-            if (context.eventName === 'workflow_dispatch') {
-              provider = context.payload.inputs.provider;
-              consumer = context.payload.inputs.consumer;
-              service_type = context.payload.inputs.service_type;
-              score = parseInt(context.payload.inputs.score);
-              feedback = context.payload.inputs.feedback;
-            } else if (context.eventName === 'repository_dispatch') {
-              const data = context.payload.client_payload;
-              provider = data.provider;
-              consumer = data.consumer;
-              service_type = data.service_type;
-              score = data.score;
-              feedback = data.feedback;
-            } else {
-              // 定时触发时，可以读取文件或其他逻辑
-              provider = 'programmer';
-              consumer = 'coordinator';
-              service_type = 'code_review';
-              score = 2;
-              feedback = '定期检查发现的改进项';
-            }
-            
-            // 确定优先级
-            let priority;
-            if (score <= 1) priority = 'critical';
-            else if (score <= 2) priority = 'high';
-            else if (score <= 3) priority = 'medium';
-            else priority = 'low';
-            
-            // 生成工单 ID
-            const issueId = `IMPROVE-${new Date().toISOString().replace(/[-:T.]/g, '').slice(0, 14)}`;
-            
-            // 设置输出
-            core.setOutput('provider', provider);
-            core.setOutput('consumer', consumer);
-            core.setOutput('service_type', service_type);
-            core.setOutput('score', score);
-            core.setOutput('priority', priority);
-            core.setOutput('issue_id', issueId);
-            core.setOutput('feedback', feedback);
-      
       - name: 创建改进工单 Issue
         uses: actions/github-script@v7
         with:
           script: |
-            const provider = '${{ steps.parse.outputs.provider }}';
-            const consumer = '${{ steps.parse.outputs.consumer }}';
-            const service_type = '${{ steps.parse.outputs.service_type }}';
-            const score = ${{ steps.parse.outputs.score }};
-            const priority = '${{ steps.parse.outputs.priority }}';
-            const issueId = '${{ steps.parse.outputs.issue_id }}';
-            const feedback = '${{ steps.parse.outputs.feedback }}';
+            const provider = '${{ github.event.inputs.provider }}';
+            const consumer = '${{ github.event.inputs.consumer }}';
+            const service_type = '${{ github.event.inputs.service_type }}';
+            const score = parseInt('${{ github.event.inputs.score }}');
+            const feedback = '${{ github.event.inputs.feedback }}';
+            
+            // 确定优先级
+            let priority, priorityLabel;
+            if (score <= 1) {
+              priority = 'CRITICAL';
+              priorityLabel = '🚨 critical';
+            } else if (score <= 2) {
+              priority = 'HIGH';
+              priorityLabel = '🔴 high-priority';
+            } else if (score <= 3) {
+              priority = 'MEDIUM';
+              priorityLabel = '🟠 medium-priority';
+            } else {
+              priority = 'LOW';
+              priorityLabel = '🟡 low-priority';
+            }
+            
+            // 生成工单 ID
+            const now = new Date();
+            const issueId = `IMPROVE-${now.toISOString().replace(/[-:T.]/g, '').slice(0, 14)}`;
             
             // Agent GitHub 映射
             const AGENT_GITHUB = {
@@ -114,64 +79,59 @@ jobs:
             const consumerGithub = AGENT_GITHUB[consumer] || consumer;
             
             // 生成 Issue 内容
-            const issueBody = `
-            # 🎫 改进工单：${issueId}
-            
-            **优先级**: ${priority === 'critical' ? '🚨 CRITICAL' : priority === 'high' ? '🔴 HIGH' : priority === 'medium' ? '🟠 MEDIUM' : '🟡 LOW'}  
-            **乙方**: @${providerGithub}  
-            **甲方**: @${consumerGithub}  
-            **服务类型**: \`${service_type}\`  
-            **创建时间**: ${new Date().toISOString()}  
-            **触发方式**: GitHub Actions 自动化
-            
-            ---
-            
-            ## ⭐ 总体评分
-            
-            **得分**: ${score}/5.0 ${'⭐'.repeat(score)}${'☆'.repeat(5-score)}
-            
-            ## 📝 问题描述
-            
-            ${feedback}
-            
-            ## 💡 改进建议
-            
-            - [ ] 分析具体问题原因
-            - [ ] 制定改进计划
-            - [ ] 实施改进
-            - [ ] 验证改进效果
-            
-            ---
-            
-            ## 📋 处理流程
-            
-            1. **接收任务** - @${providerGithub} 确认接收
-            2. **创建 Branch** - \`fix/${issueId.toLowerCase()}\`
-            3. **解决问题** - 实施改进
-            4. **创建 PR** - 关联此 Issue (\`Closes #{{issue_number}}\`)
-            5. **Code Review** - 等待审核
-            6. **Merge** - 合并后自动关闭
-            
-            ---
-            
-            **标签**: \`improvement-ticket\` \`agent-feedback\` \`automated\`
-            
-            > 💡 提示：完成改进后，请在 PR 描述中使用 \`Closes #\` 关联此 Issue
-            `;
+            const issueBody = `# 🎫 改进工单：${issueId}
+
+**优先级**: ${priority}  
+**乙方**: @${providerGithub}  
+**甲方**: @${consumerGithub}  
+**服务类型**: \`${service_type}\`  
+**创建时间**: ${now.toISOString()}  
+**触发方式**: GitHub Actions 自动化
+
+---
+
+## ⭐ 总体评分
+
+**得分**: ${score}/5.0 ${'⭐'.repeat(score)}${'☆'.repeat(5-score)}
+
+## 📝 问题描述
+
+${feedback}
+
+## 💡 改进建议
+
+- [ ] 分析具体问题原因
+- [ ] 制定改进计划
+- [ ] 实施改进
+- [ ] 验证改进效果
+
+---
+
+## 📋 处理流程
+
+1. **接收任务** - @${providerGithub} 确认接收
+2. **创建 Branch** - \`fix/${issueId.toLowerCase()}\`
+3. **解决问题** - 实施改进
+4. **创建 PR** - 关联此 Issue (\`Closes #{{issue_number}}\`)
+5. **Code Review** - 等待审核
+6. **Merge** - 合并后自动关闭
+
+---
+
+**标签**: \`improvement-ticket\` \`agent-feedback\` \`automated\`
+
+> 💡 提示：完成改进后，请在 PR 描述中使用 \`Closes #\` 关联此 Issue
+`;
             
             // 确定 Label
             const labels = ['improvement-ticket', 'automated'];
-            
-            if (priority === 'critical') labels.push('🚨 critical');
-            else if (priority === 'high') labels.push('🔴 high-priority');
-            else if (priority === 'medium') labels.push('🟠 medium-priority');
-            else labels.push('🟡 low-priority');
+            if (priorityLabel) labels.push(priorityLabel);
             
             // 创建 Issue
             const issue = await github.rest.issues.create({
               owner: context.repo.owner,
               repo: context.repo.repo,
-              title: `[${priority.toUpperCase()}] ${providerGithub} 需要改进：${service_type}`,
+              title: `[${priority}] ${providerGithub} 需要改进：${service_type}`,
               body: issueBody,
               labels: labels
             });
@@ -180,7 +140,3 @@ jobs:
             console.log(`   标题：${issue.data.title}`);
             console.log(`   创建者：${issue.data.user.login}`);
             console.log(`   链接：${issue.data.html_url}`);
-            
-            // 输出结果
-            core.setOutput('issue_number', issue.data.number);
-            core.setOutput('issue_url', issue.data.html_url);
