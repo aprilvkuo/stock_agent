@@ -26,10 +26,10 @@
 ### 方式 1: 自动选择（推荐）
 
 ```python
-from agents.stock_programmer.ai_tool_selector import ai_do
+from agents.stock_programmer.ai_coding import ai_coding
 
 # 简单描述任务，AI 会自动选择最合适的工具
-result = ai_do("帮我重构这个文件，优化代码结构")
+result = ai_coding("帮我重构这个文件，优化代码结构")
 ```
 
 ### 方式 2: 手动指定
@@ -53,7 +53,7 @@ result = sessions_spawn(
 ### 场景 1: 代码重构
 
 ```python
-ai_do(
+ai_coding(
     "重构 auto_agent.py，提取公共函数，添加类型注解",
     files_count=1,
     code_lines=500
@@ -64,7 +64,7 @@ ai_do(
 ### 场景 2: Bug 修复
 
 ```python
-ai_do(
+ai_coding(
     "修复 GitHub Actions 工作流的 YAML 语法错误",
     files_count=1,
     code_lines=50
@@ -75,7 +75,7 @@ ai_do(
 ### 场景 3: 简单脚本
 
 ```python
-ai_do(
+ai_coding(
     "创建一个测试脚本，验证 API 连接",
     files_count=1,
     code_lines=30
@@ -86,7 +86,7 @@ ai_do(
 ### 场景 4: 技术调研
 
 ```python
-ai_do(
+ai_coding(
     "调研最新的 Python 异步框架，对比性能",
     files_count=0,
     code_lines=0

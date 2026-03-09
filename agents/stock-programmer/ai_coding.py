@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-程序员 Agent - AI 工具选择器
-根据任务复杂度自动选择最合适的 AI 工具
+程序员 Agent - AI Coding 工具
+根据任务复杂度自动选择最合适的 AI 工具（Codex/Claude Code 等）
 """
 
 import os
@@ -19,8 +19,8 @@ class TaskComplexity(Enum):
     RESEARCH = "research"      # 研究型：需要调研
 
 
-class AIToolSelector:
-    """AI 工具选择器"""
+class AICoding:
+    """AI Coding 工具选择器"""
     
     def __init__(self):
         self.config = {
@@ -205,9 +205,9 @@ class AIToolSelector:
 
 
 # 便捷函数
-def ai_do(task: str, **kwargs):
+def ai_coding(task: str, **kwargs):
     """
-    程序员 Agent 的 AI 工具调用接口
+    程序员 Agent 的 AI Coding 调用接口
     
     Args:
         task: 任务描述
@@ -216,8 +216,8 @@ def ai_do(task: str, **kwargs):
     Returns:
         执行结果
     """
-    selector = AIToolSelector()
-    return selector.spawn_agent(task, **kwargs)
+    coding = AICoding()
+    return coding.spawn_agent(task, **kwargs)
 
 
 # 使用示例
@@ -246,7 +246,7 @@ if __name__ == '__main__':
     
     for i, case in enumerate(test_cases, 1):
         print(f"\n测试 {i}: {case['task']}")
-        result = ai_do(case['task'], 
+        result = ai_coding(case['task'], 
                       files_count=case['files_count'],
                       code_lines=case['code_lines'])
         print(f"结果：{result}")
