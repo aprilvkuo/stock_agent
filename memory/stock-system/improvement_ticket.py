@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 Agent 互相指导系统 - 改进工单模块
-低分自动触发改进工单，追踪改进进度（v1.7 新增 Git 自动提交）
+低分自动触发改进工单，追踪改进进度（v2.0 新增 GitHub Issues + PR 流程）
 """
 
 import os
@@ -14,6 +14,14 @@ from typing import Dict, List, Optional
 import sys
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), 'scripts'))
 from git_version_control import GitVersionControl
+
+# 导入 GitHub Issue 管理器
+try:
+    from github_issue_manager import issue_manager
+    GITHUB_ENABLED = True
+except Exception as e:
+    print(f"⚠️  GitHub Issue 模块加载失败：{e}，将使用本地工单模式")
+    GITHUB_ENABLED = False
 
 # 配置
 WORKSPACE = '/Users/egg/.openclaw/workspace'
@@ -249,12 +257,47 @@ class ImprovementTicket:
         with open(ticket_file, 'w', encoding='utf-8') as f:
             json.dump(ticket, f, ensure_ascii=False, indent=2)
         
+        # GitHub Issue 创建（v2.0 新增）
+        github_issue_number = None
+        if GITHUB_ENABLED:
+            try:
+                rating = ticket.get('trigger_rating', {})
+                improvement_plan = [
+                    action['task'] for action in ticket['improvement_plan']['actions']
+                ]
+                
+                issue = issue_manager.create_improvement_issue(
+                    provider_id=ticket['provider'],
+                    consumer_id=ticket['consumer'],
+                    service_type=ticket['service_type'],
+                    rating=rating,
+                    improvement_plan=improvement_plan
+                )
+                github_issue_number = issue.get('number')
+                ticket['github_issue'] = {
+                    'number': github_issue_number,
+                    'url': issue.get('html_url'),
+                    'created_at': datetime.now().isoformat()
+                }
+                
+                # 更新本地文件
+                with open(ticket_file, 'w', encoding='utf-8') as f:
+                    json.dump(ticket, f, ensure_ascii=False, indent=2)
+                
+                print(f"✅ GitHub Issue 已创建：#{github_issue_number}")
+                
+            except Exception as e:
+                print(f"⚠️  GitHub Issue 创建失败：{e}，将使用本地工单模式")
+        
         # Git 自动提交（v1.7 新增）
         provider = ticket.get('provider', 'Unknown')
         priority = ticket.get('priority', 'medium')
         score = ticket.get('trigger_rating', {}).get('overall_score', 0)
         commit_msg = f"创建改进工单 {ticket['id']} - {provider} - 优先级：{priority} - 评分：{score}/5.0"
-        git_record = _git.commit("系统 Agent", commit_msg, files=[ticket_file], auto_push=True)
+        files_to_commit = [ticket_file]
+        if github_issue_number:
+            commit_msg += f" (GitHub #{github_issue_number})"
+        git_record = _git.commit("系统 Agent", commit_msg, files=files_to_commit, auto_push=True)
         if git_record:
             print(f"✅ Git 提交：{git_record['hash'][:8]}")
     

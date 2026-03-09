@@ -1,0 +1,52 @@
+---
+name: 🔧 功能改进
+description: 系统功能改进建议
+title: "[Feature] 功能描述"
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## 🔧 功能改进建议
+        
+        提出对股票多 Agent 系统的功能改进建议。
+  
+  - type: textarea
+    id: problem
+    attributes:
+      label: 问题描述
+      description: 当前存在的问题或不足
+      placeholder: "当前系统缺少 XX 功能，导致..."
+    validations:
+      required: true
+  
+  - type: textarea
+    id: solution
+    attributes:
+      label: 建议方案
+      description: 具体的改进方案
+      placeholder: "建议添加 XX 功能，实现方式..."
+    validations:
+      required: true
+  
+  - type: textarea
+    id: benefits
+    attributes:
+      label: 预期收益
+      description: 改进后的预期效果
+      placeholder: "提升分析准确率、改善用户体验等"
+    validations:
+      required: false
+  
+  - type: dropdown
+    id: priority
+    attributes:
+      label: 优先级
+      description: 期望的优先级
+      options:
+        - 🟡 Low
+        - 🟠 Medium
+        - 🔴 High
+      default: 1
+    validations:
+      required: true

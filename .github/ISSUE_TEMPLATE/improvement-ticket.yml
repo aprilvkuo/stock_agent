@@ -1,0 +1,87 @@
+---
+name: 🎫 改进工单
+description: Agent 服务质量改进工单（低分自动触发）
+title: "[优先级] @Agent 需要改进：服务类型"
+labels: ["improvement-ticket", "agent-feedback"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## 🎫 改进工单
+        
+        此模板用于 Agent 服务质量改进工单。
+        **注意**: 大部分改进工单由系统自动创建，无需手动填写。
+  
+  - type: dropdown
+    id: priority
+    attributes:
+      label: 优先级
+      description: 根据评分确定优先级
+      options:
+        - 🟡 Low (评分 3-4)
+        - 🟠 Medium (评分 2-3)
+        - 🔴 High (评分 1-2)
+        - 🚨 Critical (评分 0-1)
+      default: 1
+    validations:
+      required: true
+  
+  - type: input
+    id: provider
+    attributes:
+      label: 乙方 Agent
+      description: 需要改进的 Agent
+      placeholder: "e.g., data-fetcher"
+    validations:
+      required: true
+  
+  - type: input
+    id: consumer
+    attributes:
+      label: 甲方 Agent
+      description: 提出改进的 Agent
+      placeholder: "e.g., fundamental"
+    validations:
+      required: true
+  
+  - type: input
+    id: service-type
+    attributes:
+      label: 服务类型
+      description: 服务类型
+      placeholder: "e.g., financial_data, code_implementation"
+    validations:
+      required: true
+  
+  - type: textarea
+    id: problem
+    attributes:
+      label: 问题描述
+      description: 详细描述问题
+      placeholder: "数据缺少关键指标..."
+    validations:
+      required: true
+  
+  - type: textarea
+    id: suggestions
+    attributes:
+      label: 改进建议
+      description: 具体改进建议（每条一行）
+      placeholder: |
+        - 添加 ROE 指标
+        - 添加毛利率指标
+        - 提升数据完整性
+    validations:
+      required: false
+  
+  - type: dropdown
+    id: auto-created
+    attributes:
+      label: 是否自动创建
+      description: 是否由系统自动创建
+      options:
+        - "是"
+        - "否"
+      default: "是"
+    validations:
+      required: true
