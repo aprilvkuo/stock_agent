@@ -1,0 +1,14 @@
+{
+  "agent_id": "cio",
+  "agent_name": "CIO Agent",
+  "agent_emoji": "👔",
+  "status": "idle",
+  "status_text": "🟢 空闲",
+  "todo_count": 0,
+  "doing_count": 0,
+  "done_count": 0,
+  "todo_list": [],
+  "doing_list": [],
+  "last_sync": "2026-03-09T22:25:51.634201",
+  "github_label": "cio-agent"
+}

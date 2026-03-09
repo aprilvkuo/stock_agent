@@ -45,16 +45,16 @@ AGENT_GITHUB = {
     'cio': 'cio-agent'
 }
 
-# Agent 职责关键词
+# Agent 职责关键词（按特异性排序，特异性高的在前）
 AGENT_KEYWORDS = {
-    'programmer': ['代码', '重构', '优化', 'bug', 'fix', 'dev', 'draft', 'structure', 'program', 'code'],
-    'fundamental': ['财报', '估值', '基本面', 'financial', 'roe', 'pe', 'pb'],
-    'technical': ['k 线', '技术指标', '技术面', 'technical', 'macd', 'rsi', '均线'],
-    'sentiment': ['情绪', '市场', 'sentiment', '热度', 'volume'],
-    'data-fetcher': ['数据', 'api', '抓取', 'data', 'fetch', 'crawl'],
-    'qa': ['测试', '质量', 'review', 'qa', 'test', 'verify'],
-    'coordinator': ['协调', '分配', 'coordinator', 'assign'],
-    'cio': ['投资', '策略', 'risk', 'investment', 'strategy']
+    'fundamental': ['财报', '估值', '基本面', 'financial', 'roe', 'pe', 'pb', '财务报表', '利润表', '资产负债表', '现金流'],
+    'technical': ['k 线', '技术指标', '技术面', 'technical', 'macd', 'rsi', '均线', '布林带', '成交量'],
+    'sentiment': ['情绪', '市场', 'sentiment', '热度', 'volume', '舆情', '新闻', '市场情绪'],
+    'data-fetcher': ['数据', 'api', '抓取', 'data', 'fetch', 'crawl', '爬虫', '接口'],
+    'qa': ['测试', '质量', 'review', 'qa', 'test', 'verify', '单元测试', '集成测试'],
+    'programmer': ['代码', '重构', '优化', 'bug', 'fix', 'dev', 'draft', 'structure', 'program', 'code', '程序', '开发'],
+    'coordinator': ['协调', '分配', 'coordinator', 'assign', '任务分配'],
+    'cio': ['投资', '策略', 'risk', 'investment', 'strategy', '投资组合', '风控']
 }
 
 # 无效任务关键词
@@ -336,10 +336,11 @@ class IssueAutoResolver:
                                 print(f"   从表格识别：{agent_id}")
                                 return agent_id
         
-        # 3. 关键词匹配
+        # 3. 关键词匹配（按特异性排序）
         scores = {}
         for agent_id, keywords in AGENT_KEYWORDS.items():
-            score = sum(1 for kw in keywords if kw.lower() in text)
+            # 特异性关键词权重更高
+            score = sum(2 if kw in text else 1 for kw in keywords if kw.lower() in text)
             scores[agent_id] = score
         
         best_agent = max(scores, key=scores.get)

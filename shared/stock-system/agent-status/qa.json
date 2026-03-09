@@ -1,0 +1,31 @@
+{
+  "agent_id": "qa",
+  "agent_name": "质检 Agent",
+  "agent_emoji": "🔍",
+  "status": "active",
+  "status_text": "🔴 工作中",
+  "todo_count": 2,
+  "doing_count": 0,
+  "done_count": 0,
+  "todo_list": [
+    {
+      "id": "issue-25",
+      "task": "[WEB-MIGRATED] [URGENT] 测试工单系统功能",
+      "priority": "high",
+      "status": "pending",
+      "url": "https://github.com/aprilvkuo/stock_agent/issues/25",
+      "created_at": "2026-03-09T14:14:20+00:00"
+    },
+    {
+      "id": "issue-13",
+      "task": "[MIGRATED] [质检 Agent] 检查系统健康",
+      "priority": "medium",
+      "status": "pending",
+      "url": "https://github.com/aprilvkuo/stock_agent/issues/13",
+      "created_at": "2026-03-09T14:03:43+00:00"
+    }
+  ],
+  "doing_list": [],
+  "last_sync": "2026-03-09T22:25:44.442736",
+  "github_label": "qa-agent"
+}
