@@ -13,9 +13,9 @@ from pathlib import Path
 AGENT_GIT_USERS = {
     "技术 Agent": ("技术 Agent", "tech-agent@stock-system.local"),
     "情绪 Agent": ("情绪 Agent", "emotion-agent@stock-system.local"),
-    "资金 Agent": ("fund-agent@stock-system.local"),
-    "估值 Agent": ("valuation-agent@stock-system.local"),
-    "协调 Agent": ("coordinator@stock-system.local"),
+    "资金 Agent": ("资金 Agent", "fund-agent@stock-system.local"),
+    "估值 Agent": ("估值 Agent", "valuation-agent@stock-system.local"),
+    "协调 Agent": ("协调 Agent", "coordinator@stock-system.local"),
     "系统 Agent": ("系统 Agent", "system-agent@stock-system.local"),
     "auto_agent.py": ("系统 Agent", "system-agent@stock-system.local"),
     "task_assigner.py": ("协调 Agent", "coordinator@stock-system.local"),
