@@ -2,8 +2,9 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="refresh" content="0;url=https://github.com/aprilvkuo/stock_agent/issues">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🎫 工单系统 - Agent 互相指导</title>
+    <title>🎫 工单系统已迁移到 GitHub</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         body {
@@ -23,16 +24,13 @@
         .nav-item:hover {
             background: rgba(255,255,255,0.1);
         }
-        .nav-item.active {
-            background: rgba(99, 102, 241, 0.2);
-            border-left: 3px solid #6366F1;
-        }
-        .ticket-card {
+        .btn-primary {
+            background: linear-gradient(135deg, #6366F1 0%, #8B5CF6 100%);
             transition: all 0.3s;
         }
-        .ticket-card:hover {
+        .btn-primary:hover {
             transform: translateY(-2px);
-            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+            box-shadow: 0 10px 40px rgba(99, 102, 241, 0.4);
         }
     </style>
 </head>
@@ -45,269 +43,167 @@
                     <a href="/" class="text-xl font-bold text-white">📊 Agent 监控系统</a>
                     <div class="flex gap-2">
                         <a href="/" class="nav-item px-4 py-2 rounded text-gray-300 hover:text-white">🏠 首页</a>
-                        <a href="/tickets" class="nav-item active px-4 py-2 rounded text-white">🎫 工单系统</a>
+                        <a href="https://github.com/aprilvkuo/stock_agent/issues" class="nav-item active px-4 py-2 rounded text-white">🎫 工单系统</a>
                         <a href="/agent-transparency" class="nav-item px-4 py-2 rounded text-gray-300 hover:text-white">📈 透明度</a>
+                        <a href="/monitor" class="nav-item px-4 py-2 rounded text-gray-300 hover:text-white">📊 监控</a>
                     </div>
                 </div>
             </div>
         </div>
     </nav>
 
-    <div class="max-w-7xl mx-auto p-6">
-        <!-- 页面标题 -->
-        <div class="mb-8">
-            <h1 class="text-4xl font-bold mb-2">🎫 工单系统</h1>
-            <p class="text-gray-400">实时跟踪所有任务工单，支持筛选和搜索</p>
+    <div class="max-w-4xl mx-auto p-6 mt-20">
+        <!-- 迁移通知 -->
+        <div class="card p-8 text-center">
+            <div class="mb-6">
+                <div class="text-6xl mb-4">🚀</div>
+                <h1 class="text-4xl font-bold mb-4">工单系统已迁移到 GitHub Issues</h1>
+                <p class="text-xl text-gray-300 mb-2">
+                    所有任务现在都在 GitHub Issues 中统一管理
+                </p>
+                <p class="text-gray-400">
+                    页面将在 <span id="countdown">3</span> 秒后自动跳转...
+                </p>
+            </div>
+
+            <!-- 统计信息 -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+                <div class="card p-4">
+                    <div class="text-3xl font-bold text-white">12+</div>
+                    <div class="text-sm text-gray-400">已迁移任务</div>
+                </div>
+                <div class="card p-4">
+                    <div class="text-3xl font-bold text-green-400">100%</div>
+                    <div class="text-sm text-gray-400">迁移完成</div>
+                </div>
+                <div class="card p-4">
+                    <div class="text-3xl font-bold text-blue-400">GitHub</div>
+                    <div class="text-sm text-gray-400">统一管理</div>
+                </div>
+                <div class="card p-4">
+                    <div class="text-3xl font-bold text-purple-400">24/7</div>
+                    <div class="text-sm text-gray-400">自动化</div>
+                </div>
+            </div>
+
+            <!-- 操作按钮 -->
+            <div class="flex flex-col md:flex-row gap-4 justify-center">
+                <a href="https://github.com/aprilvkuo/stock_agent/issues" 
+                   class="btn-primary px-8 py-4 rounded-lg text-white font-bold text-lg inline-flex items-center justify-center gap-2">
+                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                    </svg>
+                    访问 GitHub Issues
+                </a>
+                <a href="/" 
+                   class="px-8 py-4 rounded-lg bg-gray-700 hover:bg-gray-600 text-white font-bold text-lg inline-flex items-center justify-center gap-2 transition">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
+                    </svg>
+                    返回首页
+                </a>
+            </div>
+
+            <!-- 特性列表 -->
+            <div class="mt-8 text-left">
+                <h3 class="text-xl font-bold mb-4 text-center">✨ 新工单系统的优势</h3>
+                <div class="grid md:grid-cols-2 gap-4">
+                    <div class="flex items-start gap-3">
+                        <div class="text-green-400 mt-1">✅</div>
+                        <div>
+                            <div class="font-bold text-white">全局可见</div>
+                            <div class="text-gray-400 text-sm">所有人都可以查看和参与讨论</div>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <div class="text-green-400 mt-1">✅</div>
+                        <div>
+                            <div class="font-bold text-white">完整历史</div>
+                            <div class="text-gray-400 text-sm">所有变更记录都有据可查</div>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <div class="text-green-400 mt-1">✅</div>
+                        <div>
+                            <div class="font-bold text-white">自动化</div>
+                            <div class="text-gray-400 text-sm">GitHub Actions 自动处理任务分配</div>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <div class="text-green-400 mt-1">✅</div>
+                        <div>
+                            <div class="font-bold text-white">深度集成</div>
+                            <div class="text-gray-400 text-sm">与 PR、CI/CD 无缝集成</div>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <div class="text-green-400 mt-1">✅</div>
+                        <div>
+                            <div class="font-bold text-white">移动支持</div>
+                            <div class="text-gray-400 text-sm">GitHub App 随时随地管理</div>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <div class="text-green-400 mt-1">✅</div>
+                        <div>
+                            <div class="font-bold text-white">通知系统</div>
+                            <div class="text-gray-400 text-sm">@mention 实时通知负责人</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 快速链接 -->
+            <div class="mt-8 pt-8 border-t border-gray-700">
+                <h3 class="text-xl font-bold mb-4 text-center">🔗 快速链接</h3>
+                <div class="flex flex-wrap gap-3 justify-center">
+                    <a href="https://github.com/aprilvkuo/stock_agent/issues" 
+                       class="px-4 py-2 bg-gray-800 hover:bg-gray-700 rounded text-sm transition">
+                        📋 所有 Issues
+                    </a>
+                    <a href="https://github.com/aprilvkuo/stock_agent/issues?q=label:improvement-ticket" 
+                       class="px-4 py-2 bg-gray-800 hover:bg-gray-700 rounded text-sm transition">
+                        🚀 改进工单
+                    </a>
+                    <a href="https://github.com/aprilvkuo/stock_agent/issues?q=label:task" 
+                       class="px-4 py-2 bg-gray-800 hover:bg-gray-700 rounded text-sm transition">
+                        📝 任务
+                    </a>
+                    <a href="https://github.com/aprilvkuo/stock_agent/issues?q=label:urgent" 
+                       class="px-4 py-2 bg-gray-800 hover:bg-gray-700 rounded text-sm transition">
+                        🔴 紧急任务
+                    </a>
+                    <a href="https://github.com/aprilvkuo/stock_agent/issues/new/choose" 
+                       class="px-4 py-2 bg-green-700 hover:bg-green-600 rounded text-sm transition">
+                        ➕ 创建新 Issue
+                    </a>
+                </div>
+            </div>
         </div>
 
-        <!-- 统计卡片 -->
-        <div class="grid grid-cols-2 md:grid-cols-5 gap-4 mb-8">
-            <div class="card p-4 text-center">
-                <div id="stat-total" class="text-3xl font-bold text-white">-</div>
-                <div class="text-sm text-gray-400">总工单</div>
-            </div>
-            <div class="card p-4 text-center">
-                <div id="stat-open" class="text-3xl font-bold text-yellow-400">-</div>
-                <div class="text-sm text-gray-400">待处理</div>
-            </div>
-            <div class="card p-4 text-center">
-                <div id="stat-progress" class="text-3xl font-bold text-blue-400">-</div>
-                <div class="text-sm text-gray-400">进行中</div>
-            </div>
-            <div class="card p-4 text-center">
-                <div id="stat-done" class="text-3xl font-bold text-green-400">-</div>
-                <div class="text-sm text-gray-400">已完成</div>
-            </div>
-            <div class="card p-4 text-center">
-                <div id="stat-rate" class="text-3xl font-bold text-purple-400">-%</div>
-                <div class="text-sm text-gray-400">完成率</div>
-            </div>
-        </div>
-
-        <!-- 筛选和搜索 -->
-        <div class="card p-4 mb-8">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
-                <div>
-                    <label class="block text-sm text-gray-400 mb-2">按 Agent 筛选</label>
-                    <select id="filter-agent" class="w-full bg-gray-800 border border-gray-700 rounded px-3 py-2 text-white">
-                        <option value="">全部 Agent</option>
-                        <option value="programmer">程序员 Agent</option>
-                        <option value="qa">质检 Agent</option>
-                        <option value="coordinator">主 Agent</option>
-                    </select>
-                </div>
-                <div>
-                    <label class="block text-sm text-gray-400 mb-2">按优先级筛选</label>
-                    <select id="filter-priority" class="w-full bg-gray-800 border border-gray-700 rounded px-3 py-2 text-white">
-                        <option value="">全部优先级</option>
-                        <option value="critical">🔴 Critical</option>
-                        <option value="high">🟠 High</option>
-                        <option value="medium">🟡 Medium</option>
-                        <option value="low">🟢 Low</option>
-                    </select>
-                </div>
-                <div>
-                    <label class="block text-sm text-gray-400 mb-2">按状态筛选</label>
-                    <select id="filter-status" class="w-full bg-gray-800 border border-gray-700 rounded px-3 py-2 text-white">
-                        <option value="">全部状态</option>
-                        <option value="open">🟡 待处理</option>
-                        <option value="in_progress">🔵 进行中</option>
-                        <option value="done">✅ 已完成</option>
-                    </select>
-                </div>
-                <div>
-                    <label class="block text-sm text-gray-400 mb-2">搜索</label>
-                    <input type="text" id="search" placeholder="搜索任务..." class="w-full bg-gray-800 border border-gray-700 rounded px-3 py-2 text-white">
-                </div>
-            </div>
-        </div>
-
-        <!-- 工单列表 -->
-        <div id="ticket-list" class="space-y-4">
-            <div class="text-center text-gray-500 py-8">加载中...</div>
+        <!-- 备份信息 -->
+        <div class="mt-6 text-center text-gray-500 text-sm">
+            <p>💾 所有历史工单已备份到 <code class="bg-gray-800 px-2 py-1 rounded">.backup/old-ticket-system/</code></p>
         </div>
     </div>
 
+    <!-- 自动跳转脚本 -->
     <script>
-        const agentNames = {
-            'programmer': '程序员 Agent',
-            'qa': '质检 Agent',
-            'coordinator': '主 Agent',
-            'fundamental': '基本面 Agent',
-            'technical': '技术面 Agent',
-            'sentiment': '情绪 Agent'
-        };
-
-        const priorityColors = {
-            'critical': 'border-red-500 bg-red-900/20',
-            'high': 'border-orange-500 bg-orange-900/20',
-            'medium': 'border-yellow-500 bg-yellow-900/20',
-            'low': 'border-blue-500 bg-blue-900/20'
-        };
-
-        const statusEmoji = {
-            'open': '🟡',
-            'in_progress': '🔵',
-            'done': '✅',
-            'closed': '⚪'
-        };
-
-        async function loadTickets() {
-            try {
-                const [ticketsRes, statsRes] = await Promise.all([
-                    fetch('/api/improvement-tickets'),
-                    fetch('/api/improvement-tickets/stats')
-                ]);
-
-                const tickets = await ticketsRes.json();
-                const stats = await statsRes.json();
-
-                // 更新统计
-                document.getElementById('stat-total').textContent = stats.total || 0;
-                document.getElementById('stat-open').textContent = stats.by_status?.open || 0;
-                document.getElementById('stat-progress').textContent = stats.by_status?.in_progress || 0;
-                document.getElementById('stat-done').textContent = (stats.by_status?.done || 0) + (stats.by_status?.closed || 0);
-                document.getElementById('stat-rate').textContent = (stats.completion_rate || 0) + '%';
-
-                // 筛选和搜索
-                const agentFilter = document.getElementById('filter-agent').value;
-                const priorityFilter = document.getElementById('filter-priority').value;
-                const statusFilter = document.getElementById('filter-status').value;
-                const searchText = document.getElementById('search').value.toLowerCase();
-
-                let filtered = tickets.filter(t => {
-                    if (agentFilter && t.provider !== agentFilter) return false;
-                    if (priorityFilter && t.priority !== priorityFilter) return false;
-                    if (statusFilter && t.status !== statusFilter) return false;
-                    if (searchText && !t.task_title?.toLowerCase().includes(searchText)) return false;
-                    return true;
-                });
-
-                // 按优先级排序
-                const priorityOrder = { critical: 0, high: 1, medium: 2, low: 3 };
-                filtered.sort((a, b) => priorityOrder[a.priority] - priorityOrder[b.priority]);
-
-                // 渲染工单
-                const container = document.getElementById('ticket-list');
-                
-                if (filtered.length === 0) {
-                    container.innerHTML = '<div class="text-center text-gray-500 py-8">暂无工单</div>';
-                    return;
-                }
-
-                container.innerHTML = filtered.map(ticket => {
-                    const actions = ticket.improvement_plan?.actions || [];
-                    const pendingActions = actions.filter(a => a.status === 'pending').length;
-                    const doneActions = actions.filter(a => a.status === 'done').length;
-                    const progress = actions.length > 0 ? Math.round(doneActions / actions.length * 100) : 0;
-
-                    return `
-                        <div class="ticket-card card p-6 border-l-4 ${priorityColors[ticket.priority] || 'border-gray-500'}">
-                            <div class="flex items-start justify-between mb-4">
-                                <div class="flex-1">
-                                    <div class="flex items-center gap-3 mb-2">
-                                        <span class="text-2xl">${statusEmoji[ticket.status] || '⚪'}</span>
-                                        <span class="text-lg font-bold">${ticket.task_title || '无标题'}</span>
-                                        <span class="text-xs px-2 py-1 rounded bg-gray-700">${ticket.priority}</span>
-                                        <span class="text-xs px-2 py-1 rounded ${ticket.type === 'urgent_task' ? 'bg-red-700' : 'bg-blue-700'}">${ticket.type === 'urgent_task' ? '🔴 紧急' : '任务'}</span>
-                                    </div>
-                                    <div class="text-sm text-gray-400 mb-2">
-                                        <span class="text-blue-400">${agentNames[ticket.consumer] || ticket.consumer}</span>
-                                        <span class="text-gray-500 mx-2">→</span>
-                                        <span class="text-purple-400">${agentNames[ticket.provider] || ticket.provider}</span>
-                                        <span class="text-gray-500 mx-2">|</span>
-                                        <span>工单：${ticket.id}</span>
-                                    </div>
-                                    <div class="text-sm text-gray-300 italic">${ticket.task_description || ticket.issue?.description || ''}</div>
-                                </div>
-                                <div class="text-right ml-4">
-                                    <div class="text-sm text-gray-400 mb-1">截止：${ticket.improvement_plan?.deadline || '未设置'}</div>
-                                    <div class="text-sm text-gray-400">预计：${ticket.improvement_plan?.estimated_effort || '未知'}</div>
-                                </div>
-                            </div>
-
-                            <!-- 进度条 -->
-                            <div class="mb-4">
-                                <div class="flex justify-between text-xs text-gray-400 mb-1">
-                                    <span>进度</span>
-                                    <span>${progress}%</span>
-                                </div>
-                                <div class="w-full bg-gray-700 rounded-full h-2">
-                                    <div class="bg-gradient-to-r from-blue-500 to-green-500 h-2 rounded-full transition-all" style="width: ${progress}%"></div>
-                                </div>
-                            </div>
-
-                            <!-- 行动项 -->
-                            <div class="bg-gray-900/50 rounded-lg p-4">
-                                <div class="text-sm font-bold mb-2">改进行动 (${doneActions}/${actions.length})</div>
-                                <div class="space-y-2">
-                                    ${actions.map((action, i) => `
-                                        <div class="flex items-center gap-2">
-                                            <button onclick="updateAction('${ticket.id}', ${i}, '${action.status === 'done' ? 'pending' : 'done'}')" class="text-lg hover:scale-125 transition-transform">
-                                                ${action.status === 'done' ? '✅' : '⏳'}
-                                            </button>
-                                            <span class="${action.status === 'done' ? 'text-green-400 line-through' : 'text-gray-300'}">${action.task}</span>
-                                        </div>
-                                    `).join('')}
-                                </div>
-                            </div>
-
-                            <!-- 状态更新 -->
-                            <div class="mt-4 flex gap-2">
-                                <button onclick="updateStatus('${ticket.id}', 'in_progress')" class="px-3 py-1 bg-blue-600 hover:bg-blue-700 rounded text-sm">开始处理</button>
-                                <button onclick="updateStatus('${ticket.id}', 'done')" class="px-3 py-1 bg-green-600 hover:bg-green-700 rounded text-sm">完成</button>
-                            </div>
-                        </div>
-                    `;
-                }).join('');
-
-            } catch (error) {
-                console.error('加载工单失败:', error);
-                document.getElementById('ticket-list').innerHTML = '<div class="text-center text-red-400 py-8">加载失败</div>';
+        // 倒计时
+        let seconds = 3;
+        const countdown = document.getElementById('countdown');
+        const timer = setInterval(() => {
+            seconds--;
+            countdown.textContent = seconds;
+            if (seconds <= 0) {
+                clearInterval(timer);
             }
-        }
+        }, 1000);
 
-        async function updateStatus(ticketId, status) {
-            try {
-                const res = await fetch(`/api/improvement-tickets/${ticketId}/status`, {
-                    method: 'PUT',
-                    headers: {'Content-Type': 'application/json'},
-                    body: JSON.stringify({status})
-                });
-                if (res.ok) {
-                    loadTickets();
-                }
-            } catch (error) {
-                alert('更新失败：' + error);
-            }
-        }
-
-        async function updateAction(ticketId, actionIndex, status) {
-            try {
-                const res = await fetch(`/api/improvement-tickets/${ticketId}/action`, {
-                    method: 'PUT',
-                    headers: {'Content-Type': 'application/json'},
-                    body: JSON.stringify({action_index: actionIndex, status})
-                });
-                if (res.ok) {
-                    loadTickets();
-                }
-            } catch (error) {
-                alert('更新失败：' + error);
-            }
-        }
-
-        // 事件监听
-        document.getElementById('filter-agent').addEventListener('change', loadTickets);
-        document.getElementById('filter-priority').addEventListener('change', loadTickets);
-        document.getElementById('filter-status').addEventListener('change', loadTickets);
-        document.getElementById('search').addEventListener('input', loadTickets);
-
-        // 初始加载
-        loadTickets();
-
-        // 定时刷新
-        setInterval(loadTickets, 30000);
+        // 3 秒后自动跳转
+        setTimeout(() => {
+            window.location.href = 'https://github.com/aprilvkuo/stock_agent/issues';
+        }, 3000);
     </script>
 </body>
 </html>
