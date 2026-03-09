@@ -16,15 +16,18 @@ from dotenv import load_dotenv
 import os
 from dotenv import load_dotenv
 
-# 先尝试从系统环境变量读取
-GITHUB_TOKEN = os.getenv('GITHUB_TOKEN', '')
+# 先尝试从系统环境变量读取 Bot Token
+GITHUB_TOKEN = os.getenv('GITHUB_BOT_TOKEN', '') or os.getenv('GITHUB_TOKEN', '')
+GITHUB_BOT_USERNAME = os.getenv('GITHUB_BOT_USERNAME', 'stock-agent-bot')
 GITHUB_REPO = os.getenv('GITHUB_REPO', 'aprilvkuo/stock_agent')
 
 # 如果系统变量没有，再尝试从 .env 文件读取
 if not GITHUB_TOKEN:
-    load_dotenv(os.path.join(os.path.dirname(__file__), '../../.env.github'))
-    GITHUB_TOKEN = os.getenv('GITHUB_TOKEN', '')
-    GITHUB_REPO = os.getenv('GITHUB_REPO', 'aprilvkuo/stock_agent')
+    env_path = os.path.join(os.path.dirname(__file__), '../../.env.github')
+    if os.path.exists(env_path):
+        load_dotenv(env_path)
+        GITHUB_TOKEN = os.getenv('GITHUB_BOT_TOKEN', '') or os.getenv('GITHUB_TOKEN', '')
+        GITHUB_REPO = os.getenv('GITHUB_REPO', 'aprilvkuo/stock_agent')
 
 GITHUB_API_BASE = f'https://api.github.com/repos/{GITHUB_REPO}'
 
