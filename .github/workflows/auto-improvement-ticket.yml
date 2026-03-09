@@ -1,6 +1,7 @@
 name: Auto Improvement Ticket
 
 on:
+  # 手动触发（网页）
   workflow_dispatch:
     inputs:
       provider:
@@ -23,6 +24,10 @@ on:
         description: 'Feedback'
         required: true
         default: 'Needs improvement'
+  
+  # API 触发（脚本）
+  repository_dispatch:
+    types: [create-improvement-ticket]
 
 permissions:
   issues: write
@@ -36,11 +41,26 @@ jobs:
         uses: actions/github-script@v7
         with:
           script: |
-            const provider = '${{ github.event.inputs.provider }}';
-            const consumer = '${{ github.event.inputs.consumer }}';
-            const service_type = '${{ github.event.inputs.service_type }}';
-            const score = parseInt('${{ github.event.inputs.score }}');
-            const feedback = '${{ github.event.inputs.feedback }}';
+            // 从不同事件来源获取数据
+            let provider, consumer, service_type, score, feedback;
+            
+            if (context.eventName === 'workflow_dispatch') {
+              provider = '${{ github.event.inputs.provider }}';
+              consumer = '${{ github.event.inputs.consumer }}';
+              service_type = '${{ github.event.inputs.service_type }}';
+              score = parseInt('${{ github.event.inputs.score }}');
+              feedback = '${{ github.event.inputs.feedback }}';
+            } else if (context.eventName === 'repository_dispatch') {
+              const data = context.payload.client_payload;
+              provider = data.provider || 'programmer';
+              consumer = data.consumer || 'coordinator';
+              service_type = data.service_type || 'code_structure';
+              score = parseInt(data.score) || 2;
+              feedback = data.feedback || 'Needs improvement';
+            } else {
+              core.setFailed('Unsupported event type');
+              return;
+            }
             
             let priority;
             if (score <= 1) priority = 'CRITICAL';
