@@ -1,8 +1,77 @@
 # 🤝 贡献指南 (Contributing Guide)
 
-**版本**: v1.0  
+**版本**: v1.1  
 **实施日期**: 2026-03-09  
+**最后更新**: 2026-03-09 (v1.1 添加目录规范)  
 **适用范围**: 股票多 Agent 系统团队
+
+---
+
+## 📁 目录结构规范
+
+### 根目录规则
+
+**允许在根目录的文件**（仅限以下核心配置）：
+
+| 文件 | 用途 |
+|------|------|
+| `AGENTS.md` | Agent 配置 |
+| `SOUL.md` | 人格定义 |
+| `USER.md` | 用户信息 |
+| `TOOLS.md` | 工具配置 |
+| `IDENTITY.md` | 身份定义 |
+| `HEARTBEAT.md` | 心跳任务 |
+| `CONTRIBUTING.md` | 贡献指南 |
+| `.gitignore` | Git 忽略 |
+| `.env` | 环境变量 |
+| `.github/` | GitHub 配置 |
+| `.openclaw/` | OpenClaw 配置 |
+
+**禁止在根目录**：
+- ❌ 临时文件
+- ❌ 测试脚本
+- ❌ 报告文档
+- ❌ 功能文档
+
+### 目录结构
+
+```
+workspace/
+├── .github/              # GitHub 配置（ISSUE_TEMPLATE, workflows）
+├── .openclaw/           # OpenClaw 运行时配置
+├── agents/              # Agent 配置文件
+│   ├── stock-coordinator/
+│   ├── stock-programmer/
+│   └── ...
+├── docs/                # 项目文档
+│   ├── github/          # GitHub 工作流相关文档
+│   ├── stock-system/    # 股票系统文档
+│   └── guides/          # 使用指南和报告
+├── memory/              # 记忆和日志
+│   ├── stock-system/    # 股票系统记忆
+│   └── YYYY-MM-DD.md    # 每日记忆
+├── scripts/             # 可执行脚本
+│   └── auto_agent.py
+├── shared/              # 共享数据
+├── skills/              # 技能包
+├── dev/                 # 开发实验区
+│   ├── experiments/     # 实验性代码
+│   ├── drafts/          # 草稿
+│   └── testing/         # 测试脚本
+└── .backup/             # 备份目录
+```
+
+### 文档归档规则
+
+| 文档类型 | 存放位置 | 示例 |
+|---------|---------|------|
+| GitHub 配置文档 | `docs/github/` | `GITHUB_WORKFLOW_COMPLETE.md` |
+| 分支规范 | `docs/github/` | `BRANCH_NAMING.md` |
+| Issue 模板 | `docs/github/` | `ISSUE_TEMPLATE_FINAL.md` |
+| 使用指南 | `docs/guides/` | `CODE_STRUCTURE.md` |
+| 实现报告 | `docs/guides/` | `GITHUB_IMPLEMENTATION_REPORT.md` |
+| 安全文档 | `docs/guides/` | `GITHUB_TOKEN_SECURITY.md` |
+| 股票系统文档 | `memory/stock-system/` 或 `docs/stock-system/` | `OPTIMIZATION_REPORT.md` |
 
 ---
 
