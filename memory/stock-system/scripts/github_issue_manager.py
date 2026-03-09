@@ -12,12 +12,20 @@ from datetime import datetime, timedelta
 from typing import Dict, List, Optional
 from dotenv import load_dotenv
 
-# 加载配置
-load_dotenv('.env.github')
+# 加载配置（优先级：系统环境变量 > .env 文件）
+import os
+from dotenv import load_dotenv
 
-# 配置
+# 先尝试从系统环境变量读取
 GITHUB_TOKEN = os.getenv('GITHUB_TOKEN', '')
 GITHUB_REPO = os.getenv('GITHUB_REPO', 'aprilvkuo/stock_agent')
+
+# 如果系统变量没有，再尝试从 .env 文件读取
+if not GITHUB_TOKEN:
+    load_dotenv(os.path.join(os.path.dirname(__file__), '../../.env.github'))
+    GITHUB_TOKEN = os.getenv('GITHUB_TOKEN', '')
+    GITHUB_REPO = os.getenv('GITHUB_REPO', 'aprilvkuo/stock_agent')
+
 GITHUB_API_BASE = f'https://api.github.com/repos/{GITHUB_REPO}'
 
 # Agent GitHub 身份映射
