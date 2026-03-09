@@ -2,13 +2,18 @@
 # -*- coding: utf-8 -*-
 """
 Agent 互相指导系统 - 改进工单模块
-低分自动触发改进工单，追踪改进进度
+低分自动触发改进工单，追踪改进进度（v1.7 新增 Git 自动提交）
 """
 
 import os
 import json
 from datetime import datetime, timedelta
 from typing import Dict, List, Optional
+
+# 导入 Git 版本控制
+import sys
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), 'scripts'))
+from git_version_control import GitVersionControl
 
 # 配置
 WORKSPACE = '/Users/egg/.openclaw/workspace'
@@ -18,6 +23,9 @@ TICKETS_FILE = os.path.join(STOCK_SYSTEM, 'improvement-tickets.json')
 
 # 确保目录存在
 os.makedirs(TICKETS_DIR, exist_ok=True)
+
+# Git 控制器实例
+_git = GitVersionControl()
 
 class ImprovementTicket:
     """改进工单系统"""
@@ -240,6 +248,15 @@ class ImprovementTicket:
         ticket_file = os.path.join(TICKETS_DIR, f"{ticket['id']}.json")
         with open(ticket_file, 'w', encoding='utf-8') as f:
             json.dump(ticket, f, ensure_ascii=False, indent=2)
+        
+        # Git 自动提交（v1.7 新增）
+        provider = ticket.get('provider', 'Unknown')
+        priority = ticket.get('priority', 'medium')
+        score = ticket.get('trigger_rating', {}).get('overall_score', 0)
+        commit_msg = f"创建改进工单 {ticket['id']} - {provider} - 优先级：{priority} - 评分：{score}/5.0"
+        git_record = _git.commit("系统 Agent", commit_msg, files=[ticket_file], auto_push=True)
+        if git_record:
+            print(f"✅ Git 提交：{git_record['hash'][:8]}")
     
     def _load_all_tickets(self) -> List[Dict]:
         """加载所有工单"""

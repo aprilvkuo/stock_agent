@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 任务拆分和工单分配系统
-将 TODO.md 中的任务拆分并分配给对应 Agent，创建工单实时跟踪
+将 TODO.md 中的任务拆分并分配给对应 Agent，创建工单实时跟踪（v1.7 新增 Git 自动提交）
 """
 
 import os
@@ -15,7 +15,13 @@ WORKSPACE = '/Users/egg/.openclaw/workspace'
 STOCK_SYSTEM = os.path.join(WORKSPACE, 'memory/stock-system')
 sys.path.insert(0, STOCK_SYSTEM)
 
+# 导入 Git 版本控制
+from git_version_control import GitVersionControl
+
 from improvement_ticket import ticket_system
+
+# Git 控制器实例
+_git = GitVersionControl()
 
 # Agent 职责映射
 AGENT_RESPONSIBILITIES = {
@@ -301,7 +307,7 @@ def create_task_tickets():
     return created_tickets
 
 def save_task_assignment(agents, tickets):
-    """保存任务分配结果"""
+    """保存任务分配结果（v1.7 新增 Git 自动提交）"""
     assignment_file = os.path.join(STOCK_SYSTEM, 'task-assignment.json')
     
     assignment = {
@@ -326,6 +332,13 @@ def save_task_assignment(agents, tickets):
         json.dump(assignment, f, ensure_ascii=False, indent=2)
     
     print(f"\n💾 任务分配已保存到：{assignment_file}")
+    
+    # Git 自动提交（v1.7 新增）
+    total_tasks = len(tickets)
+    commit_msg = f"任务分配：创建 {total_tasks} 个工单"
+    git_record = _git.commit("协调 Agent", commit_msg, files=[assignment_file], auto_push=True)
+    if git_record:
+        print(f"✅ Git 提交：{git_record['hash'][:8]}")
 
 if __name__ == '__main__':
     print("🚀 任务拆分和工单分配系统")

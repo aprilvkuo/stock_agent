@@ -2,13 +2,18 @@
 # -*- coding: utf-8 -*-
 """
 Agent 互相指导系统 - 服务质量评分模块
-每个 Agent 既是服务提供者（乙方），也是服务使用者（甲方）
+每个 Agent 既是服务提供者（乙方），也是服务使用者（甲方）（v1.7 新增 Git 自动提交）
 """
 
 import os
 import json
 from datetime import datetime
 from typing import Dict, List, Optional
+
+# 导入 Git 版本控制
+import sys
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), 'scripts'))
+from git_version_control import GitVersionControl
 
 # 配置
 WORKSPACE = '/Users/egg/.openclaw/workspace'
@@ -18,6 +23,9 @@ STATS_FILE = os.path.join(STOCK_SYSTEM, 'agent-rating-stats.json')
 
 # 确保目录存在
 os.makedirs(RATING_DIR, exist_ok=True)
+
+# Git 控制器实例
+_git = GitVersionControl()
 
 class AgentServiceRating:
     """Agent 服务质量评分系统"""
@@ -122,6 +130,16 @@ class AgentServiceRating:
         # 保存
         with open(rating_file, 'w', encoding='utf-8') as f:
             json.dump(ratings, f, ensure_ascii=False, indent=2)
+        
+        # Git 自动提交（v1.7 新增）
+        provider = rating.get('provider', 'Unknown')
+        consumer = rating.get('consumer', 'Unknown')
+        score = rating.get('overall_score', 0)
+        service_type = rating.get('service_type', 'unknown')
+        commit_msg = f"更新服务评分：{consumer} 评价 {provider} - {service_type} - 得分：{score}/5.0"
+        git_record = _git.commit("系统 Agent", commit_msg, files=[rating_file], auto_push=True)
+        if git_record:
+            print(f"✅ Git 提交：{git_record['hash'][:8]}")
     
     def _update_stats(self, rating: Dict):
         """更新统计数据"""

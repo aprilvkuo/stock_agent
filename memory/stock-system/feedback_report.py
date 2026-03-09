@@ -2,13 +2,18 @@
 # -*- coding: utf-8 -*-
 """
 Agent 互相指导系统 - 反馈报告模块
-每周自动生成 Agent 服务反馈报告
+每周自动生成 Agent 服务反馈报告（v1.7 新增 Git 自动提交）
 """
 
 import os
 import json
 from datetime import datetime, timedelta
 from typing import Dict, List
+
+# 导入 Git 版本控制
+import sys
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), 'scripts'))
+from git_version_control import GitVersionControl
 
 # 配置
 WORKSPACE = '/Users/egg/.openclaw/workspace'
@@ -18,6 +23,9 @@ REPORTS_DIR = os.path.join(STOCK_SYSTEM, 'feedback-reports')
 
 # 确保目录存在
 os.makedirs(REPORTS_DIR, exist_ok=True)
+
+# Git 控制器实例
+_git = GitVersionControl()
 
 class FeedbackReportGenerator:
     """反馈报告生成器"""
@@ -354,7 +362,7 @@ class FeedbackReportGenerator:
         }
     
     def _save_report(self, report: Dict):
-        """保存报告"""
+        """保存报告（v1.7 新增 Git 自动提交）"""
         agent_id = report['agent_id']
         period_start = report['period']['start']
         
@@ -368,6 +376,15 @@ class FeedbackReportGenerator:
         
         # 同时生成 Markdown 版本
         self._save_markdown_report(report)
+        
+        # Git 自动提交（v1.7 新增）
+        agent_name = report.get('agent_name', agent_id)
+        week_num = report['period']['week_number']
+        score = report['summary'].get('average_score', 0)
+        commit_msg = f"生成 {agent_name} 周度反馈报告 (第{week_num}周) - 得分：{score}/5.0"
+        git_record = _git.commit("系统 Agent", commit_msg, auto_push=True)
+        if git_record:
+            print(f"✅ Git 提交：{git_record['hash'][:8]}")
     
     def _save_markdown_report(self, report: Dict):
         """保存 Markdown 格式报告"""
