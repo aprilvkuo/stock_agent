@@ -1,9 +1,15 @@
 # 🤖 Issue 自动化处理系统 - 正式文档
 
-**版本**: v3.0  
+**版本**: v3.1  
 **实施日期**: 2026-03-09  
 **维护者**: 程序员 Agent  
 **状态**: ✅ 生产就绪
+
+**v3.1 更新**:
+- ✅ 强制从系统环境变量获取 GITHUB_TOKEN
+- ✅ 移除 .env 文件支持（提高安全性）
+- ✅ 添加环境变量配置指南
+- ✅ 改进环境变量验证和错误提示
 
 ---
 
@@ -69,35 +75,37 @@ Issue 自动化处理系统实现从 GitHub 自动抓取 Issue、验证有效性
 
 ### 环境配置
 
+**⚠️ 重要**: 从 v3.0 开始，GITHUB_TOKEN 必须从系统环境变量获取，不支持 .env 文件！
+
 **1. 安装依赖**:
 ```bash
-pip3 install requests python-dotenv
+pip3 install requests
 ```
 
-**2. 配置 Token**:
+**2. 配置环境变量**:
 
-方式 A: 系统环境变量（推荐）
+详细配置指南请查看：[GITHUB_ENV_SETUP.md](./GITHUB_ENV_SETUP.md)
+
 ```bash
-# ~/.zshrc
+# macOS/Linux (添加到 ~/.zshrc)
 export GITHUB_TOKEN="github_pat_xxx"
 export GITHUB_REPO="aprilvkuo/stock_agent"
-```
+export WORKSPACE="/Users/egg/.openclaw/workspace"
 
-方式 B: .env 文件
-```bash
-# .env
-GITHUB_TOKEN=github_pat_xxx
-GITHUB_REPO=aprilvkuo/stock_agent
+# 使配置生效
+source ~/.zshrc
+
+# 验证配置
+echo $GITHUB_TOKEN
 ```
 
 **3. Token 权限要求**:
 
 | 权限 | 访问级别 | 用途 |
 |------|---------|------|
-| `Issues` | Read and write | 创建/关闭 Issue，添加评论 |
-| `Pull requests` | Read and write | 创建 PR |
-| `Contents` | Read and write | 读取/写入代码 |
-| `Metadata` | Read only | 读取元数据 |
+| `repo` | Full control | 访问仓库代码、Issues、PRs |
+| `workflow` | Read and write | 管理 GitHub Actions |
+| `read:org` | Read only | 读取组织信息 |
 
 ---
 

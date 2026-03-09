@@ -12,13 +12,20 @@ import os
 workspace = "/Users/egg/.openclaw/workspace"
 sys.path.insert(0, workspace)
 
-# 模拟 GitHub Token（避免实际 API 调用）
-os.environ["GITHUB_TOKEN"] = "test_token"
+# 模拟 GitHub Token（避免实际 API 调用，绕过环境变量检查）
+os.environ["GITHUB_TOKEN"] = "test_token_for_unit_test"
 
-# 导入模块
+# 直接导入模块（不执行主脚本的环境变量检查）
 import importlib.util
 spec = importlib.util.spec_from_file_location("auto_issue_resolver", f"{workspace}/scripts/auto_issue_resolver.py")
 auto_resolver = importlib.util.module_from_spec(spec)
+
+# 手动设置模块变量，避免触发 sys.exit(1)
+auto_resolver.GITHUB_TOKEN = "test_token"
+auto_resolver.GITHUB_REPO = "test/repo"
+auto_resolver.GITHUB_API_BASE = "https://api.github.com/repos/test/repo"
+auto_resolver.WORKSPACE = workspace
+
 spec.loader.exec_module(auto_resolver)
 
 IssueValidator = auto_resolver.IssueValidator

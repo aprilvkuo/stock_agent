@@ -4,9 +4,14 @@
 Issue 自动化处理系统（单线程实时监控版）
 抓取 Issue → 验证有效性 → 无效关闭 / 有效分配 → Agent 解决 → PR → Merge → 关闭
 
-版本：v3.0
+版本：v3.1
 日期：2026-03-09
-特性：单线程、优先级排序、PR 审核等待、实时监控
+特性：单线程、优先级排序、PR 审核等待、实时监控、强制系统环境变量
+
+系统指令:
+  - GITHUB_TOKEN 必须从系统环境变量获取（不支持 .env 文件）
+  - 首次运行前请确保已配置环境变量
+  - 使用 `source ~/.zshrc` 或重新打开终端使配置生效
 """
 
 import os
@@ -18,16 +23,29 @@ import re
 import time
 from datetime import datetime, timedelta
 from typing import Dict, List, Optional, Tuple
-from dotenv import load_dotenv
 
-# 加载环境变量
-load_dotenv()
-
-# 配置
+# 系统配置（从环境变量获取）
 GITHUB_TOKEN = os.getenv("GITHUB_TOKEN")
 GITHUB_REPO = os.getenv("GITHUB_REPO", "aprilvkuo/stock_agent")
 GITHUB_API_BASE = f"https://api.github.com/repos/{GITHUB_REPO}"
-WORKSPACE = "/Users/egg/.openclaw/workspace"
+WORKSPACE = os.getenv("WORKSPACE", "/Users/egg/.openclaw/workspace")
+
+# 验证必需的环境变量
+if not GITHUB_TOKEN:
+    print("❌ 错误：GITHUB_TOKEN 未配置！")
+    print("\n📝 请按以下步骤配置:")
+    print("\n1. 打开终端配置文件:")
+    print("   vim ~/.zshrc  # 或 ~/.bash_profile")
+    print("\n2. 添加环境变量:")
+    print("   export GITHUB_TOKEN=\"github_pat_xxxxxxxxxxxxx\"")
+    print("   export GITHUB_REPO=\"aprilvkuo/stock_agent\"")
+    print("   export WORKSPACE=\"/Users/egg/.openclaw/workspace\"")
+    print("\n3. 使配置生效:")
+    print("   source ~/.zshrc")
+    print("\n4. 验证配置:")
+    print("   echo $GITHUB_TOKEN")
+    print("\n⚠️  注意：GITHUB_TOKEN 必须从系统环境变量获取，不支持 .env 文件！\n")
+    sys.exit(1)
 
 # 实时监控配置
 MONITOR_INTERVAL = 60  # 监控间隔（秒）
