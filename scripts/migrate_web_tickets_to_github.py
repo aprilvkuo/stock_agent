@@ -227,7 +227,27 @@ class WebTicketMigrator:
     def create_issue(self, ticket: Dict) -> bool:
         """创建单个 Issue"""
         ticket_id = ticket.get('id', 'UNKNOWN')
-        task_title = ticket.get('task_title', ticket.get('task_id', 'Unknown'))
+        
+        # 修复标题获取逻辑（多级尝试）
+        task_title = ticket.get('task_title')
+        
+        if not task_title:
+            # 尝试从 title 获取（某些工单格式）
+            task_title = ticket.get('title')
+        
+        if not task_title:
+            # 尝试从 feedback 获取
+            feedback = ticket.get('trigger_rating', {}).get('feedback', '')
+            if feedback:
+                task_title = feedback[:60]
+        
+        if not task_title:
+            # 尝试从 description 获取
+            task_title = ticket.get('issue', {}).get('description', '')
+            if not task_title:
+                task_title = ticket.get('description', 'Unknown Task')
+            task_title = task_title[:60]
+        
         ticket_type = ticket.get('type', 'task')
         priority = ticket.get('priority', 'medium')
         provider = ticket.get('provider', 'unknown')
